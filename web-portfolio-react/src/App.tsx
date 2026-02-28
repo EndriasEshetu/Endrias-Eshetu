@@ -1,5 +1,4 @@
 import { useMemo, useState } from "react";
-import { AboutSection } from "./components/AboutSection";
 import { AchievementsSection } from "./components/AchievementsSection";
 import { CertificatesSection } from "./components/CertificatesSection";
 import { ContactSection } from "./components/ContactSection";
@@ -81,7 +80,6 @@ function App() {
       <SiteHeader />
 
       <main id="main">
-        <AboutSection />
         <SkillsSection />
         <ExperienceSection />
         <AchievementsSection />

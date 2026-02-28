@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeNav, setActiveNav] = useState("");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
@@ -19,10 +20,14 @@ export function Navbar() {
 
   return (
     <nav
-      className={`navbar  navbar-expand-lg py-3 fixed-top portfolio-navbar ${isScrolled ? "is-scrolled" : ""}`}
+      className={`fixed top-0 z-1030 text-white w-full py-3 portfolio-navbar ${isScrolled ? "is-scrolled" : ""}`}
     >
-      <div className="container">
-        <a className="navbar-brand fw-semibold" href="#top" aria-label="Home">
+      <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <a
+          className="navbar-brand text-lg font-semibold"
+          href="#top"
+          aria-label="Home"
+        >
           <img
             className="brand-mark"
             src="/android-chrome-512x512.png"
@@ -31,60 +36,90 @@ export function Navbar() {
           Endrias Eshetu
         </a>
         <button
-          className="navbar-toggler"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-white/50 text-white lg:hidden"
           type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#siteNav"
           aria-controls="siteNav"
-          aria-expanded="false"
+          aria-expanded={isMenuOpen}
           aria-label="Toggle navigation"
+          onClick={() => setIsMenuOpen((prev) => !prev)}
         >
-          <span className="navbar-toggler-icon"></span>
+          <svg
+            className="h-5 w-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              d="M4 7H20M4 12H20M4 17H20"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+          </svg>
         </button>
-        <div className="collapse navbar-collapse" id="siteNav">
-          <ul className="navbar-nav ms-auto align-items-lg-center gap-lg-3">
-            <li className="nav-item">
+        <div
+          className={`${isMenuOpen ? "block" : "hidden"} absolute left-4 right-4 top-full mt-2 rounded-2xl bg-white p-4 shadow-lg lg:static lg:mt-0 lg:block lg:bg-transparent lg:p-0 lg:shadow-none`}
+          id="siteNav"
+        >
+          <ul className="flex flex-col gap-2 lg:ml-auto lg:flex-row lg:items-center lg:gap-4">
+            <li>
               <a
-                className={`nav-link ${activeNav === "#about" ? "is-active" : ""}`}
+                className={`nav-link block rounded-lg px-3 py-2 text-[rgb(24,2,58)] transition lg:px-2 lg:text-white ${activeNav === "#about" ? "is-active" : ""}`}
                 href="#about"
-                onClick={() => setActiveNav("#about")}
+                onClick={() => {
+                  setActiveNav("#about");
+                  setIsMenuOpen(false);
+                }}
               >
-                Skills
+                About
               </a>
             </li>
 
-            <li className="nav-item">
+            <li>
               <a
-                className={`nav-link ${activeNav === "#experience" ? "is-active" : ""}`}
+                className={`nav-link block rounded-lg px-3 py-2 text-[rgb(24,2,58)] transition lg:px-2 lg:text-white ${activeNav === "#experience" ? "is-active" : ""}`}
                 href="#experience"
-                onClick={() => setActiveNav("#experience")}
+                onClick={() => {
+                  setActiveNav("#experience");
+                  setIsMenuOpen(false);
+                }}
               >
                 Experience
               </a>
             </li>
-            <li className="nav-item">
+            <li>
               <a
-                className={`nav-link ${activeNav === "#achievements" ? "is-active" : ""}`}
+                className={`nav-link block rounded-lg px-3 py-2 text-[rgb(24,2,58)] transition lg:px-2 lg:text-white ${activeNav === "#achievements" ? "is-active" : ""}`}
                 href="#achievements"
-                onClick={() => setActiveNav("#achievements")}
+                onClick={() => {
+                  setActiveNav("#achievements");
+                  setIsMenuOpen(false);
+                }}
               >
                 Achievements
               </a>
             </li>
-            <li className="nav-item">
+            <li>
               <a
-                className={`nav-link ${activeNav === "#certificates" ? "is-active" : ""}`}
+                className={`nav-link block rounded-lg px-3 py-2 text-[rgb(24,2,58)] transition lg:px-2 lg:text-white ${activeNav === "#certificates" ? "is-active" : ""}`}
                 href="#certificates"
-                onClick={() => setActiveNav("#certificates")}
+                onClick={() => {
+                  setActiveNav("#certificates");
+                  setIsMenuOpen(false);
+                }}
               >
                 Certificates
               </a>
             </li>
-            <li className="nav-item">
+            <li>
               <a
-                className={`nav-link ${activeNav === "#contact" ? "is-active" : ""}`}
+                className={`nav-link block rounded-lg px-3 py-2 text-[rgb(24,2,58)] transition lg:px-2 lg:text-white ${activeNav === "#contact" ? "is-active" : ""}`}
                 href="#contact"
-                onClick={() => setActiveNav("#contact")}
+                onClick={() => {
+                  setActiveNav("#contact");
+                  setIsMenuOpen(false);
+                }}
               >
                 Contact
               </a>

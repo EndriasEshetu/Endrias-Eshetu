@@ -46,39 +46,39 @@ export function SkillsSection() {
       id="skills"
       aria-labelledby="skills-title"
     >
-      <div className="container">
-        <div className="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
+      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
           <div>
             <h2 className="section-title" id="skills-title">
               Skills
             </h2>
-            <p className="text-muted mb-0">
+            <p className="m-0 text-slate-600">
               Built around web development, automation, and teamwork.
             </p>
           </div>
-          <span className="badge rounded-pill text-bg-dark">2026 focus</span>
+          <span className="rounded-full bg-[rgba(24,2,58,0.9)] px-3 py-1 text-sm font-semibold text-white">
+            2026 focus
+          </span>
         </div>
-        <div className="row g-4">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {skills.map((skill) => (
-            <div className="col-md-6 col-lg-4" key={skill.title}>
-              <div className="card skill-card h-100">
-                <div className="card-body">
-                  <h3 className="h5">{skill.title}</h3>
-                  <p className="text-muted">{skill.description}</p>
+            <div key={skill.title}>
+              <div className="skill-card h-full rounded-3xl bg-white p-6">
+                <h3 className="text-xl font-semibold">{skill.title}</h3>
+                <p className="text-slate-600">{skill.description}</p>
+                <div
+                  className="progress"
+                  role="progressbar"
+                  aria-label={skill.aria}
+                  aria-valuenow={skill.score}
+                  aria-valuemin={0}
+                  aria-valuemax={100}
+                >
                   <div
-                    className="progress"
-                    role="progressbar"
-                    aria-label={skill.aria}
-                    aria-valuenow={skill.score}
-                    aria-valuemin={0}
-                    aria-valuemax={100}
+                    className="progress-bar"
+                    style={{ width: `${skill.score}%` }}
                   >
-                    <div
-                      className="progress-bar"
-                      style={{ width: `${skill.score}%` }}
-                    >
-                      {skill.score}%
-                    </div>
+                    {skill.score}%
                   </div>
                 </div>
               </div>

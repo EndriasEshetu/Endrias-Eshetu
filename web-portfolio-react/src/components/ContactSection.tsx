@@ -1,13 +1,13 @@
 export function ContactSection() {
   return (
     <section className="section" id="contact" aria-labelledby="contact-title">
-      <div className="container">
-        <div className="row g-4 align-items-center">
-          <div className="col-lg-6">
+      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="grid items-center gap-6 lg:grid-cols-2">
+          <div>
             <h2 className="section-title" id="contact-title">
               Let's connect
             </h2>
-            <p className="text-muted">
+            <p className="text-slate-600">
               Reach out for internships, collaboration, or project work. I
               respond as quickly as possible.
             </p>
@@ -19,7 +19,7 @@ export function ContactSection() {
               <p className="mb-1 mt-3">Phone</p>
               <a href="tel:+251900000000">+251 989 483 775</a>
               <p className="mb-1 mt-3">Social</p>
-              <div className="d-flex gap-3">
+              <div className="flex gap-3">
                 <a
                   href="https://github.com/EndriasEshetu"
                   target="_blank"
@@ -44,76 +44,92 @@ export function ContactSection() {
               </div>
             </div>
           </div>
-          <div className="col-lg-6">
-            <form className="card panel-card" aria-label="Contact form">
-              <div className="card-body">
-                <div className="row g-3">
-                  <div className="col-md-6">
-                    <label className="form-label" htmlFor="contact-name">
-                      Full name
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="contact-name"
-                      name="name"
-                      placeholder="Your name"
-                      required
-                    />
-                  </div>
-                  <div className="col-md-6">
-                    <label className="form-label" htmlFor="contact-email">
-                      Email address
-                    </label>
-                    <input
-                      type="email"
-                      className="form-control"
-                      id="contact-email"
-                      name="email"
-                      placeholder="you@example.com"
-                      required
-                    />
-                  </div>
-                  <div className="col-12">
-                    <label className="form-label" htmlFor="contact-topic">
-                      Topic
-                    </label>
-                    <select
-                      className="form-select"
-                      id="contact-topic"
-                      name="topic"
-                      required
-                    >
-                      <option value="" disabled>
-                        Choose one
-                      </option>
-                      <option value="fullstack">Full-stack project</option>
-                      <option value="automation">Automation</option>
-                      <option value="networking">Networking</option>
-                      <option value="other">Other</option>
-                    </select>
-                  </div>
-                  <div className="col-12">
-                    <label className="form-label" htmlFor="contact-message">
-                      Message
-                    </label>
-                    <textarea
-                      className="form-control"
-                      id="contact-message"
-                      name="message"
-                      rows={4}
-                      placeholder="Tell me about your project"
-                      required
-                    ></textarea>
-                  </div>
-                  <div className="col-12">
-                    <button className="btn btn-accent w-100" type="submit">
-                      Send message
-                    </button>
-                    <p className="small text-muted mt-2 mb-0">
-                      This form is a demo. Replace with your email handler.
-                    </p>
-                  </div>
+          <div>
+            <form
+              className="panel-card rounded-3xl bg-white p-6"
+              aria-label="Contact form"
+            >
+              <div className="grid gap-3 md:grid-cols-2">
+                <div>
+                  <label
+                    className="mb-1 block text-sm font-medium"
+                    htmlFor="contact-name"
+                  >
+                    Full name
+                  </label>
+                  <input
+                    type="text"
+                    className="w-full rounded-lg border border-[#d9d0c7] bg-white px-3 py-2 outline-none transition focus:border-[rgba(24,2,58,0.6)]"
+                    id="contact-name"
+                    name="name"
+                    placeholder="Your name"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    className="mb-1 block text-sm font-medium"
+                    htmlFor="contact-email"
+                  >
+                    Email address
+                  </label>
+                  <input
+                    type="email"
+                    className="w-full rounded-lg border border-[#d9d0c7] bg-white px-3 py-2 outline-none transition focus:border-[rgba(24,2,58,0.6)]"
+                    id="contact-email"
+                    name="email"
+                    placeholder="you@example.com"
+                    required
+                  />
+                </div>
+                <div className="md:col-span-2">
+                  <label
+                    className="mb-1 block text-sm font-medium"
+                    htmlFor="contact-topic"
+                  >
+                    Topic
+                  </label>
+                  <select
+                    className="w-full rounded-lg border border-[#d9d0c7] bg-white px-3 py-2 outline-none transition focus:border-[rgba(24,2,58,0.6)]"
+                    id="contact-topic"
+                    name="topic"
+                    required
+                  >
+                    <option value="" disabled>
+                      Choose one
+                    </option>
+                    <option value="fullstack">Full-stack project</option>
+                    <option value="automation">Automation</option>
+                    <option value="networking">Networking</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+                <div className="md:col-span-2">
+                  <label
+                    className="mb-1 block text-sm font-medium"
+                    htmlFor="contact-message"
+                  >
+                    Message
+                  </label>
+                  <textarea
+                    className="w-full rounded-lg border border-[#d9d0c7] bg-white px-3 py-2 outline-none transition focus:border-[rgba(24,2,58,0.6)]"
+                    id="contact-message"
+                    name="message"
+                    rows={4}
+                    placeholder="Tell me about your project"
+                    required
+                  ></textarea>
+                </div>
+                <div className="md:col-span-2">
+                  <button
+                    className="btn-accent inline-flex w-full items-center justify-center rounded-lg px-4 py-2.5 font-medium"
+                    type="submit"
+                  >
+                    Send message
+                  </button>
+                  <p className="mb-0 mt-2 text-sm text-slate-600">
+                    This form is a demo. Replace with your email handler.
+                  </p>
                 </div>
               </div>
             </form>

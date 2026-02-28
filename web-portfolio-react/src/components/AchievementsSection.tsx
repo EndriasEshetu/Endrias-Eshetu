@@ -5,48 +5,54 @@ export function AchievementsSection() {
       id="achievements"
       aria-labelledby="achievements-title"
     >
-      <div className="container">
-        <div className="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
+      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
           <div>
             <h2 className="section-title" id="achievements-title">
               Achievements
             </h2>
-            <p className="text-muted mb-0">Milestones from my learning path.</p>
+            <p className="m-0 text-slate-600">
+              Milestones from my learning path.
+            </p>
           </div>
-          <span className="badge rounded-pill text-bg-accent">Growing</span>
+          <span className="rounded-full bg-[rgba(76,43,126,0.9)] px-3 py-1 text-sm font-semibold text-white">
+            Growing
+          </span>
         </div>
-        <div className="row g-4">
-          <div className="col-md-6 col-lg-4">
-            <article className="card achievement-card h-100">
-              <div className="card-body">
-                <p className="text-uppercase small text-muted">2025</p>
-                <h3 className="h5">National ID System Prototype</h3>
-                <p className="text-muted mb-0">
-                  Delivered a working prototype for identity integration.
-                </p>
-              </div>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div>
+            <article className="achievement-card h-full rounded-3xl bg-white p-6">
+              <p className="text-xs uppercase tracking-wide text-slate-500">
+                2025
+              </p>
+              <h3 className="text-xl font-semibold">
+                National ID System Prototype
+              </h3>
+              <p className="m-0 text-slate-600">
+                Delivered a working prototype for identity integration.
+              </p>
             </article>
           </div>
-          <div className="col-md-6 col-lg-4">
-            <article className="card achievement-card h-100">
-              <div className="card-body">
-                <p className="text-uppercase small text-muted">2024</p>
-                <h3 className="h5">Automation Impact</h3>
-                <p className="text-muted mb-0">
-                  Built automated payment reminders to reduce follow-up time.
-                </p>
-              </div>
+          <div>
+            <article className="achievement-card h-full rounded-3xl bg-white p-6">
+              <p className="text-xs uppercase tracking-wide text-slate-500">
+                2024
+              </p>
+              <h3 className="text-xl font-semibold">Automation Impact</h3>
+              <p className="m-0 text-slate-600">
+                Built automated payment reminders to reduce follow-up time.
+              </p>
             </article>
           </div>
-          <div className="col-md-6 col-lg-4">
-            <article className="card achievement-card h-100">
-              <div className="card-body">
-                <p className="text-uppercase small text-muted">2023</p>
-                <h3 className="h5">Full-Stack Growth</h3>
-                <p className="text-muted mb-0">
-                  Strengthened front-end and back-end development skills.
-                </p>
-              </div>
+          <div>
+            <article className="achievement-card h-full rounded-3xl bg-white p-6">
+              <p className="text-xs uppercase tracking-wide text-slate-500">
+                2023
+              </p>
+              <h3 className="text-xl font-semibold">Full-Stack Growth</h3>
+              <p className="m-0 text-slate-600">
+                Strengthened front-end and back-end development skills.
+              </p>
             </article>
           </div>
         </div>

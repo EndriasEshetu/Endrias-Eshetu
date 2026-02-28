@@ -7,63 +7,70 @@ export function SiteHeader() {
 
       <header className="site-header" id="top">
         <section className="hero" aria-labelledby="hero-title">
-          <div className="container">
-            <div className="row align-items-center gy-5">
-              <div className="col-lg-6 ">
-                <p className="eyebrow text-uppercase">
+          <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+            <div className="grid items-center gap-10 lg:grid-cols-2">
+              <div>
+                <p className="eyebrow uppercase">
                   Full-Stack Developer (Student)
                 </p>
-                <h1 className="display-4 hero-title" id="hero-title">
-                  Building reliable web experiences from front-end to back-end.
+                <h1
+                  className="hero-title text-4xl font-bold md:text-5xl"
+                  id="hero-title"
+                >
+                  Building reliable, user-focused web products from front-end to
+                  back-end.
                 </h1>
-                <p className="lead text-muted">
-                  I am a full-stack developer and student based in Adama,
-                  usually in Hawasa. I enjoy building clean, responsive
-                  interfaces and dependable back-end systems.
+                <p className="mt-4 text-lg text-slate-600">
+                  Based in Adama (often in Hawasa), I build responsive
+                  interfaces and dependable back-end systems with clean,
+                  maintainable code.
                 </p>
-                <div className="d-flex flex-wrap gap-3">
-                  <a className="btn btn-accent btn-lg" href="#projects">
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <a
+                    className="btn-accent inline-flex items-center justify-center rounded-lg px-6 py-3 font-medium"
+                    href="#projects"
+                  >
                     View projects
                   </a>
                   <a
-                    className="btn btn-outline-dark btn-lg"
+                    className="hero-outline-btn inline-flex items-center justify-center rounded-lg border border-[rgba(24,2,58,0.9)] px-6 py-3 font-medium text-[rgba(24,2,58,0.9)]"
                     href="#certificates"
                   >
-                    Add a certificate
+                    View certificates
                   </a>
                 </div>
-                <div className="hero-metrics mt-4">
+                <div className="hero-metrics mt-6">
                   <div>
-                    <p className="metric-value">Full-stack</p>
-                    <p className="metric-label">Front-end + back-end focus</p>
+                    <p className="metric-value">End-to-end</p>
+                    <p className="metric-label">UI, API, and delivery focus</p>
                   </div>
                   <div>
                     <p className="metric-value">Student</p>
                     <p className="metric-label">
-                      Always learning &amp; building
+                      Consistently learning and shipping
                     </p>
                   </div>
                   <div>
                     <p className="metric-value">Open</p>
                     <p className="metric-label">
-                      Internships &amp; collaborations
+                      Internships and collaborations
                     </p>
                   </div>
                 </div>
               </div>
-              <div className="col-lg-6">
+              <div>
                 <div className="hero-card">
                   <div className="hero-card-inner">
                     <img
                       src="/endrias_photo.jpg"
                       alt="Photo of me working on a laptop, smiling at the camera"
-                      className="img-fluid rounded-4 shadow"
+                      className="h-auto w-full rounded-3xl shadow"
                     />
                     <div className="hero-card-meta">
-                      <p className="mb-1 fw-semibold">
-                        Available for internships
+                      <p className="mb-1 font-semibold">
+                        Available for internships and junior roles
                       </p>
-                      <p className="mb-0 text-muted">
+                      <p className="m-0 text-slate-600">
                         Adama, Ethiopia · Often in Hawasa
                       </p>
                     </div>
@@ -74,6 +81,69 @@ export function SiteHeader() {
           </div>
         </section>
       </header>
+
+      <section className="section" id="about" aria-labelledby="about-title">
+        <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-6 lg:grid-cols-12">
+            <div className="lg:col-span-5">
+              <h2 className="section-title" id="about-title">
+                About me
+              </h2>
+              <p className="text-slate-600">
+                I am a student full-stack developer focused on delivering
+                complete features—from planning and UI design to back-end logic
+                and deployment support.
+              </p>
+              <div className="mt-4 flex flex-wrap gap-3">
+                <a
+                  className="inline-flex items-center justify-center rounded-lg border border-[rgba(24,2,58,0.9)] px-5 py-2.5 font-medium text-[rgba(24,2,58,0.9)]"
+                  href="#contact"
+                >
+                  Hire me
+                </a>
+                <a
+                  className="inline-flex items-center justify-center px-2 py-2 text-[rgba(24,2,58,0.9)] underline-offset-4 hover:underline"
+                  href="#experience"
+                >
+                  See my journey
+                </a>
+              </div>
+            </div>
+            <div className="lg:col-span-7">
+              <div className="panel-card rounded-3xl bg-white p-6">
+                <div className="grid gap-6 md:grid-cols-2">
+                  <div>
+                    <h3 className="text-sm font-semibold uppercase tracking-wide">
+                      Focus areas
+                    </h3>
+                    <ul className="m-0 list-none p-0">
+                      <li>Front-end development</li>
+                      <li>Back-end development</li>
+                      <li>Full-stack project delivery</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-semibold uppercase tracking-wide">
+                      Tools I love
+                    </h3>
+                    <ul className="m-0 list-none p-0">
+                      <li>HTML, CSS, JavaScript</li>
+                      <li>Tailwind CSS, Git, VS Code</li>
+                      <li>Node.js, Python, SQL</li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="about-highlight mt-4">
+                  <p className="mb-1">Signature strength</p>
+                  <p className="mb-0 font-semibold">
+                    Delivering end-to-end features with clarity and care.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 }
