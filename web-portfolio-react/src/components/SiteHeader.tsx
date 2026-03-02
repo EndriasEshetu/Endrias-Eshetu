@@ -10,9 +10,6 @@ export function SiteHeader() {
           <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="grid items-center gap-10 lg:grid-cols-2">
               <div>
-                <p className="eyebrow uppercase">
-                  Full-Stack Developer (Student)
-                </p>
                 <h1
                   className="hero-title text-4xl font-bold md:text-5xl"
                   id="hero-title"
@@ -46,12 +43,7 @@ export function SiteHeader() {
                       UI, API, and delivery focus
                     </p>
                   </div>
-                  <div>
-                    <p className="metric-value">Student</p>
-                    <p className=" text-slate-400">
-                      Consistently learning and shipping
-                    </p>
-                  </div>
+
                   <div>
                     <p className="metric-value">Open</p>
                     <p className=" text-slate-400">
@@ -64,7 +56,7 @@ export function SiteHeader() {
                 <div className="hero-card">
                   <div className="hero-card-inner">
                     <img
-                      src="/endrias_photo.jpg"
+                      src="/ee.jpg"
                       alt="Photo of me working on a laptop, smiling at the camera"
                       className="h-auto w-full rounded-3xl shadow"
                     />
@@ -92,9 +84,9 @@ export function SiteHeader() {
                 About me
               </h2>
               <p className="text-slate-400">
-                I am a student full-stack developer focused on delivering
-                complete features—from planning and UI design to back-end logic
-                and deployment support.
+                I'm Endrias, a freelance full-stack developer focused on
+                delivering complete features from planning and UI design to
+                back-end logic and deployment support.
               </p>
               <div className="mt-4 flex flex-wrap gap-3">
                 <a
@@ -129,9 +121,9 @@ export function SiteHeader() {
                       Tools I love
                     </h3>
                     <ul className="m-0 list-none p-0">
-                      <li>HTML, CSS, JavaScript</li>
+                      <li>HTML, CSS, JavaScript(TypeScript), React.JS</li>
                       <li>Tailwind CSS, Git, VS Code</li>
-                      <li>Node.js, Python, SQL</li>
+                      <li>Node.js, Express.js, MongoDB</li>
                     </ul>
                   </div>
                 </div>

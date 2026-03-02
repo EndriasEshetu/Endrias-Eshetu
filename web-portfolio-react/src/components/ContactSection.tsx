@@ -14,7 +14,7 @@ export function ContactSection() {
             <div className="contact-details mt-2">
               <p className="mb-1">Email</p>
               <a href="mailto:endrias.eshetu@example.com">
-                endrias.eshetu.egata@gmail.com
+                egataendrias@gmail.com
               </a>
               <p className="mb-1 mt-3">Phone</p>
               <a href="tel:+251989483775">+251 989 483 775</a>
@@ -127,9 +127,6 @@ export function ContactSection() {
                   >
                     Send message
                   </button>
-                  <p className="mb-0 mt-2 text-sm text-slate-400">
-                    This form is a demo. Replace with your email handler.
-                  </p>
                 </div>
               </div>
             </form>

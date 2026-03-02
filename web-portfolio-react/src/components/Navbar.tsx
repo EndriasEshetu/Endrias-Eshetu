@@ -124,7 +124,7 @@ export function Navbar() {
                   setIsMenuOpen(false);
                 }}
               >
-                About
+                About Me
               </a>
             </li>
 
