@@ -52,11 +52,11 @@ export function SkillsSection() {
             <h2 className="section-title" id="skills-title">
               Skills
             </h2>
-            <p className="m-0 text-slate-600">
+            <p className="m-0 text-slate-400">
               Built around web development, automation, and teamwork.
             </p>
           </div>
-          <span className="rounded-full bg-[rgba(24,2,58,0.9)] px-3 py-1 text-sm font-semibold text-white">
+          <span className="rounded-full bg-fuchsia-950 px-3 py-1 text-sm font-semibold text-white">
             2026 focus
           </span>
         </div>
@@ -65,9 +65,9 @@ export function SkillsSection() {
             <div key={skill.title}>
               <div className="skill-card h-full rounded-3xl bg-white p-6">
                 <h3 className="text-xl font-semibold">{skill.title}</h3>
-                <p className="text-slate-600">{skill.description}</p>
+                <p className="text-slate-400">{skill.description}</p>
                 <div
-                  className="h-3 overflow-hidden rounded-full bg-[#f0e7de]"
+                  className="h-3 mt-4 overflow-hidden rounded-full bg-[#f0e7de]"
                   role="progressbar"
                   aria-label={skill.aria}
                   aria-valuenow={skill.score}
@@ -75,7 +75,7 @@ export function SkillsSection() {
                   aria-valuemax={100}
                 >
                   <div
-                    className="flex h-full items-center justify-end bg-(--navy) pr-2 text-[11px] font-semibold text-white"
+                    className="flex h-full min-w-10 items-center justify-end bg-fuchsia-950 pr-2 text-[11px] font-semibold text-white"
                     style={{ width: `${skill.score}%` }}
                   >
                     {skill.score}%

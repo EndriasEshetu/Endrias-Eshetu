@@ -7,15 +7,21 @@ interface CertificatesSectionProps {
   onClear: () => void;
 }
 
-function formatMonthYear(value: string) {
+function formatCertificateDate(value: string) {
   if (!value) {
     return "";
   }
 
-  const [year, month] = value.split("-");
-  const date = new Date(Number(year), Number(month) - 1, 1);
+  const [year, month, day] = value.split("-");
+  const date = new Date(Number(year), Number(month) - 1, day ? Number(day) : 1);
+
+  if (Number.isNaN(date.getTime())) {
+    return value;
+  }
+
   return date.toLocaleDateString("en-US", {
-    month: "long",
+    month: "short",
+    day: "numeric",
     year: "numeric",
   });
 }
@@ -66,11 +72,11 @@ export function CertificatesSection({
             <h2 className="section-title" id="certificates-title">
               Certificates
             </h2>
-            <p className="text-slate-600">
+            <p className="text-slate-400">
               Add new certificates anytime. They will stay on this device.
             </p>
             <form
-              className="certificate-form rounded-3xl bg-white p-6"
+              className="certificate-form mt-4 rounded-3xl p-6"
               id="certificate-form"
               onSubmit={handleSubmit}
             >
@@ -83,7 +89,7 @@ export function CertificatesSection({
                 </label>
                 <input
                   type="text"
-                  className="w-full rounded-lg border border-[#d9d0c7] bg-white px-3 py-2 outline-none transition focus:border-[rgba(24,2,58,0.6)]"
+                  className="w-full text-slate-900 rounded-lg border border-[#b200e3] bg-white px-3 py-2 outline-none transition focus:border-[#ae00f399]"
                   id="cert-title"
                   name="title"
                   required
@@ -102,7 +108,7 @@ export function CertificatesSection({
                 </label>
                 <input
                   type="text"
-                  className="w-full rounded-lg border border-[#d9d0c7] bg-white px-3 py-2 outline-none transition focus:border-[rgba(24,2,58,0.6)]"
+                  className="w-full text-slate-900 rounded-lg border border-[#b200e3] bg-white px-3 py-2 outline-none transition focus:border-[#ae00f399]"
                   id="cert-issuer"
                   name="issuer"
                   required
@@ -120,8 +126,8 @@ export function CertificatesSection({
                   Completion date
                 </label>
                 <input
-                  type="month"
-                  className="w-full rounded-lg border border-[#d9d0c7] bg-white px-3 py-2 outline-none transition focus:border-[rgba(24,2,58,0.6)]"
+                  type="date"
+                  className="w-full text-slate-900 rounded-lg border border-[#b200e3] bg-white px-3 py-2 outline-none transition focus:border-[#ae00f399]"
                   id="cert-date"
                   name="date"
                   required
@@ -138,7 +144,7 @@ export function CertificatesSection({
                 </label>
                 <input
                   type="url"
-                  className="w-full rounded-lg border border-[#d9d0c7] bg-white px-3 py-2 outline-none transition focus:border-[rgba(24,2,58,0.6)]"
+                  className="w-full text-slate-900 rounded-lg border border-[#b200e3] bg-white px-3 py-2 outline-none transition focus:border-[#ae00f399]"
                   id="cert-link"
                   name="link"
                   placeholder="https://"
@@ -153,7 +159,7 @@ export function CertificatesSection({
                 Add certificate
               </button>
               <p
-                className="mb-0 mt-3 text-sm text-slate-600"
+                className="mb-0 mt-3 text-sm text-slate-400"
                 id="certificate-help"
               >
                 Tip: Use the credential URL or verification link.
@@ -164,7 +170,7 @@ export function CertificatesSection({
             <div className="mb-3 flex items-center justify-between">
               <h3 className="m-0 text-xl font-semibold">Latest credentials</h3>
               <button
-                className="inline-flex items-center justify-center rounded-lg border border-[rgba(24,2,58,0.9)] px-3 py-1.5 text-sm font-medium text-[rgba(24,2,58,0.9)]"
+                className="inline-flex items-center justify-center rounded-lg border border-fuchsia-950 px-3 py-1.5 text-sm font-medium text-white cursor-pointer hover:bg-fuchsia-950"
                 type="button"
                 id="clear-certificates"
                 onClick={onClear}
@@ -187,11 +193,11 @@ export function CertificatesSection({
                       Issued by {certificate.issuer}
                     </p>
                     <p className="certificate-meta mb-3">
-                      {formatMonthYear(certificate.date)}
+                      {formatCertificateDate(certificate.date)}
                     </p>
                     {certificate.link ? (
                       <a
-                        className="inline-flex items-center justify-center rounded-lg border border-[rgba(24,2,58,0.9)] px-3 py-1.5 text-sm font-medium text-[rgba(24,2,58,0.9)]"
+                        className="certificate-link inline-flex items-center justify-center rounded-lg border border-fuchsia-950 px-3 py-1.5 text-sm font-medium text-white hover:bg-fuchsia-950"
                         href={certificate.link}
                         target="_blank"
                         rel="noreferrer"
@@ -204,7 +210,7 @@ export function CertificatesSection({
               ))}
             </div>
             {certificates.length === 0 ? (
-              <p className="mt-3 text-slate-600" id="certificate-empty">
+              <p className="mt-3 text-slate-300" id="certificate-empty">
                 No certificates yet. Add your first credential using the form.
               </p>
             ) : null}

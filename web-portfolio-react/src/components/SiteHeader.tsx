@@ -1,12 +1,12 @@
 export function SiteHeader() {
   return (
     <>
-      <a className="skip-link" href="#main">
+      <a className="skip-link mt-0" href="#main">
         Skip to main content
       </a>
 
       <header className="site-header" id="top">
-        <section className="hero" aria-labelledby="hero-title">
+        <section className="section-alt hero" aria-labelledby="hero-title">
           <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="grid items-center gap-10 lg:grid-cols-2">
               <div>
@@ -20,7 +20,7 @@ export function SiteHeader() {
                   Building reliable, user-focused web products from front-end to
                   back-end.
                 </h1>
-                <p className="mt-4 text-lg text-slate-600">
+                <p className="mt-4 text-lg text-slate-400">
                   Based in Adama (often in Hawasa), I build responsive
                   interfaces and dependable back-end systems with clean,
                   maintainable code.
@@ -33,7 +33,7 @@ export function SiteHeader() {
                     View projects
                   </a>
                   <a
-                    className="hero-outline-btn inline-flex items-center justify-center rounded-lg border border-[rgba(24,2,58,0.9)] px-6 py-3 font-medium text-[rgba(24,2,58,0.9)]"
+                    className="hero-outline-btn inline-flex items-center justify-center rounded-lg border border-[#18023ae6] px-6 py-3 font-medium text-[#18023ae6]"
                     href="#certificates"
                   >
                     View certificates
@@ -42,17 +42,19 @@ export function SiteHeader() {
                 <div className="hero-metrics mt-6">
                   <div>
                     <p className="metric-value">End-to-end</p>
-                    <p className="metric-label">UI, API, and delivery focus</p>
+                    <p className=" text-slate-400">
+                      UI, API, and delivery focus
+                    </p>
                   </div>
                   <div>
                     <p className="metric-value">Student</p>
-                    <p className="metric-label">
+                    <p className=" text-slate-400">
                       Consistently learning and shipping
                     </p>
                   </div>
                   <div>
                     <p className="metric-value">Open</p>
-                    <p className="metric-label">
+                    <p className=" text-slate-400">
                       Internships and collaborations
                     </p>
                   </div>
@@ -66,11 +68,11 @@ export function SiteHeader() {
                       alt="Photo of me working on a laptop, smiling at the camera"
                       className="h-auto w-full rounded-3xl shadow"
                     />
-                    <div className="hero-card-meta">
+                    <div className="panel-card mt-4  bg-white p-4">
                       <p className="mb-1 font-semibold">
                         Available for internships and junior roles
                       </p>
-                      <p className="m-0 text-slate-600">
+                      <p className="m-0 text-slate-400">
                         Adama, Ethiopia · Often in Hawasa
                       </p>
                     </div>
@@ -89,20 +91,20 @@ export function SiteHeader() {
               <h2 className="section-title" id="about-title">
                 About me
               </h2>
-              <p className="text-slate-600">
+              <p className="text-slate-400">
                 I am a student full-stack developer focused on delivering
                 complete features—from planning and UI design to back-end logic
                 and deployment support.
               </p>
               <div className="mt-4 flex flex-wrap gap-3">
                 <a
-                  className="inline-flex items-center justify-center rounded-lg border border-[rgba(24,2,58,0.9)] px-5 py-2.5 font-medium text-[rgba(24,2,58,0.9)]"
+                  className="btn-accent inline-flex items-center justify-center rounded-lg p-3 font-medium"
                   href="#contact"
                 >
                   Hire me
                 </a>
                 <a
-                  className="inline-flex items-center justify-center px-2 py-2 text-[rgba(24,2,58,0.9)] underline-offset-4 hover:underline"
+                  className="inline-flex items-center justify-center p-2  underline-offset-4 hover:underline"
                   href="#experience"
                 >
                   See my journey
@@ -133,7 +135,7 @@ export function SiteHeader() {
                     </ul>
                   </div>
                 </div>
-                <div className="about-highlight mt-4">
+                <div className="panel-card mt-4 bg-white p-4">
                   <p className="mb-1">Signature strength</p>
                   <p className="mb-0 font-semibold">
                     Delivering end-to-end features with clarity and care.

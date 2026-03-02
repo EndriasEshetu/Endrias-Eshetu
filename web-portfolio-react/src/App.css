@@ -1,13 +1,13 @@
 /* Theme variables */
 :root {
-  --ink: #111111;
-  --paper: #f6f2ed;
-  --accent: #f05a28;
-  --accent-soft: #fbe3d7;
-  --navy: #1f2a44;
-  --line: #d9d0c7;
-  --card: #ffffff;
-  --shadow: 0 25px 60px rgba(20, 20, 20, 0.12);
+  --ink: #eef2ff;
+  --paper: #020202;
+  --accent: #4a044e;
+  --accent-soft: rgba(240, 90, 40, 0.16);
+  --navy: #dbe4ff;
+  --line: #2b3342;
+  --card: rgba(10, 14, 24, 0.82);
+  --shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
   --navbar-height: 5.5rem;
 }
 
@@ -18,7 +18,29 @@
 
 body {
   color: var(--ink);
-  background: radial-gradient(circle at top, #fff7f0 0%, var(--paper) 55%);
+  background: #000;
+}
+
+.app-shell {
+  position: relative;
+}
+
+.app-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: #000;
+}
+
+.app-particles {
+  width: 100%;
+  height: 100%;
+}
+
+.app-content {
+  position: relative;
+  z-index: 1;
 }
 
 a {
@@ -47,7 +69,11 @@ a:focus {
 }
 
 .site-header {
-  background: linear-gradient(120deg, #eaddffe6, 0%, #e8dafce6 100%);
+  background: linear-gradient(
+    120deg,
+    rgba(19, 24, 39, 0.86) 0%,
+    rgba(14, 17, 30, 0.86) 100%
+  );
   position: relative;
   overflow: hidden;
   padding-top: var(--navbar-height);
@@ -126,15 +152,21 @@ a:focus {
 }
 
 .btn-accent {
-  background: rgba(24, 2, 58, 0.9);
+  background: #4a044e;
   color: #fff;
   border: 1px solid transparent;
+  border-color: #b57bef;
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease,
     background-color 0.2s ease,
     border-color 0.2s ease,
     color 0.2s ease;
+}
+
+.hero-outline-btn {
+  border: 1px solid transparent;
+  border-color: #fff;
 }
 
 .btn-accent:hover,
@@ -152,20 +184,18 @@ a:focus {
 
 .hero .hero-outline-btn:hover,
 .hero .hero-outline-btn:focus {
-  background: rgba(24, 2, 58, 0.9);
-  border-color: rgba(24, 2, 58, 0.9);
+  background: #4a044e;
   color: #fff;
 }
 
 .hero .btn-accent:hover,
 .hero .btn-accent:focus {
   background: transparent;
-  border-color: rgba(24, 2, 58, 0.9);
-  color: rgba(24, 2, 58, 0.9);
+  color: #fff;
 }
 
 .hero {
-  padding: 4rem 0 6rem;
+  padding: 4rem 0;
   position: relative;
   z-index: 1;
 }
@@ -187,7 +217,8 @@ a:focus {
 }
 
 .hero-card-inner {
-  background: #fff;
+  background: var(--card);
+  border: 1px solid var(--line);
   padding: 1.5rem;
   border-radius: 2rem;
   box-shadow: var(--shadow);
@@ -213,7 +244,7 @@ a:focus {
 }
 
 .metric-label {
-  color: #5f5f5f;
+  color: #a8b3c7;
   margin-bottom: 0;
 }
 
@@ -222,8 +253,9 @@ a:focus {
 }
 
 .section-alt {
-  background: #fffaf6;
+  background: rgba(8, 12, 22, 0.7);
   border-top: 1px solid var(--line);
+  top: 0;
   border-bottom: 1px solid var(--line);
 }
 
@@ -236,9 +268,10 @@ a:focus {
 .achievement-card,
 .project-card,
 .certificate-form {
+  background: var(--card);
   border: 1px solid var(--line);
   border-radius: 1.5rem;
-  box-shadow: 0 18px 40px rgba(20, 20, 20, 0.08);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
 }
 
 .hero-card-inner,
@@ -266,7 +299,7 @@ a:focus {
 
 .about-highlight {
   padding: 1rem 1.25rem;
-  background: var(--accent-soft);
+  background: rgba(240, 90, 40, 0.14);
   border-radius: 1rem;
 }
 
@@ -289,19 +322,19 @@ a:focus {
 }
 
 .achievement-card {
-  background: #fff;
+  background: var(--card);
 }
 
 .project-card {
-  background: #fff;
+  background: var(--card);
 }
 
 .certificate-form {
-  background: #fff;
+  background: var(--card);
 }
 
 .certificate-card {
-  background: #fff;
+  background: var(--card);
   border: 1px solid var(--line);
   border-radius: 1.25rem;
   padding: 1.25rem;
@@ -310,7 +343,13 @@ a:focus {
 
 .certificate-meta {
   font-size: 0.9rem;
-  color: #5b5b5b;
+  color: #a8b3c7;
+}
+
+.certificate-link,
+.certificate-link:hover,
+.certificate-link:focus {
+  color: #fff;
 }
 
 .contact-details a {
