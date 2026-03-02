@@ -67,7 +67,7 @@ export function SkillsSection() {
                 <h3 className="text-xl font-semibold">{skill.title}</h3>
                 <p className="text-slate-600">{skill.description}</p>
                 <div
-                  className="progress"
+                  className="h-3 overflow-hidden rounded-full bg-[#f0e7de]"
                   role="progressbar"
                   aria-label={skill.aria}
                   aria-valuenow={skill.score}
@@ -75,7 +75,7 @@ export function SkillsSection() {
                   aria-valuemax={100}
                 >
                   <div
-                    className="progress-bar"
+                    className="flex h-full items-center justify-end bg-(--navy) pr-2 text-[11px] font-semibold text-white"
                     style={{ width: `${skill.score}%` }}
                   >
                     {skill.score}%
