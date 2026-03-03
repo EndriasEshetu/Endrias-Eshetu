@@ -56,7 +56,7 @@ export function SiteHeader() {
                 <div className="hero-card">
                   <div className="hero-card-inner">
                     <img
-                      src="/ee.jpg"
+                      src="/155A2404.JPG"
                       alt="Photo of me working on a laptop, smiling at the camera"
                       className="h-auto w-full rounded-3xl shadow"
                     />

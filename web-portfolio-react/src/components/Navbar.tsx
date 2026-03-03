@@ -82,7 +82,7 @@ export function Navbar() {
         >
           <img
             className="brand-mark"
-            src="/android-chrome-512x512.png"
+            src="/logo.png"
             alt="Endrias Eshetu logo"
           />
           Endrias Eshetu
