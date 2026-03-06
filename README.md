@@ -1,137 +1,111 @@
-# React + TypeScript + Vite
+# Endrias Eshetu Portfolio
 
-## Contact form backend (Express.js)
+## Purpose
 
-This project now includes an Express API to receive contact form submissions.
+This repository contains a professional web portfolio that presents technical experience, selected projects, certifications, achievements, and a contact channel for collaboration opportunities.
 
-### 1) Install dependencies
+The application is designed to:
+
+- Establish a clear online professional presence
+- Showcase practical software engineering work and skills
+- Enable visitors to submit contact requests through a secure backend API
+
+## Overview
+
+The project consists of:
+
+- A frontend single-page application built with React, TypeScript, and Vite
+- A backend Express API that receives contact form submissions
+- Optional SMTP email forwarding for incoming contact messages
+- Local JSON persistence for submitted contact messages
+
+## Technology Stack
+
+- React 19
+- TypeScript
+- Vite
+- Express.js
+- Nodemailer
+- ESLint
+
+## Project Structure
+
+- `src/` Frontend application source code
+- `server/` Backend API and storage logic
+- `server/data/contact-messages.json` Local storage for contact submissions
+- `public/` Static assets
+
+## Prerequisites
+
+- Node.js 18+ (recommended LTS)
+- npm 9+
+
+## Installation
 
 ```bash
 npm install
 ```
 
-### 2) Configure environment
+## Environment Configuration
 
-Copy `.env.example` to `.env` and update values if needed.
+Create a `.env` file in the project root (you can copy `.env.example`).
 
-To receive each form submission by email, set:
+Required and optional variables:
 
-- `CONTACT_RECEIVER_EMAIL=egataendrias@gmail.com`
-- `SMTP_HOST=smtp.gmail.com`
-- `SMTP_PORT=465`
-- `SMTP_USER=egataendrias@gmail.com`
-- `SMTP_PASS=<your Gmail app password>`
+- `PORT` Backend server port (default: `4000`)
+- `FRONTEND_ORIGIN` Allowed CORS origin(s) for frontend access
+- `VITE_API_BASE_URL` Frontend API base URL
+- `CONTACT_RECEIVER_EMAIL` Destination email for contact notifications
+- `SMTP_HOST` SMTP host (default: `smtp.gmail.com`)
+- `SMTP_PORT` SMTP port (default: `465`)
+- `SMTP_USER` SMTP account username
+- `SMTP_PASS` SMTP account app password
 
-Note: Gmail requires an App Password (not your normal Gmail password).
-Defaults for receiver + Gmail SMTP are already prepared; you mainly need to set `SMTP_PASS`.
+If `SMTP_PASS` is not provided, messages are still stored locally and email forwarding is disabled.
 
-### 3) Run backend API
+## Running the Application
 
-```bash
-npm run dev:server
-```
-
-The API runs on `http://localhost:4000` and exposes:
-
-- `GET /api/health`
-- `POST /api/contact`
-
-Messages are saved to `server/data/contact-messages.json` on your local machine.
-If SMTP is configured, each message is also delivered to `CONTACT_RECEIVER_EMAIL`.
-
-### 4) Run frontend
-
-In a second terminal:
-
-```bash
-npm run dev:client
-```
-
-The contact form submits to `VITE_API_BASE_URL` (defaults to `http://localhost:4000`).
-
-### 5) Run both (optional)
+Run frontend and backend together:
 
 ```bash
 npm run dev:full
 ```
 
-This starts frontend + backend together.
+Run backend only:
 
-If your terminal closes one process unexpectedly, use two terminals instead:
-
-- Terminal A: `npm run dev:server`
-- Terminal B: `npm run dev:client`
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
-
-Note: This will impact Vite dev & build performances.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+```bash
+npm run dev:server
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Run frontend only:
 
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
-
-export default defineConfig([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs["recommended-typescript"],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+```bash
+npm run dev:client
 ```
+
+## Available Scripts
+
+- `npm run dev` Start Vite development server
+- `npm run dev:client` Start frontend development server
+- `npm run dev:server` Start backend API server
+- `npm run dev:full` Start frontend and backend concurrently
+- `npm run build` Build production frontend bundle
+- `npm run preview` Preview production build locally
+- `npm run lint` Run ESLint checks
+
+## API Endpoints
+
+- `GET /api/health` Health check endpoint
+- `POST /api/contact` Accepts contact form payload and stores message
+
+## Contact Message Handling
+
+Each contact submission is:
+
+- Validated on the server
+- Stored in `server/data/contact-messages.json`
+- Forwarded by email when SMTP is configured correctly
+
+## License
+
+This project is intended for personal professional portfolio use.
