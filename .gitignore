@@ -24,3 +24,15 @@ server/data/contact-messages.json
 *.njsproj
 *.sln
 *.sw?
+
+# Temporary/cache artifacts
+coverage/
+.cache/
+*.tmp
+*.temp
+*.bak
+*.tsbuildinfo
+
+# Local environment overrides
+.env.*
+!.env.example
