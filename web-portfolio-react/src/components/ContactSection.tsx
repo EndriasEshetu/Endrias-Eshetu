@@ -1,4 +1,66 @@
+import { useState, type FormEvent } from "react";
+
+type SubmitStatus = "idle" | "submitting" | "success" | "error";
+
 export function ContactSection() {
+  const [status, setStatus] = useState<SubmitStatus>("idle");
+  const [feedback, setFeedback] = useState("");
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    const payload = {
+      name: String(formData.get("name") ?? ""),
+      email: String(formData.get("email") ?? ""),
+      topic: String(formData.get("topic") ?? ""),
+      message: String(formData.get("message") ?? ""),
+    };
+
+    setStatus("submitting");
+    setFeedback("Sending your message...");
+
+    const baseUrl = import.meta.env.VITE_API_BASE_URL?.trim() ?? "";
+    const endpoint = baseUrl ? `${baseUrl}/api/contact` : "/api/contact";
+
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = (await response.json()) as { message?: string };
+
+      if (!response.ok) {
+        throw new Error(result.message ?? "Could not send your message.");
+      }
+
+      setStatus("success");
+      setFeedback(result.message ?? "Message sent successfully.");
+      form.reset();
+    } catch (error) {
+      setStatus("error");
+
+      if (error instanceof TypeError) {
+        setFeedback(
+          "Cannot reach contact server. Start backend with npm run dev (or npm run dev:server).",
+        );
+        return;
+      }
+
+      setFeedback(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again.",
+      );
+    }
+  };
+
   return (
     <section className="section" id="contact" aria-labelledby="contact-title">
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -48,6 +110,7 @@ export function ContactSection() {
             <form
               className="panel-card rounded-3xl bg-white p-6"
               aria-label="Contact form"
+              onSubmit={handleSubmit}
             >
               <div className="grid gap-3 md:grid-cols-2">
                 <div>
@@ -93,6 +156,7 @@ export function ContactSection() {
                     className="w-full text-slate-900 rounded-lg border border-[#b200e3] bg-white px-3 py-2 outline-none transition focus:border-[#ae00f399]"
                     id="contact-topic"
                     name="topic"
+                    defaultValue=""
                     required
                   >
                     <option value="" disabled>
@@ -124,9 +188,18 @@ export function ContactSection() {
                   <button
                     className="btn-accent inline-flex w-full items-center justify-center rounded-lg px-4 py-2.5 font-medium"
                     type="submit"
+                    disabled={status === "submitting"}
                   >
-                    Send message
+                    {status === "submitting" ? "Sending..." : "Send message"}
                   </button>
+                  <p
+                    className={`mb-0 mt-2 text-sm ${status === "error" ? "text-red-500" : "text-slate-500"}`}
+                    role="status"
+                    aria-live="polite"
+                  >
+                    {feedback ||
+                      "Your message will be delivered to the backend API."}
+                  </p>
                 </div>
               </div>
             </form>

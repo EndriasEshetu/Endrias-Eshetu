@@ -1,5 +1,67 @@
 # React + TypeScript + Vite
 
+## Contact form backend (Express.js)
+
+This project now includes an Express API to receive contact form submissions.
+
+### 1) Install dependencies
+
+```bash
+npm install
+```
+
+### 2) Configure environment
+
+Copy `.env.example` to `.env` and update values if needed.
+
+To receive each form submission by email, set:
+
+- `CONTACT_RECEIVER_EMAIL=egataendrias@gmail.com`
+- `SMTP_HOST=smtp.gmail.com`
+- `SMTP_PORT=465`
+- `SMTP_USER=egataendrias@gmail.com`
+- `SMTP_PASS=<your Gmail app password>`
+
+Note: Gmail requires an App Password (not your normal Gmail password).
+Defaults for receiver + Gmail SMTP are already prepared; you mainly need to set `SMTP_PASS`.
+
+### 3) Run backend API
+
+```bash
+npm run dev:server
+```
+
+The API runs on `http://localhost:4000` and exposes:
+
+- `GET /api/health`
+- `POST /api/contact`
+
+Messages are saved to `server/data/contact-messages.json` on your local machine.
+If SMTP is configured, each message is also delivered to `CONTACT_RECEIVER_EMAIL`.
+
+### 4) Run frontend
+
+In a second terminal:
+
+```bash
+npm run dev:client
+```
+
+The contact form submits to `VITE_API_BASE_URL` (defaults to `http://localhost:4000`).
+
+### 5) Run both (optional)
+
+```bash
+npm run dev:full
+```
+
+This starts frontend + backend together.
+
+If your terminal closes one process unexpectedly, use two terminals instead:
+
+- Terminal A: `npm run dev:server`
+- Terminal B: `npm run dev:client`
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
@@ -19,9 +81,9 @@ If you are developing a production application, we recommend updating the config
 
 ```js
 export default defineConfig([
-  globalIgnores(['dist']),
+  globalIgnores(["dist"]),
   {
-    files: ['**/*.{ts,tsx}'],
+    files: ["**/*.{ts,tsx}"],
     extends: [
       // Other configs...
 
@@ -36,40 +98,40 @@ export default defineConfig([
     ],
     languageOptions: {
       parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
         tsconfigRootDir: import.meta.dirname,
       },
       // other options...
     },
   },
-])
+]);
 ```
 
 You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
 ```js
 // eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+import reactX from "eslint-plugin-react-x";
+import reactDom from "eslint-plugin-react-dom";
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  globalIgnores(["dist"]),
   {
-    files: ['**/*.{ts,tsx}'],
+    files: ["**/*.{ts,tsx}"],
     extends: [
       // Other configs...
       // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
+      reactX.configs["recommended-typescript"],
       // Enable lint rules for React DOM
       reactDom.configs.recommended,
     ],
     languageOptions: {
       parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
         tsconfigRootDir: import.meta.dirname,
       },
       // other options...
     },
   },
-])
+]);
 ```
