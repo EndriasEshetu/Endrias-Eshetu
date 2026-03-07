@@ -45,9 +45,37 @@ const configuredOrigins = process.env.FRONTEND_ORIGIN
       .map((origin) => origin.trim())
       .filter(Boolean)
   : [];
-const allowedOrigins = configuredOrigins.length > 0 ? configuredOrigins : true;
 
-app.use(cors({ origin: allowedOrigins }));
+function normalizeOrigin(origin) {
+  return typeof origin === "string" ? origin.replace(/\/$/, "") : "";
+}
+
+const normalizedAllowedOrigins = new Set(
+  configuredOrigins.map((origin) => normalizeOrigin(origin)),
+);
+
+const corsOrigin = (origin, callback) => {
+  // Allow same-origin/non-browser requests (no Origin header).
+  if (!origin) {
+    callback(null, true);
+    return;
+  }
+
+  if (normalizedAllowedOrigins.size === 0) {
+    callback(null, true);
+    return;
+  }
+
+  if (normalizedAllowedOrigins.has(normalizeOrigin(origin))) {
+    callback(null, true);
+    return;
+  }
+
+  console.warn("Blocked by CORS. Origin not allowed:", origin);
+  callback(new Error("Not allowed by CORS"));
+};
+
+app.use(cors({ origin: corsOrigin }));
 app.use(express.json({ limit: "100kb" }));
 
 const hasSmtpConfig = Boolean(smtpPass);
