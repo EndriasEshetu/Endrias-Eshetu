@@ -2,10 +2,10 @@ import { useMemo } from "react";
 import { AchievementsSection } from "./components/AchievementsSection";
 import { CertificatesSection } from "./components/CertificatesSection";
 import { ContactSection } from "./components/ContactSection";
-import { ExperienceSection } from "./components/ExperienceSection";
+import { ProjectsSection } from "./components/ProjectsSection";
 import { Navbar } from "./components/Navbar";
 import { Particles } from "./components/Particles";
-import { ProjectsSection } from "./components/ProjectsSection";
+import { SelectedWork } from "./components/SelectedWork";
 import { SiteFooter } from "./components/SiteFooter";
 import { SiteHeader } from "./components/SiteHeader";
 import { SkillsSection } from "./components/SkillsSection";
@@ -40,9 +40,10 @@ function App() {
 
         <main id="main">
           <SkillsSection />
-          <ExperienceSection />
-          <AchievementsSection />
           <ProjectsSection />
+
+          <AchievementsSection />
+          <SelectedWork />
           <CertificatesSection certificates={certificates} />
           <ContactSection />
         </main>
