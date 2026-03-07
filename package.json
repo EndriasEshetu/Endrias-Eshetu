@@ -5,9 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "dev:full": "concurrently \"npm:dev:server\" \"npm:dev:client\"",
+    "dev:full": "concurrently \"npm:server\" \"npm:dev:client\"",
     "dev:client": "vite",
-    "dev:server": "node server/index.js",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",

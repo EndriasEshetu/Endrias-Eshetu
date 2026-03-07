@@ -48,7 +48,7 @@ export function ContactSection() {
 
       if (error instanceof TypeError) {
         setFeedback(
-          "Cannot reach contact server. Start backend with npm run dev (or npm run dev:server).",
+          "Cannot reach contact server. Start backend with npm run dev (or npm run server).",
         );
         return;
       }

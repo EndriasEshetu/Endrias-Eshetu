@@ -74,20 +74,20 @@ npm run dev:full
 Run backend only:
 
 ```bash
-npm run dev:server
+npm run server
 ```
 
 Run frontend only:
 
 ```bash
-npm run dev:client
+npm run dev
 ```
 
 ## Available Scripts
 
 - `npm run dev` Start Vite development server
 - `npm run dev:client` Start frontend development server
-- `npm run dev:server` Start backend API server
+- `npm run server` Start backend API server
 - `npm run dev:full` Start frontend and backend concurrently
 - `npm run build` Build production frontend bundle
 - `npm run preview` Preview production build locally
