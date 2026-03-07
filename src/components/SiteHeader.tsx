@@ -1,3 +1,29 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { SiExpress, SiMongodb } from "react-icons/si";
+import {
+  faCss3Alt,
+  faGitAlt,
+  faHtml5,
+  faJs,
+  faNodeJs,
+  faReact,
+  faTailwindCss,
+  faTypescript,
+} from "@fortawesome/free-brands-svg-icons";
+
+const byPrefixAndName = {
+  fab: {
+    html5: faHtml5,
+    css3Alt: faCss3Alt,
+    js: faJs,
+    react: faReact,
+    typescript: faTypescript,
+    "tailwind-css": faTailwindCss,
+    gitAlt: faGitAlt,
+    nodeJs: faNodeJs,
+  },
+} as const;
+
 export function SiteHeader() {
   return (
     <>
@@ -25,9 +51,10 @@ export function SiteHeader() {
                 <div className="mt-6 flex flex-wrap gap-3">
                   <a
                     className="btn-accent inline-flex items-center justify-center rounded-lg px-6 py-3 font-medium"
-                    href="#projects"
+                    href="/certificates/Endrias%20Eshetu%20CV%20Resume.pdf"
+                    download="Endrias-Eshetu-CV.pdf"
                   >
-                    View projects
+                    Download CV
                   </a>
                   <a
                     className="hero-outline-btn inline-flex items-center justify-center rounded-lg border border-[#18023ae6] px-6 py-3 font-medium text-[#18023ae6]"
@@ -52,7 +79,7 @@ export function SiteHeader() {
                   </div>
                 </div>
               </div>
-              <div>
+              <div className="mx-auto w-8/12">
                 <div className="hero-card">
                   <div className="hero-card-inner">
                     <img
@@ -60,11 +87,11 @@ export function SiteHeader() {
                       alt="Photo of me working on a laptop, smiling at the camera"
                       className="h-auto w-full rounded-3xl shadow"
                     />
-                    <div className="panel-card mt-4  bg-white p-4">
-                      <p className="mb-1 font-semibold">
+                    <div className="panel-card  mt-4  bg-white p-2.5">
+                      <p className="mb-1 font-semibold pl-4">
                         Available for internships and junior roles
                       </p>
-                      <p className="m-0 text-slate-400">
+                      <p className="m-0 text-slate-400 pl-4">
                         Adama, Ethiopia · Often in Hawasa
                       </p>
                     </div>
@@ -110,7 +137,7 @@ export function SiteHeader() {
                     <h3 className="text-sm font-semibold uppercase tracking-wide">
                       Focus areas
                     </h3>
-                    <ul className="m-0 list-none p-0">
+                    <ul className="m-0 list-none mt-2 p-0">
                       <li>Front-end development</li>
                       <li>Back-end development</li>
                       <li>Full-stack project delivery</li>
@@ -120,16 +147,92 @@ export function SiteHeader() {
                     <h3 className="text-sm font-semibold uppercase tracking-wide">
                       Tools I love
                     </h3>
-                    <ul className="m-0 list-none p-0">
-                      <li>HTML, CSS, JavaScript(TypeScript), React.JS</li>
-                      <li>Tailwind CSS, Git, VS Code</li>
-                      <li>Node.js, Express.js, MongoDB</li>
+                    <ul
+                      className="flex list-none flex-wrap gap-2 mt-2 p-0"
+                      aria-label="Tools I love"
+                    >
+                      <li
+                        className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-orange-50 text-orange-600"
+                        title="HTML5"
+                      >
+                        <FontAwesomeIcon icon={byPrefixAndName.fab["html5"]} />
+                        <span className="sr-only">HTML5</span>
+                      </li>
+                      <li
+                        className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-blue-600"
+                        title="CSS3"
+                      >
+                        <FontAwesomeIcon
+                          icon={byPrefixAndName.fab["css3Alt"]}
+                        />
+                        <span className="sr-only">CSS3</span>
+                      </li>
+                      <li
+                        className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-yellow-100 text-yellow-600"
+                        title="JavaScript"
+                      >
+                        <FontAwesomeIcon icon={byPrefixAndName.fab["js"]} />
+                        <span className="sr-only">JavaScript</span>
+                      </li>
+                      <li
+                        className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-50 text-cyan-600"
+                        title="React"
+                      >
+                        <FontAwesomeIcon icon={byPrefixAndName.fab["react"]} />
+                        <span className="sr-only">React</span>
+                      </li>
+                      <li
+                        className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100 text-blue-700"
+                        title="TypeScript"
+                      >
+                        <FontAwesomeIcon
+                          icon={byPrefixAndName.fab["typescript"]}
+                        />
+                        <span className="sr-only">TypeScript</span>
+                      </li>
+                      <li
+                        className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-100 text-cyan-700"
+                        title="Tailwind CSS"
+                      >
+                        <FontAwesomeIcon
+                          icon={byPrefixAndName.fab["tailwind-css"]}
+                        />
+                        <span className="sr-only">Tailwind CSS</span>
+                      </li>
+                      <li
+                        className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-amber-50 text-amber-600"
+                        title="Git"
+                      >
+                        <FontAwesomeIcon icon={byPrefixAndName.fab["gitAlt"]} />
+                        <span className="sr-only">Git</span>
+                      </li>
+                      <li
+                        className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-green-50 text-green-600"
+                        title="Node.js"
+                      >
+                        <FontAwesomeIcon icon={byPrefixAndName.fab["nodeJs"]} />
+                        <span className="sr-only">Node.js</span>
+                      </li>
+                      <li
+                        className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-neutral-100 text-neutral-700"
+                        title="Express.js"
+                      >
+                        <SiExpress className="h-5 w-5" />
+                        <span className="sr-only">Express.js</span>
+                      </li>
+                      <li
+                        className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-50 text-emerald-700"
+                        title="MongoDB"
+                      >
+                        <SiMongodb className="h-5 w-5" />
+                        <span className="sr-only">MongoDB</span>
+                      </li>
                     </ul>
                   </div>
                 </div>
-                <div className="panel-card mt-4 bg-white p-4">
-                  <p className="mb-1">Signature strength</p>
-                  <p className="mb-0 font-semibold">
+                <div className="panel-card mt-4 bg-white p-4 ">
+                  <p className="mb-1 font-semibold">Signature strength</p>
+                  <p className="">
                     Delivering end-to-end features with clarity and care.
                   </p>
                 </div>

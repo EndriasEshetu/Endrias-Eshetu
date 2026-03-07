@@ -76,7 +76,7 @@ export function ContactSection() {
             <div className="contact-details mt-2">
               <p className="mb-1">Email</p>
               <a href="mailto:endrias.eshetu@example.com">
-                egataendrias@gmail.com
+                endriaseshetu75@gmail.com
               </a>
               <p className="mb-1 mt-3">Phone</p>
               <a href="tel:+251989483775">+251 989 483 775</a>

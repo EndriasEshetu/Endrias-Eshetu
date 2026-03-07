@@ -111,7 +111,7 @@ export function Navbar() {
           </svg>
         </button>
         <div
-          className={`${isMenuOpen ? "flex" : "hidden"} absolute right-4 top-full mt-2 rounded-2xl bg-gray-700 p-4 shadow-lg lg:static lg:mt-0 lg:block lg:bg-transparent lg:p-0 lg:shadow-none`}
+          className={`${isMenuOpen ? "flex" : "hidden"} absolute right-4 top-full mt-2 rounded-2xl bg-gray-900 p-4 shadow-lg lg:static lg:mt-0 lg:block lg:bg-transparent lg:p-0 lg:shadow-none`}
           id="siteNav"
         >
           <ul className="flex flex-col gap-2 lg:ml-auto lg:flex-row lg:items-center lg:gap-4">

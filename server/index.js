@@ -2,6 +2,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import nodemailer from "nodemailer";
+import { randomUUID } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -12,8 +13,12 @@ const envPath = path.join(__dirname, "..", ".env");
 
 dotenv.config({ path: envPath });
 
+const MESSAGE_LIMIT = 500;
+const DEFAULT_PORT = 4000;
+const RETRYABLE_SMTP_ERRORS = new Set(["ETIMEDOUT", "ESOCKET"]);
+
 const app = express();
-const port = Number(process.env.PORT) || 4000;
+const port = Number(process.env.PORT) || DEFAULT_PORT;
 const receiverEmail =
   process.env.CONTACT_RECEIVER_EMAIL || "egataendrias@gmail.com";
 const smtpHost = process.env.SMTP_HOST || "smtp.gmail.com";
@@ -35,9 +40,12 @@ const smtpPass = process.env.SMTP_PASS;
 const dataDir = path.join(__dirname, "data");
 const messagesFile = path.join(dataDir, "contact-messages.json");
 
-const allowedOrigins = process.env.FRONTEND_ORIGIN
-  ? process.env.FRONTEND_ORIGIN.split(",").map((origin) => origin.trim())
-  : true;
+const configuredOrigins = process.env.FRONTEND_ORIGIN
+  ? process.env.FRONTEND_ORIGIN.split(",")
+      .map((origin) => origin.trim())
+      .filter(Boolean)
+  : [];
+const allowedOrigins = configuredOrigins.length > 0 ? configuredOrigins : true;
 
 app.use(cors({ origin: allowedOrigins }));
 app.use(express.json({ limit: "100kb" }));
@@ -70,6 +78,25 @@ let activeTransporter = primaryTransporter;
 let activeTransporterLabel = `port ${smtpPort}${smtpSecure ? " (secure)" : ""}`;
 
 const topics = new Set(["fullstack", "automation", "networking", "other"]);
+
+function isRetryableSmtpError(error) {
+  return Boolean(error?.code && RETRYABLE_SMTP_ERRORS.has(error.code));
+}
+
+function setFallbackTransporterAsActive() {
+  activeTransporter = fallbackTransporter;
+  activeTransporterLabel = `port ${smtpFallbackPort} (starttls)`;
+}
+
+function logSmtpSendResult(info) {
+  console.log("SMTP send result:", {
+    transporter: activeTransporterLabel,
+    messageId: info.messageId,
+    accepted: info.accepted,
+    rejected: info.rejected,
+    response: info.response,
+  });
+}
 
 function normalizeText(value) {
   return typeof value === "string" ? value.trim() : "";
@@ -120,7 +147,7 @@ async function readMessages() {
 async function saveMessage(entry) {
   await mkdir(dataDir, { recursive: true });
   const existing = await readMessages();
-  const next = [entry, ...existing].slice(0, 500);
+  const next = [entry, ...existing].slice(0, MESSAGE_LIMIT);
   await writeFile(messagesFile, JSON.stringify(next, null, 2), "utf-8");
 }
 
@@ -151,19 +178,12 @@ async function sendContactEmail(entry) {
 
   try {
     const info = await activeTransporter.sendMail(message);
-
-    console.log("SMTP send result:", {
-      transporter: activeTransporterLabel,
-      messageId: info.messageId,
-      accepted: info.accepted,
-      rejected: info.rejected,
-      response: info.response,
-    });
+    logSmtpSendResult(info);
   } catch (error) {
     const shouldTryFallback =
       fallbackTransporter &&
       activeTransporter !== fallbackTransporter &&
-      (error?.code === "ETIMEDOUT" || error?.code === "ESOCKET");
+      isRetryableSmtpError(error);
 
     if (!shouldTryFallback) {
       throw error;
@@ -174,16 +194,8 @@ async function sendContactEmail(entry) {
     );
 
     const info = await fallbackTransporter.sendMail(message);
-    activeTransporter = fallbackTransporter;
-    activeTransporterLabel = `port ${smtpFallbackPort} (starttls)`;
-
-    console.log("SMTP send result:", {
-      transporter: activeTransporterLabel,
-      messageId: info.messageId,
-      accepted: info.accepted,
-      rejected: info.rejected,
-      response: info.response,
-    });
+    setFallbackTransporterAsActive();
+    logSmtpSendResult(info);
   }
 
   return true;
@@ -201,7 +213,7 @@ app.post("/api/contact", async (req, res) => {
   }
 
   const entry = {
-    id: crypto.randomUUID(),
+    id: randomUUID(),
     createdAt: new Date().toISOString(),
     ...result.data,
   };
@@ -257,13 +269,12 @@ async function verifySmtpConnection() {
     const shouldTryFallback =
       fallbackTransporter &&
       activeTransporter !== fallbackTransporter &&
-      (error?.code === "ETIMEDOUT" || error?.code === "ESOCKET");
+      isRetryableSmtpError(error);
 
     if (shouldTryFallback) {
       try {
         await fallbackTransporter.verify();
-        activeTransporter = fallbackTransporter;
-        activeTransporterLabel = `port ${smtpFallbackPort} (starttls)`;
+        setFallbackTransporterAsActive();
         console.log(
           `SMTP ready on ${activeTransporterLabel}: email auto-forwarding is active.`,
         );

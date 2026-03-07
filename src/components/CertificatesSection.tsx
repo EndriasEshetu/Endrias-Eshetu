@@ -70,7 +70,7 @@ export function CertificatesSection({
                             target="_blank"
                             rel="noreferrer"
                           >
-                            See PDF
+                            See Certificate
                           </a>
                         ) : null}
                         {certificate.link ? (
