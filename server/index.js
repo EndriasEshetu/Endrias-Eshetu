@@ -15,17 +15,25 @@ dotenv.config({ path: envPath });
 
 const MESSAGE_LIMIT = 500;
 const DEFAULT_PORT = 4000;
-const RETRYABLE_SMTP_ERRORS = new Set(["ETIMEDOUT", "ESOCKET"]);
+const RETRYABLE_SMTP_ERRORS = new Set([
+  "ETIMEDOUT",
+  "ESOCKET",
+  "ECONNECTION",
+  "ECONNRESET",
+  "ECONNREFUSED",
+  "EHOSTUNREACH",
+  "ENOTFOUND",
+]);
 
 const app = express();
 const port = Number(process.env.PORT) || DEFAULT_PORT;
 const receiverEmail =
-  process.env.CONTACT_RECEIVER_EMAIL || "egataendrias@gmail.com";
-const smtpHost = process.env.SMTP_HOST || "smtp.gmail.com";
+  normalizeEnvText(process.env.CONTACT_RECEIVER_EMAIL) ||
+  "egataendrias@gmail.com";
+const smtpHost = normalizeEnvText(process.env.SMTP_HOST) || "smtp.gmail.com";
 const smtpPort = Number(process.env.SMTP_PORT || 465);
-const smtpSecure = process.env.SMTP_SECURE
-  ? process.env.SMTP_SECURE === "true"
-  : smtpPort === 465;
+const smtpSecureEnv = normalizeEnvText(process.env.SMTP_SECURE).toLowerCase();
+const smtpSecure = smtpSecureEnv ? smtpSecureEnv === "true" : smtpPort === 465;
 const smtpFallbackPort = Number(
   process.env.SMTP_FALLBACK_PORT || (smtpPort === 465 ? 587 : 0),
 );
@@ -34,20 +42,31 @@ const smtpConnectionTimeout = Number(
 );
 const smtpGreetingTimeout = Number(process.env.SMTP_GREETING_TIMEOUT || 12000);
 const smtpSocketTimeout = Number(process.env.SMTP_SOCKET_TIMEOUT || 20000);
-const smtpUser = process.env.SMTP_USER || "egataendrias@gmail.com";
-const smtpPass = process.env.SMTP_PASS;
+const smtpUser =
+  normalizeEnvText(process.env.SMTP_USER) || "egataendrias@gmail.com";
+const smtpPass = normalizeEnvText(process.env.SMTP_PASS);
 
 const dataDir = path.join(__dirname, "data");
 const messagesFile = path.join(dataDir, "contact-messages.json");
 
-const configuredOrigins = process.env.FRONTEND_ORIGIN
-  ? process.env.FRONTEND_ORIGIN.split(",")
+const configuredOrigins = normalizeEnvText(process.env.FRONTEND_ORIGIN)
+  ? normalizeEnvText(process.env.FRONTEND_ORIGIN)
+      .split(",")
       .map((origin) => origin.trim())
       .filter(Boolean)
   : [];
 
 function normalizeOrigin(origin) {
   return typeof origin === "string" ? origin.replace(/\/$/, "") : "";
+}
+
+function normalizeEnvText(value) {
+  if (typeof value !== "string") {
+    return "";
+  }
+
+  // Handle accidental wrapping quotes in .env values.
+  return value.trim().replace(/^['\"]|['\"]$/g, "");
 }
 
 const normalizedAllowedOrigins = new Set(
@@ -98,12 +117,24 @@ function createMailTransporter(port, secure) {
 const primaryTransporter = hasSmtpConfig
   ? createMailTransporter(smtpPort, smtpSecure)
   : null;
+const autoFallbackPort = smtpPort === 465 ? 587 : 465;
+const autoFallbackSecure = autoFallbackPort === 465;
 const fallbackTransporter =
-  hasSmtpConfig && smtpFallbackPort > 0 && smtpFallbackPort !== smtpPort
-    ? createMailTransporter(smtpFallbackPort, false)
+  hasSmtpConfig && (smtpFallbackPort > 0 || autoFallbackPort !== smtpPort)
+    ? createMailTransporter(
+        smtpFallbackPort > 0 ? smtpFallbackPort : autoFallbackPort,
+        smtpFallbackPort > 0 ? smtpFallbackPort === 465 : autoFallbackSecure,
+      )
     : null;
 let activeTransporter = primaryTransporter;
 let activeTransporterLabel = `port ${smtpPort}${smtpSecure ? " (secure)" : ""}`;
+const fallbackTransporterLabel = fallbackTransporter
+  ? `port ${smtpFallbackPort > 0 ? smtpFallbackPort : autoFallbackPort}${
+      (smtpFallbackPort > 0 ? smtpFallbackPort : autoFallbackPort) === 465
+        ? " (secure)"
+        : " (starttls)"
+    }`
+  : "";
 
 const topics = new Set(["fullstack", "automation", "networking", "other"]);
 
@@ -111,9 +142,27 @@ function isRetryableSmtpError(error) {
   return Boolean(error?.code && RETRYABLE_SMTP_ERRORS.has(error.code));
 }
 
+function isAuthSmtpError(error) {
+  return Boolean(
+    error?.code === "EAUTH" ||
+    error?.responseCode === 535 ||
+    String(error?.response || "").includes("5.7.8"),
+  );
+}
+
+function describeSmtpError(error) {
+  return {
+    code: error?.code,
+    responseCode: error?.responseCode,
+    command: error?.command,
+    response: error?.response,
+    message: error?.message,
+  };
+}
+
 function setFallbackTransporterAsActive() {
   activeTransporter = fallbackTransporter;
-  activeTransporterLabel = `port ${smtpFallbackPort} (starttls)`;
+  activeTransporterLabel = fallbackTransporterLabel;
 }
 
 function logSmtpSendResult(info) {
@@ -208,6 +257,8 @@ async function sendContactEmail(entry) {
     const info = await activeTransporter.sendMail(message);
     logSmtpSendResult(info);
   } catch (error) {
+    console.error("SMTP send failed:", describeSmtpError(error));
+
     const shouldTryFallback =
       fallbackTransporter &&
       activeTransporter !== fallbackTransporter &&
@@ -218,7 +269,7 @@ async function sendContactEmail(entry) {
     }
 
     console.warn(
-      `SMTP on ${activeTransporterLabel} failed (${error.code}). Retrying on port ${smtpFallbackPort}.`,
+      `SMTP on ${activeTransporterLabel} failed (${error.code}). Retrying on ${fallbackTransporterLabel}.`,
     );
 
     const info = await fallbackTransporter.sendMail(message);
@@ -267,12 +318,15 @@ app.post("/api/contact", async (req, res) => {
         : "Message received. Email delivery is currently disabled on the server.",
     });
   } catch (error) {
-    console.error("SMTP delivery failed:", error);
+    console.error("SMTP delivery failed:", describeSmtpError(error));
+
+    const message = isAuthSmtpError(error)
+      ? "Message received and saved, but SMTP authentication failed. Verify SMTP_USER/SMTP_PASS (use an app password for Gmail)."
+      : "Message received and saved, but email delivery failed. Check SMTP host/port/security settings and network access.";
 
     return res.status(201).json({
       ok: true,
-      message:
-        "Message received and saved, but email delivery failed. Check SMTP credentials.",
+      message,
     });
   }
 });
@@ -294,6 +348,8 @@ async function verifySmtpConnection() {
       `SMTP ready on ${activeTransporterLabel}: email auto-forwarding is active.`,
     );
   } catch (error) {
+    console.error("SMTP verify failed:", describeSmtpError(error));
+
     const shouldTryFallback =
       fallbackTransporter &&
       activeTransporter !== fallbackTransporter &&
@@ -308,14 +364,22 @@ async function verifySmtpConnection() {
         );
         return;
       } catch (fallbackError) {
-        console.error("SMTP fallback verify failed:", fallbackError);
+        console.error(
+          "SMTP fallback verify failed:",
+          describeSmtpError(fallbackError),
+        );
       }
     }
 
-    console.error("SMTP auth/config failed:", error);
-    console.log(
-      "Check SMTP_USER/SMTP_PASS and SMTP_HOST/SMTP_PORT, then restart server.",
-    );
+    if (isAuthSmtpError(error)) {
+      console.log(
+        "SMTP auth failed. For Gmail, use an App Password and verify SMTP_USER exactly matches that Gmail account.",
+      );
+    } else {
+      console.log(
+        "SMTP connection failed. Check SMTP_HOST/SMTP_PORT/SMTP_SECURE and firewall/network access.",
+      );
+    }
   }
 }
 
