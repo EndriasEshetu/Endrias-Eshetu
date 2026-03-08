@@ -1,7 +1,7 @@
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 import { randomUUID } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
@@ -13,167 +13,46 @@ const envPath = path.join(__dirname, "..", ".env");
 
 dotenv.config({ path: envPath });
 
-const MESSAGE_LIMIT = 500;
-const DEFAULT_PORT = 4000;
-const RETRYABLE_SMTP_ERRORS = new Set([
-  "ETIMEDOUT",
-  "ESOCKET",
-  "ECONNECTION",
-  "ECONNRESET",
-  "ECONNREFUSED",
-  "EHOSTUNREACH",
-  "ENOTFOUND",
-]);
-
 const app = express();
-const port = Number(process.env.PORT) || DEFAULT_PORT;
+const port = Number(process.env.PORT) || 4000;
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
 const receiverEmail =
-  normalizeEnvText(process.env.CONTACT_RECEIVER_EMAIL) ||
-  "egataendrias@gmail.com";
-const smtpHost = normalizeEnvText(process.env.SMTP_HOST) || "smtp.gmail.com";
-const smtpPort = Number(process.env.SMTP_PORT || 465);
-const smtpSecureEnv = normalizeEnvText(process.env.SMTP_SECURE).toLowerCase();
-const smtpSecure = smtpSecureEnv ? smtpSecureEnv === "true" : smtpPort === 465;
-const smtpFallbackPort = Number(
-  process.env.SMTP_FALLBACK_PORT || (smtpPort === 465 ? 587 : 0),
-);
-const smtpConnectionTimeout = Number(
-  process.env.SMTP_CONNECTION_TIMEOUT || 12000,
-);
-const smtpGreetingTimeout = Number(process.env.SMTP_GREETING_TIMEOUT || 12000);
-const smtpSocketTimeout = Number(process.env.SMTP_SOCKET_TIMEOUT || 20000);
-const smtpUser =
-  normalizeEnvText(process.env.SMTP_USER) || "egataendrias@gmail.com";
-const smtpPass = normalizeEnvText(process.env.SMTP_PASS);
+  process.env.CONTACT_RECEIVER_EMAIL || "egataendrias@gmail.com";
 
 const dataDir = path.join(__dirname, "data");
 const messagesFile = path.join(dataDir, "contact-messages.json");
 
-const configuredOrigins = normalizeEnvText(process.env.FRONTEND_ORIGIN)
-  ? normalizeEnvText(process.env.FRONTEND_ORIGIN)
-      .split(",")
-      .map((origin) => origin.trim())
-      .filter(Boolean)
+const MESSAGE_LIMIT = 500;
+
+const configuredOrigins = process.env.FRONTEND_ORIGIN
+  ? process.env.FRONTEND_ORIGIN.split(",").map((o) => o.trim())
   : [];
 
 function normalizeOrigin(origin) {
   return typeof origin === "string" ? origin.replace(/\/$/, "") : "";
 }
 
-function normalizeEnvText(value) {
-  if (typeof value !== "string") {
-    return "";
-  }
-
-  // Handle accidental wrapping quotes in .env values.
-  return value.trim().replace(/^['\"]|['\"]$/g, "");
-}
-
-const normalizedAllowedOrigins = new Set(
-  configuredOrigins.map((origin) => normalizeOrigin(origin)),
-);
+const allowedOrigins = new Set(configuredOrigins.map(normalizeOrigin));
 
 const corsOrigin = (origin, callback) => {
-  // Allow same-origin/non-browser requests (no Origin header).
-  if (!origin) {
-    callback(null, true);
-    return;
+  if (!origin) return callback(null, true);
+
+  if (allowedOrigins.size === 0) return callback(null, true);
+
+  if (allowedOrigins.has(normalizeOrigin(origin))) {
+    return callback(null, true);
   }
 
-  if (normalizedAllowedOrigins.size === 0) {
-    callback(null, true);
-    return;
-  }
-
-  if (normalizedAllowedOrigins.has(normalizeOrigin(origin))) {
-    callback(null, true);
-    return;
-  }
-
-  console.warn("Blocked by CORS. Origin not allowed:", origin);
+  console.warn("Blocked by CORS:", origin);
   callback(new Error("Not allowed by CORS"));
 };
 
 app.use(cors({ origin: corsOrigin }));
 app.use(express.json({ limit: "100kb" }));
 
-const hasSmtpConfig = Boolean(smtpPass);
-
-function createMailTransporter(port, secure) {
-  return nodemailer.createTransport({
-    host: smtpHost,
-    port,
-    secure,
-    auth: {
-      user: smtpUser,
-      pass: smtpPass,
-    },
-    connectionTimeout: smtpConnectionTimeout,
-    greetingTimeout: smtpGreetingTimeout,
-    socketTimeout: smtpSocketTimeout,
-  });
-}
-
-const primaryTransporter = hasSmtpConfig
-  ? createMailTransporter(smtpPort, smtpSecure)
-  : null;
-const autoFallbackPort = smtpPort === 465 ? 587 : 465;
-const autoFallbackSecure = autoFallbackPort === 465;
-const fallbackTransporter =
-  hasSmtpConfig && (smtpFallbackPort > 0 || autoFallbackPort !== smtpPort)
-    ? createMailTransporter(
-        smtpFallbackPort > 0 ? smtpFallbackPort : autoFallbackPort,
-        smtpFallbackPort > 0 ? smtpFallbackPort === 465 : autoFallbackSecure,
-      )
-    : null;
-let activeTransporter = primaryTransporter;
-let activeTransporterLabel = `port ${smtpPort}${smtpSecure ? " (secure)" : ""}`;
-const fallbackTransporterLabel = fallbackTransporter
-  ? `port ${smtpFallbackPort > 0 ? smtpFallbackPort : autoFallbackPort}${
-      (smtpFallbackPort > 0 ? smtpFallbackPort : autoFallbackPort) === 465
-        ? " (secure)"
-        : " (starttls)"
-    }`
-  : "";
-
 const topics = new Set(["fullstack", "automation", "networking", "other"]);
-
-function isRetryableSmtpError(error) {
-  return Boolean(error?.code && RETRYABLE_SMTP_ERRORS.has(error.code));
-}
-
-function isAuthSmtpError(error) {
-  return Boolean(
-    error?.code === "EAUTH" ||
-    error?.responseCode === 535 ||
-    String(error?.response || "").includes("5.7.8"),
-  );
-}
-
-function describeSmtpError(error) {
-  return {
-    code: error?.code,
-    responseCode: error?.responseCode,
-    command: error?.command,
-    response: error?.response,
-    message: error?.message,
-  };
-}
-
-function setFallbackTransporterAsActive() {
-  activeTransporter = fallbackTransporter;
-  activeTransporterLabel = fallbackTransporterLabel;
-}
-
-function logSmtpSendResult(info) {
-  console.log("SMTP send result:", {
-    transporter: activeTransporterLabel,
-    messageId: info.messageId,
-    accepted: info.accepted,
-    rejected: info.rejected,
-    response: info.response,
-  });
-}
 
 function normalizeText(value) {
   return typeof value === "string" ? value.trim() : "";
@@ -190,11 +69,11 @@ function validateContactPayload(payload) {
   }
 
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return { error: "A valid email is required." };
+    return { error: "Valid email required." };
   }
 
   if (!topics.has(topic)) {
-    return { error: "Please choose a valid topic." };
+    return { error: "Invalid topic." };
   }
 
   if (!message || message.length < 10 || message.length > 2000) {
@@ -202,12 +81,7 @@ function validateContactPayload(payload) {
   }
 
   return {
-    data: {
-      name,
-      email,
-      topic,
-      message,
-    },
+    data: { name, email, topic, message },
   };
 }
 
@@ -225,59 +99,29 @@ async function saveMessage(entry) {
   await mkdir(dataDir, { recursive: true });
   const existing = await readMessages();
   const next = [entry, ...existing].slice(0, MESSAGE_LIMIT);
-  await writeFile(messagesFile, JSON.stringify(next, null, 2), "utf-8");
+
+  await writeFile(messagesFile, JSON.stringify(next, null, 2));
 }
 
 async function sendContactEmail(entry) {
-  if (!activeTransporter) {
-    return false;
-  }
+  const topicLabel = entry.topic.charAt(0).toUpperCase() + entry.topic.slice(1);
 
-  const topicLabel =
-    entry.topic.charAt(0).toUpperCase() + entry.topic.slice(1).toLowerCase();
-
-  const message = {
-    from: `Portfolio Contact <${smtpUser}>`,
+  await resend.emails.send({
+    from: "Portfolio <onboarding@resend.dev>",
     to: receiverEmail,
-    replyTo: entry.email,
     subject: `New portfolio message: ${topicLabel}`,
-    text: [
-      `Name: ${entry.name}`,
-      `Email: ${entry.email}`,
-      `Topic: ${entry.topic}`,
-      "",
-      "Message:",
-      entry.message,
-      "",
-      `Received at: ${entry.createdAt}`,
-    ].join("\n"),
-  };
+    text: `
+Name: ${entry.name}
+Email: ${entry.email}
+Topic: ${entry.topic}
 
-  try {
-    const info = await activeTransporter.sendMail(message);
-    logSmtpSendResult(info);
-  } catch (error) {
-    console.error("SMTP send failed:", describeSmtpError(error));
+Message:
+${entry.message}
 
-    const shouldTryFallback =
-      fallbackTransporter &&
-      activeTransporter !== fallbackTransporter &&
-      isRetryableSmtpError(error);
-
-    if (!shouldTryFallback) {
-      throw error;
-    }
-
-    console.warn(
-      `SMTP on ${activeTransporterLabel} failed (${error.code}). Retrying on ${fallbackTransporterLabel}.`,
-    );
-
-    const info = await fallbackTransporter.sendMail(message);
-    setFallbackTransporterAsActive();
-    logSmtpSendResult(info);
-  }
-
-  return true;
+Received: ${entry.createdAt}
+`,
+    reply_to: entry.email,
+  });
 }
 
 app.get("/api/health", (_req, res) => {
@@ -299,34 +143,28 @@ app.post("/api/contact", async (req, res) => {
 
   try {
     await saveMessage(entry);
-  } catch (error) {
-    console.error("Saving contact message failed:", error);
+  } catch (err) {
+    console.error("Save failed:", err);
 
     return res.status(500).json({
       ok: false,
-      message: "Could not save your message right now. Please try again.",
+      message: "Could not save message.",
     });
   }
 
   try {
-    const sent = await sendContactEmail(entry);
+    await sendContactEmail(entry);
 
     return res.status(201).json({
       ok: true,
-      message: sent
-        ? "Message received and delivered by email."
-        : "Message received. Email delivery is currently disabled on the server.",
+      message: "Message received and delivered by email.",
     });
-  } catch (error) {
-    console.error("SMTP delivery failed:", describeSmtpError(error));
-
-    const message = isAuthSmtpError(error)
-      ? "Message received and saved, but SMTP authentication failed. Verify SMTP_USER/SMTP_PASS (use an app password for Gmail)."
-      : "Message received and saved, but email delivery failed. Check SMTP host/port/security settings and network access.";
+  } catch (err) {
+    console.error("Email failed:", err);
 
     return res.status(201).json({
       ok: true,
-      message,
+      message: "Message saved but email delivery failed.",
     });
   }
 });
@@ -335,57 +173,6 @@ app.use((_req, res) => {
   res.status(404).json({ ok: false, message: "Route not found." });
 });
 
-async function verifySmtpConnection() {
-  if (!activeTransporter) {
-    console.log("SMTP not configured. Messages are saved locally only.");
-    console.log("Set SMTP_PASS in .env to enable auto-forwarding email.");
-    return;
-  }
-
-  try {
-    await activeTransporter.verify();
-    console.log(
-      `SMTP ready on ${activeTransporterLabel}: email auto-forwarding is active.`,
-    );
-  } catch (error) {
-    console.error("SMTP verify failed:", describeSmtpError(error));
-
-    const shouldTryFallback =
-      fallbackTransporter &&
-      activeTransporter !== fallbackTransporter &&
-      isRetryableSmtpError(error);
-
-    if (shouldTryFallback) {
-      try {
-        await fallbackTransporter.verify();
-        setFallbackTransporterAsActive();
-        console.log(
-          `SMTP ready on ${activeTransporterLabel}: email auto-forwarding is active.`,
-        );
-        return;
-      } catch (fallbackError) {
-        console.error(
-          "SMTP fallback verify failed:",
-          describeSmtpError(fallbackError),
-        );
-      }
-    }
-
-    if (isAuthSmtpError(error)) {
-      console.log(
-        "SMTP auth failed. For Gmail, use an App Password and verify SMTP_USER exactly matches that Gmail account.",
-      );
-    } else {
-      console.log(
-        "SMTP connection failed. Check SMTP_HOST/SMTP_PORT/SMTP_SECURE and firewall/network access.",
-      );
-    }
-  }
-}
-
-app.listen(port, async () => {
-  console.log(`Contact API running on http://localhost:${port}`);
-  console.log(`Contact receiver email: ${receiverEmail}`);
-
-  await verifySmtpConnection();
+app.listen(port, () => {
+  console.log(`Contact API running on port ${port}`);
 });
