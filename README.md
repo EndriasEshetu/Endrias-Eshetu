@@ -63,6 +63,12 @@ Required and optional variables:
 
 If `SMTP_PASS` is not provided, messages are still stored locally and email forwarding is disabled.
 
+For split hosting (frontend on Vercel and backend on Render):
+
+- Set backend `FRONTEND_ORIGIN` to your Vercel site URL (for CORS)
+- Set frontend `VITE_API_BASE_URL` to your Render API URL
+- Example: `https://your-api.onrender.com`
+
 ## Running the Application
 
 Run frontend and backend together:
@@ -98,6 +104,40 @@ npm run dev
 - `GET /api/health` Health check endpoint
 - `POST /api/contact` Accepts contact form payload and stores message
 
+## Deploy Backend To Render
+
+This repository can run as a Render Web Service without code changes.
+
+1. Push your latest code to GitHub.
+2. In Render, create a new `Web Service` from this repository.
+3. Use these settings:
+
+- Runtime: `Node`
+- Build Command: `npm install`
+- Start Command: `npm run server`
+- Health Check Path: `/api/health`
+
+4. Add Render environment variables:
+
+- `FRONTEND_ORIGIN` = `https://<your-vercel-domain>`
+- `CONTACT_RECEIVER_EMAIL`
+- `SMTP_HOST`
+- `SMTP_PORT`
+- `SMTP_SECURE`
+- `SMTP_FALLBACK_PORT`
+- `SMTP_USER`
+- `SMTP_PASS`
+
+5. Deploy and copy your Render service URL (example: `https://your-api.onrender.com`).
+
+## Connect Frontend (Vercel) To Render Backend
+
+In Vercel project environment variables, set:
+
+- `VITE_API_BASE_URL` = `https://your-api.onrender.com`
+
+Then redeploy the frontend.
+
 ## Contact Message Handling
 
 Each contact submission is:
@@ -105,6 +145,8 @@ Each contact submission is:
 - Validated on the server
 - Stored in `server/data/contact-messages.json`
 - Forwarded by email when SMTP is configured correctly
+
+Note: on most cloud hosts (including Render Web Services), local filesystem writes are not durable across deploys/restarts. Use a database for long-term message storage.
 
 ## License
 
