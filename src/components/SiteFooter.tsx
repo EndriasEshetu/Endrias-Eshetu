@@ -49,7 +49,7 @@ const socialLinks: SocialLink[] = [
   },
   {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/endrias-eshetu-a25948388",
+    href: "https://www.linkedin.com/in/endrias-eshetu",
     icon: "linkedin",
   },
   {

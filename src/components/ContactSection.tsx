@@ -76,7 +76,7 @@ export function ContactSection() {
             </p>
             <div className="contact-details mt-2">
               <p className="mb-1">Email</p>
-              <a href="mailto:endrias.eshetu@example.com">
+              <a href="mailto:endriaseshetu75@gmail.com">
                 endriaseshetu75@gmail.com
               </a>
               <p className="mb-1 mt-3">Phone</p>
@@ -91,7 +91,7 @@ export function ContactSection() {
                   GitHub
                 </a>
                 <a
-                  href="https://www.linkedin.com/in/endrias-eshetu-a25948388"
+                  href="https://www.linkedin.com/in/endrias-eshetu"
                   target="_blank"
                   rel="noreferrer"
                 >
