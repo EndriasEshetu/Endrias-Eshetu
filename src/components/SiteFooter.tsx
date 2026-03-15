@@ -54,12 +54,12 @@ const socialLinks: SocialLink[] = [
   },
   {
     label: "Facebook",
-    href: "https://web.facebook.com/tsinubekur1",
+    href: "https://web.facebook.com/endriaseshetu.e",
     icon: "facebook",
   },
   {
     label: "Instagram",
-    href: "https://www.instagram.com/tsinubekur1",
+    href: "https://www.instagram.com/endriaseshetu.e",
     icon: "instagram",
   },
 ];
