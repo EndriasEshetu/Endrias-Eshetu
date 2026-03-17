@@ -41,7 +41,12 @@ export function ContactSection() {
         body: JSON.stringify(payload),
       });
 
-      const result = (await response.json()) as { message?: string };
+      let result: { ok?: boolean; message?: string } = {};
+      try {
+        result = (await response.json()) as { ok?: boolean; message?: string };
+      } catch {
+        // Server returned non-JSON (e.g. HTML error page)
+      }
 
       if (!response.ok) {
         throw new Error(result.message ?? "Could not send your message.");
@@ -76,7 +81,7 @@ export function ContactSection() {
             <h2 className="section-title" id="contact-title">
               Let's connect
             </h2>
-            <p className="text-[var(--metric-label)]">
+            <p className="text-(--metric-label)">
               Reach out for internships, collaboration, or project work. I
               respond as quickly as possible.
             </p>
@@ -92,7 +97,7 @@ export function ContactSection() {
                     key={social.icon}
                     href={social.href}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                   >
                     {social.label}
                   </a>
@@ -109,14 +114,14 @@ export function ContactSection() {
               <div className="grid gap-3 md:grid-cols-2">
                 <div>
                   <label
-                    className="mb-1 block text-sm font-medium text-[var(--ink)]"
+                    className="mb-1 block text-sm font-medium text-(--ink)"
                     htmlFor="contact-name"
                   >
                     Full name
                   </label>
                   <input
                     type="text"
-                    className="w-full rounded-lg border border-[var(--line)] bg-[var(--input-bg)] px-3 py-2 text-[var(--input-text)] outline-none transition focus:border-[var(--accent)]"
+                    className="w-full rounded-lg border border-(--line) bg-(--input-bg) px-3 py-2 text-(--input-text) outline-none transition focus:border-(--accent)"
                     id="contact-name"
                     name="name"
                     placeholder="Your name"
@@ -125,14 +130,14 @@ export function ContactSection() {
                 </div>
                 <div>
                   <label
-                    className="mb-1 block text-sm font-medium text-[var(--ink)]"
+                    className="mb-1 block text-sm font-medium text-(--ink)"
                     htmlFor="contact-email"
                   >
                     Email address
                   </label>
                   <input
                     type="email"
-                    className="w-full rounded-lg border border-[var(--line)] bg-[var(--input-bg)] px-3 py-2 text-[var(--input-text)] outline-none transition focus:border-[var(--accent)]"
+                    className="w-full rounded-lg border border-(--line) bg-(--input-bg) px-3 py-2 text-(--input-text) outline-none transition focus:border-(--accent)"
                     id="contact-email"
                     name="email"
                     placeholder="you@example.com"
@@ -141,13 +146,13 @@ export function ContactSection() {
                 </div>
                 <div className="md:col-span-2">
                   <label
-                    className="mb-1 block text-sm font-medium text-[var(--ink)]"
+                    className="mb-1 block text-sm font-medium text-(--ink)"
                     htmlFor="contact-topic"
                   >
                     Topic
                   </label>
                   <select
-                    className="w-full rounded-lg border border-[var(--line)] bg-[var(--input-bg)] px-3 py-2 text-[var(--input-text)] outline-none transition focus:border-[var(--accent)]"
+                    className="w-full rounded-lg border border-(--line) bg-(--input-bg) px-3 py-2 text-(--input-text) outline-none transition focus:border-(--accent)"
                     id="contact-topic"
                     name="topic"
                     defaultValue=""
@@ -164,13 +169,13 @@ export function ContactSection() {
                 </div>
                 <div className="md:col-span-2">
                   <label
-                    className="mb-1 block text-sm font-medium text-[var(--ink)]"
+                    className="mb-1 block text-sm font-medium text-(--ink)"
                     htmlFor="contact-message"
                   >
                     Message
                   </label>
                   <textarea
-                    className="w-full rounded-lg border border-[var(--line)] bg-[var(--input-bg)] px-3 py-2 text-[var(--input-text)] outline-none transition focus:border-[var(--accent)]"
+                    className="w-full rounded-lg border border-(--line) bg-(--input-bg) px-3 py-2 text-(--input-text) outline-none transition focus:border-(--accent)"
                     id="contact-message"
                     name="message"
                     rows={4}
@@ -187,7 +192,7 @@ export function ContactSection() {
                     {status === "submitting" ? "Sending..." : "Send message"}
                   </button>
                   <p
-                    className={`mb-0 mt-2 text-sm ${status === "error" ? "text-red-500" : "text-[var(--muted)]"}`}
+                    className={`mb-0 mt-2 text-sm ${status === "error" ? "text-red-500" : "text-(--muted)"}`}
                     role="status"
                     aria-live="polite"
                   >
