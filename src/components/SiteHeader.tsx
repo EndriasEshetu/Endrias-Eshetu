@@ -87,7 +87,7 @@ export function SiteHeader() {
                       alt="Photo of me working on a laptop, smiling at the camera"
                       className="h-auto w-full rounded-3xl shadow"
                     />
-                    <div className="panel-card  mt-4  bg-white p-2.5">
+                    <div className="panel-card mt-4 p-2.5">
                       <p className="mb-1 font-semibold pl-4">
                         Available for internships and junior roles
                       </p>
@@ -131,7 +131,7 @@ export function SiteHeader() {
               </div>
             </div>
             <div className="lg:col-span-7">
-              <div className="panel-card rounded-3xl bg-white p-6">
+              <div className="panel-card rounded-3xl p-6">
                 <div className="grid gap-6 md:grid-cols-2">
                   <div>
                     <h3 className="text-sm font-semibold uppercase tracking-wide">
@@ -230,7 +230,7 @@ export function SiteHeader() {
                     </ul>
                   </div>
                 </div>
-                <div className="panel-card mt-4 bg-white p-4 ">
+                <div className="panel-card mt-4 p-4">
                   <p className="mb-1 font-semibold">Signature strength</p>
                   <p className="">
                     Delivering end-to-end features with clarity and care.

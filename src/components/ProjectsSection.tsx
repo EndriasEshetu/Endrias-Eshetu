@@ -24,7 +24,7 @@ export function ProjectsSection() {
         </div>
         <div className="grid gap-4 lg:grid-cols-3">
           <div>
-            <div className="panel-card h-full rounded-3xl bg-white p-6">
+            <div className="panel-card h-full rounded-3xl p-6">
               <p className="text-xs uppercase tracking-wide text-slate-400">
                 2025
               </p>
@@ -39,7 +39,7 @@ export function ProjectsSection() {
             </div>
           </div>
           <div>
-            <div className="panel-card h-full rounded-3xl bg-white p-6">
+            <div className="panel-card h-full rounded-3xl p-6">
               <p className="text-xs uppercase tracking-wide text-slate-400">
                 2024
               </p>
@@ -54,7 +54,7 @@ export function ProjectsSection() {
             </div>
           </div>
           <div>
-            <div className="panel-card h-full rounded-3xl bg-white p-6">
+            <div className="panel-card h-full rounded-3xl p-6">
               <div className="mb-2 flex items-center justify-between gap-2">
                 <p className="m-0 text-xs uppercase tracking-wide text-slate-400">
                   2026 - Present

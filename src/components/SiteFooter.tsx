@@ -6,6 +6,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { SOCIAL_LINKS } from "../data/contact";
 
 interface SiteFooterProps {
   currentYear: number;
@@ -14,12 +15,6 @@ interface SiteFooterProps {
 type NavLink = {
   label: string;
   href: string;
-};
-
-type SocialLink = {
-  label: string;
-  href: string;
-  icon: keyof typeof byPrefixAndName.fab;
 };
 
 const byPrefixAndName = {
@@ -41,38 +36,24 @@ const navLinks: NavLink[] = [
   { label: "Certificates", href: "#certificates" },
 ];
 
-const socialLinks: SocialLink[] = [
-  {
-    label: "GitHub",
-    href: "https://github.com/EndriasEshetu",
-    icon: "github",
-  },
-  {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/in/endrias-eshetu",
-    icon: "linkedin",
-  },
-  {
-    label: "Facebook",
-    href: "https://web.facebook.com/endriaseshetu.e",
-    icon: "facebook",
-  },
-  {
-    label: "Instagram",
-    href: "https://www.instagram.com/endriaseshetu.e",
-    icon: "instagram",
-  },
-];
-
 export function SiteFooter({ currentYear }: SiteFooterProps) {
   return (
     <footer className="site-footer">
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="site-footer-grid grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           <div>
-            <p className="footer-brand m-0 text-lg font-semibold">
-              Endrias Eshetu
-            </p>
+          <a
+          className="navbar-brand text-lg font-semibold"
+          href="#top"
+          aria-label="Home"
+        >
+          <img
+            className="brand-mark"
+            src="/logo.png"
+            alt="Endrias Eshetu logo"
+          />
+          Endrias Eshetu
+        </a>
             <p className="footer-text mb-0 mt-2 text-sm">
               Full-stack developer focused on clean UI, reliable APIs, and
               thoughtful user experience.
@@ -96,7 +77,7 @@ export function SiteFooter({ currentYear }: SiteFooterProps) {
               className="mt-3 flex flex-wrap gap-3"
               aria-label="Social links"
             >
-              {socialLinks.map((social) => (
+              {SOCIAL_LINKS.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
@@ -107,7 +88,7 @@ export function SiteFooter({ currentYear }: SiteFooterProps) {
                   className="social-link inline-flex h-10 w-10 items-center justify-center rounded-full"
                 >
                   <FontAwesomeIcon
-                    icon={byPrefixAndName.fab[social.icon]}
+                    icon={byPrefixAndName.fab[social.icon as keyof typeof byPrefixAndName.fab]}
                     className="h-5 w-5"
                   />
                 </a>

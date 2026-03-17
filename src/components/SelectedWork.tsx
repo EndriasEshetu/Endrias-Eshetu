@@ -18,7 +18,7 @@ export function SelectedWork() {
         </div>
         <div className="grid gap-4 lg:grid-cols-2">
           <div>
-            <article className="project-card h-full rounded-3xl bg-white p-6">
+            <article className="project-card h-full rounded-3xl p-6">
               <p className="text-xs uppercase tracking-wide text-slate-400">
                 Government
               </p>
@@ -37,7 +37,7 @@ export function SelectedWork() {
             </article>
           </div>
           <div>
-            <article className="project-card h-full rounded-3xl bg-white p-6">
+            <article className="project-card h-full rounded-3xl p-6">
               <p className="text-xs uppercase tracking-wide text-slate-400">
                 Automation
               </p>

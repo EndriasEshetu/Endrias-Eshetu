@@ -16,7 +16,7 @@ The project consists of:
 
 - A frontend single-page application built with React, TypeScript, and Vite
 - A backend Express API that receives contact form submissions
-- Optional SMTP email forwarding for incoming contact messages
+- **Resend**-powered email delivery for incoming contact messages (no SMTP setup)
 - Local JSON persistence for submitted contact messages
 
 ## Technology Stack
@@ -25,7 +25,7 @@ The project consists of:
 - TypeScript
 - Vite
 - Express.js
-- Nodemailer
+- Resend (transactional email API)
 - ESLint
 
 ## Project Structure
@@ -56,12 +56,9 @@ Required and optional variables:
 - `FRONTEND_ORIGIN` Allowed CORS origin(s) for frontend access
 - `VITE_API_BASE_URL` Frontend API base URL
 - `CONTACT_RECEIVER_EMAIL` Destination email for contact notifications
-- `SMTP_HOST` SMTP host (default: `smtp.gmail.com`)
-- `SMTP_PORT` SMTP port (default: `465`)
-- `SMTP_USER` SMTP account username
-- `SMTP_PASS` SMTP account app password
+- `RESEND_API_KEY` Your [Resend](https://resend.com) API key for sending contact emails
 
-If `SMTP_PASS` is not provided, messages are still stored locally and email forwarding is disabled.
+If `RESEND_API_KEY` is not set, messages are still stored locally; email delivery will fail and the API responds with “Message saved but email delivery failed.” Get an API key from [Resend](https://resend.com) (free tier available).
 
 For split hosting (frontend on Vercel and backend on Render):
 
@@ -121,12 +118,7 @@ This repository can run as a Render Web Service without code changes.
 
 - `FRONTEND_ORIGIN` = `https://<your-vercel-domain>`
 - `CONTACT_RECEIVER_EMAIL`
-- `SMTP_HOST`
-- `SMTP_PORT`
-- `SMTP_SECURE`
-- `SMTP_FALLBACK_PORT`
-- `SMTP_USER`
-- `SMTP_PASS`
+- `RESEND_API_KEY` (from [Resend](https://resend.com))
 
 5. Deploy and copy your Render service URL (example: `https://your-api.onrender.com`).
 
@@ -144,7 +136,7 @@ Each contact submission is:
 
 - Validated on the server
 - Stored in `server/data/contact-messages.json`
-- Forwarded by email when SMTP is configured correctly
+- Delivered by email via **Resend** when `RESEND_API_KEY` is set (no SMTP configuration required)
 
 Note: on most cloud hosts (including Render Web Services), local filesystem writes are not durable across deploys/restarts. Use a database for long-term message storage.
 

@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
+import { useTheme } from "../contexts/ThemeContext";
 
 export function Navbar() {
+  const { theme, toggleTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeNav, setActiveNav] = useState("#about");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -72,7 +74,7 @@ export function Navbar() {
   return (
     <nav
       ref={navRef}
-      className={`fixed top-0 z-1030 text-white w-full py-3 portfolio-navbar ${isScrolled ? "is-scrolled" : ""}`}
+      className={`fixed top-0 z-1030 w-full py-3 portfolio-navbar ${isScrolled ? "is-scrolled" : ""}`}
     >
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <a
@@ -88,7 +90,24 @@ export function Navbar() {
           Endrias Eshetu
         </a>
         <button
-          className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-fuchsia-200/50 text-white lg:hidden"
+          className="navbar-theme-toggle inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md ml-4 mr-0 opacity-90 transition hover:opacity-100 lg:order-last"
+          type="button"
+          aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+          onClick={toggleTheme}
+        >
+          {theme === "dark" ? (
+            <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+            </svg>
+          ) : (
+            <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+          )}
+        </button>
+        <button
+          className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-current opacity-90 lg:hidden ml-4"
           type="button"
           aria-controls="siteNav"
           aria-expanded={isMenuOpen}
@@ -111,13 +130,13 @@ export function Navbar() {
           </svg>
         </button>
         <div
-          className={`${isMenuOpen ? "flex" : "hidden"} absolute right-4 top-full mt-2 rounded-2xl bg-gray-900 p-4 shadow-lg lg:static lg:mt-0 lg:block lg:bg-transparent lg:p-0 lg:shadow-none`}
+          className={`${isMenuOpen ? "flex" : "hidden"} absolute right-4 top-full mt-2 rounded-2xl p-4 shadow-lg lg:static lg:mt-0 lg:flex lg:flex-1 lg:justify-end lg:bg-transparent lg:p-0 lg:shadow-none [background:var(--card)] `}
           id="siteNav"
         >
           <ul className="flex flex-col gap-2 lg:ml-auto lg:flex-row lg:items-center lg:gap-4">
             <li>
               <a
-                className={`nav-link block rounded-lg px-3 py-2 text-[#18023a] transition md:text-white lg:px-2 ${activeNav === "#about" ? "is-active" : ""}`}
+                className={`nav-link block rounded-lg px-3 py-2 transition lg:px-2 ${activeNav === "#about" ? "is-active" : ""}`}
                 href="#about"
                 onClick={() => {
                   setActiveNav("#about");
@@ -130,7 +149,7 @@ export function Navbar() {
 
             <li>
               <a
-                className={`nav-link block rounded-lg px-3 py-2 text-[#18023a] transition md:text-white lg:px-2 ${activeNav === "#experience" ? "is-active" : ""}`}
+                className={`nav-link block rounded-lg px-3 py-2 transition lg:px-2 ${activeNav === "#experience" ? "is-active" : ""}`}
                 href="#experience"
                 onClick={() => {
                   setActiveNav("#experience");
@@ -142,7 +161,7 @@ export function Navbar() {
             </li>
             <li>
               <a
-                className={`nav-link block rounded-lg px-3 py-2 text-[#18023a] transition md:text-white lg:px-2 ${activeNav === "#achievements" ? "is-active" : ""}`}
+                className={`nav-link block rounded-lg px-3 py-2 transition lg:px-2 ${activeNav === "#achievements" ? "is-active" : ""}`}
                 href="#achievements"
                 onClick={() => {
                   setActiveNav("#achievements");
@@ -154,7 +173,7 @@ export function Navbar() {
             </li>
             <li>
               <a
-                className={`nav-link block rounded-lg px-3 py-2 text-[#18023a] transition md:text-white lg:px-2 ${activeNav === "#certificates" ? "is-active" : ""}`}
+                className={`nav-link block rounded-lg px-3 py-2 transition lg:px-2 ${activeNav === "#certificates" ? "is-active" : ""}`}
                 href="#certificates"
                 onClick={() => {
                   setActiveNav("#certificates");
@@ -166,7 +185,7 @@ export function Navbar() {
             </li>
             <li>
               <a
-                className={`nav-link block rounded-lg px-3 py-2 text-[#18023a] transition md:text-white lg:px-2 ${activeNav === "#contact" ? "is-active" : ""}`}
+                className={`nav-link block rounded-lg px-3 py-2 transition lg:px-2 ${activeNav === "#contact" ? "is-active" : ""}`}
                 href="#contact"
                 onClick={() => {
                   setActiveNav("#contact");

@@ -63,7 +63,7 @@ export function SkillsSection() {
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {skills.map((skill) => (
             <div key={skill.title}>
-              <div className="skill-card h-full rounded-3xl bg-white p-6">
+              <div className="skill-card h-full rounded-3xl p-6">
                 <h3 className="text-xl font-semibold">{skill.title}</h3>
                 <p className="text-slate-400">{skill.description}</p>
                 <div

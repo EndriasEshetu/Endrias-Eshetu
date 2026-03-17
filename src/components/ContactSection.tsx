@@ -1,4 +1,10 @@
 import { useState, type FormEvent } from "react";
+import {
+  CONTACT_EMAIL,
+  CONTACT_PHONE,
+  CONTACT_PHONE_DISPLAY,
+  SOCIAL_LINKS,
+} from "../data/contact";
 
 type SubmitStatus = "idle" | "submitting" | "success" | "error";
 
@@ -70,60 +76,47 @@ export function ContactSection() {
             <h2 className="section-title" id="contact-title">
               Let's connect
             </h2>
-            <p className="text-slate-400">
+            <p className="text-[var(--metric-label)]">
               Reach out for internships, collaboration, or project work. I
               respond as quickly as possible.
             </p>
             <div className="contact-details mt-2">
               <p className="mb-1">Email</p>
-              <a href="mailto:endriaseshetu75@gmail.com">
-                endriaseshetu75@gmail.com
-              </a>
+              <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
               <p className="mb-1 mt-3">Phone</p>
-              <a href="tel:+251989483775">+251 989 483 775</a>
+              <a href={`tel:${CONTACT_PHONE}`}>{CONTACT_PHONE_DISPLAY}</a>
               <p className="mb-1 mt-3">Social</p>
               <div className="flex gap-3">
-                <a
-                  href="https://github.com/EndriasEshetu"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  GitHub
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/endrias-eshetu"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  LinkedIn
-                </a>
-                <a
-                  href="https://web.facebook.com/tsinubekur1"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Facebook
-                </a>
+                {SOCIAL_LINKS.map((social) => (
+                  <a
+                    key={social.icon}
+                    href={social.href}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {social.label}
+                  </a>
+                ))}
               </div>
             </div>
           </div>
           <div>
             <form
-              className="panel-card rounded-3xl bg-white p-6"
+              className="panel-card rounded-3xl p-6"
               aria-label="Contact form"
               onSubmit={handleSubmit}
             >
               <div className="grid gap-3 md:grid-cols-2">
                 <div>
                   <label
-                    className="mb-1 block text-sm font-medium"
+                    className="mb-1 block text-sm font-medium text-[var(--ink)]"
                     htmlFor="contact-name"
                   >
                     Full name
                   </label>
                   <input
                     type="text"
-                    className="w-full text-slate-900 rounded-lg border border-[#b200e3] bg-white px-3 py-2 outline-none transition focus:border-[#ae00f399]"
+                    className="w-full rounded-lg border border-[var(--line)] bg-[var(--input-bg)] px-3 py-2 text-[var(--input-text)] outline-none transition focus:border-[var(--accent)]"
                     id="contact-name"
                     name="name"
                     placeholder="Your name"
@@ -132,14 +125,14 @@ export function ContactSection() {
                 </div>
                 <div>
                   <label
-                    className="mb-1 block text-sm font-medium"
+                    className="mb-1 block text-sm font-medium text-[var(--ink)]"
                     htmlFor="contact-email"
                   >
                     Email address
                   </label>
                   <input
                     type="email"
-                    className="w-full text-slate-900 rounded-lg border border-[#b200e3] bg-white px-3 py-2 outline-none transition focus:border-[#ae00f399]"
+                    className="w-full rounded-lg border border-[var(--line)] bg-[var(--input-bg)] px-3 py-2 text-[var(--input-text)] outline-none transition focus:border-[var(--accent)]"
                     id="contact-email"
                     name="email"
                     placeholder="you@example.com"
@@ -148,13 +141,13 @@ export function ContactSection() {
                 </div>
                 <div className="md:col-span-2">
                   <label
-                    className="mb-1 block text-sm font-medium"
+                    className="mb-1 block text-sm font-medium text-[var(--ink)]"
                     htmlFor="contact-topic"
                   >
                     Topic
                   </label>
                   <select
-                    className="w-full text-slate-900 rounded-lg border border-[#b200e3] bg-white px-3 py-2 outline-none transition focus:border-[#ae00f399]"
+                    className="w-full rounded-lg border border-[var(--line)] bg-[var(--input-bg)] px-3 py-2 text-[var(--input-text)] outline-none transition focus:border-[var(--accent)]"
                     id="contact-topic"
                     name="topic"
                     defaultValue=""
@@ -171,13 +164,13 @@ export function ContactSection() {
                 </div>
                 <div className="md:col-span-2">
                   <label
-                    className="mb-1 block text-sm font-medium"
+                    className="mb-1 block text-sm font-medium text-[var(--ink)]"
                     htmlFor="contact-message"
                   >
                     Message
                   </label>
                   <textarea
-                    className="w-full text-slate-900 rounded-lg border border-[#b200e3] bg-white px-3 py-2 outline-none transition focus:border-[#ae00f399]"
+                    className="w-full rounded-lg border border-[var(--line)] bg-[var(--input-bg)] px-3 py-2 text-[var(--input-text)] outline-none transition focus:border-[var(--accent)]"
                     id="contact-message"
                     name="message"
                     rows={4}
@@ -194,7 +187,7 @@ export function ContactSection() {
                     {status === "submitting" ? "Sending..." : "Send message"}
                   </button>
                   <p
-                    className={`mb-0 mt-2 text-sm ${status === "error" ? "text-red-500" : "text-slate-500"}`}
+                    className={`mb-0 mt-2 text-sm ${status === "error" ? "text-red-500" : "text-[var(--muted)]"}`}
                     role="status"
                     aria-live="polite"
                   >

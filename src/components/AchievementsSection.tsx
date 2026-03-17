@@ -21,7 +21,7 @@ export function AchievementsSection() {
         </div>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           <div>
-            <article className="achievement-card h-full rounded-3xl bg-white p-6">
+            <article className="achievement-card h-full rounded-3xl p-6">
               <p className="text-xs uppercase tracking-wide text-slate-400">
                 2025
               </p>
@@ -34,7 +34,7 @@ export function AchievementsSection() {
             </article>
           </div>
           <div>
-            <article className="achievement-card h-full rounded-3xl bg-white p-6">
+            <article className="achievement-card h-full rounded-3xl p-6">
               <p className="text-xs uppercase tracking-wide text-slate-400">
                 2024
               </p>
@@ -45,7 +45,7 @@ export function AchievementsSection() {
             </article>
           </div>
           <div>
-            <article className="achievement-card h-full rounded-3xl bg-white p-6">
+            <article className="achievement-card h-full rounded-3xl p-6">
               <p className="text-xs uppercase tracking-wide text-slate-400">
                 2023
               </p>
