@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { useTheme } from "./contexts/ThemeContext";
 import { AchievementsSection } from "./components/AchievementsSection";
 import { CertificatesSection } from "./components/CertificatesSection";
 import { ContactSection } from "./components/ContactSection";
@@ -13,8 +14,17 @@ import { OWNER_CERTIFICATES } from "./data/certificates";
 import "./App.css";
 
 function App() {
+  const { theme } = useTheme();
   const certificates = OWNER_CERTIFICATES;
   const currentYear = useMemo(() => new Date().getFullYear(), []);
+
+  const particleColors = useMemo(
+    () =>
+      theme === "light"
+        ? ["#c4b5fd", "#a78bfa", "#e9d5ff"]
+        : ["#ff00ff"],
+    [theme],
+  );
 
   return (
     <div className="app-shell">
@@ -23,7 +33,7 @@ function App() {
           particleCount={380}
           particleSpread={17}
           speed={0.1}
-          particleColors={["#ff00ff"]}
+          particleColors={particleColors}
           alphaParticles
           particleBaseSize={108}
           sizeRandomness={1.1}
