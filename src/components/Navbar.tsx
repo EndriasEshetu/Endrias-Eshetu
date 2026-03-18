@@ -78,7 +78,7 @@ export function Navbar() {
     >
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <a
-          className="navbar-brand text-lg font-semibold"
+          className="navbar-brand min-w-0 shrink text-lg font-semibold"
           href="#top"
           aria-label="Home"
         >
@@ -89,46 +89,48 @@ export function Navbar() {
           />
           Endrias Eshetu
         </a>
-        <button
-          className="navbar-theme-toggle inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md ml-4 mr-0 opacity-90 transition hover:opacity-100 lg:order-last"
-          type="button"
-          aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-          onClick={toggleTheme}
-        >
-          {theme === "dark" ? (
-            <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-              <circle cx="12" cy="12" r="4" />
-              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
-            </svg>
-          ) : (
-            <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-            </svg>
-          )}
-        </button>
-        <button
-          className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-current opacity-90 lg:hidden ml-4"
-          type="button"
-          aria-controls="siteNav"
-          aria-expanded={isMenuOpen}
-          aria-label="Toggle navigation"
-          onClick={() => setIsMenuOpen((prev) => !prev)}
-        >
-          <svg
-            className="h-5 w-5"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
+        <div className="ml-auto flex shrink-0 items-center gap-2 pl-2 lg:contents">
+          <button
+            className="navbar-theme-toggle inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#334155] text-white opacity-95 transition hover:opacity-100 lg:order-last"
+            type="button"
+            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            onClick={toggleTheme}
           >
-            <path
-              d="M4 7H20M4 12H20M4 17H20"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-          </svg>
-        </button>
+            {theme === "dark" ? (
+              <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="4" />
+                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+              </svg>
+            ) : (
+              <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+              </svg>
+            )}
+          </button>
+          <button
+            className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-current opacity-90 lg:hidden"
+            type="button"
+            aria-controls="siteNav"
+            aria-expanded={isMenuOpen}
+            aria-label="Toggle navigation"
+            onClick={() => setIsMenuOpen((prev) => !prev)}
+          >
+            <svg
+              className="h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                d="M4 7H20M4 12H20M4 17H20"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+            </svg>
+          </button>
+        </div>
         <div
           className={`${isMenuOpen ? "flex" : "hidden"} absolute right-4 top-full mt-2 rounded-2xl p-4 shadow-lg lg:static lg:mt-0 lg:flex lg:flex-1 lg:justify-end lg:bg-transparent lg:p-0 lg:shadow-none [background:var(--card)] `}
           id="siteNav"
