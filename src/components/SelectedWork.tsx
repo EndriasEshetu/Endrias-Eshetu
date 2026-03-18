@@ -19,13 +19,13 @@ export function SelectedWork() {
         <div className="grid gap-4 lg:grid-cols-2">
           <div>
             <article className="project-card h-full rounded-3xl p-6">
-              <p className="text-xs uppercase tracking-wide text-slate-400">
+              <p className="text-xs uppercase tracking-wide text-muted-prose">
                 Government
               </p>
               <h3 className="text-xl font-semibold">
                 National ID Integration System
               </h3>
-              <p className="text-slate-400">
+              <p className="text-muted-prose">
                 Secure identity verification flow with full-stack delivery.
               </p>
               <a
@@ -38,13 +38,13 @@ export function SelectedWork() {
           </div>
           <div>
             <article className="project-card h-full rounded-3xl p-6">
-              <p className="text-xs uppercase tracking-wide text-slate-400">
+              <p className="text-xs uppercase tracking-wide text-muted-prose">
                 Automation
               </p>
               <h3 className="text-xl font-semibold">
                 Payment Reminder Automation
               </h3>
-              <p className="text-slate-400">
+              <p className="text-muted-prose">
                 Automated reminders with tracking and status logs.
               </p>
               <a

@@ -38,7 +38,7 @@ export function CertificatesSection({
             <h2 className="section-title" id="certificates-title">
               Certificates
             </h2>
-            <p className="text-slate-400">
+            <p className="text-muted-prose">
               Curated credentials published by the site owner.
             </p>
           </div>

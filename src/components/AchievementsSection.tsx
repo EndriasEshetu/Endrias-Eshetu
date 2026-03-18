@@ -11,7 +11,7 @@ export function AchievementsSection() {
             <h2 className="section-title" id="achievements-title">
               Achievements
             </h2>
-            <p className="m-0 text-slate-400">
+            <p className="m-0 text-muted-prose">
               Milestones from my learning path.
             </p>
           </div>
@@ -22,35 +22,35 @@ export function AchievementsSection() {
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           <div>
             <article className="achievement-card h-full rounded-3xl p-6">
-              <p className="text-xs uppercase tracking-wide text-slate-400">
+              <p className="text-xs uppercase tracking-wide text-muted-prose">
                 2025
               </p>
               <h3 className="text-xl font-semibold">
                 National ID System Prototype
               </h3>
-              <p className="m-0 text-slate-400">
+              <p className="m-0 text-muted-prose">
                 Delivered a working prototype for identity integration.
               </p>
             </article>
           </div>
           <div>
             <article className="achievement-card h-full rounded-3xl p-6">
-              <p className="text-xs uppercase tracking-wide text-slate-400">
+              <p className="text-xs uppercase tracking-wide text-muted-prose">
                 2024
               </p>
               <h3 className="text-xl font-semibold">Automation Impact</h3>
-              <p className="m-0 text-slate-400">
+              <p className="m-0 text-muted-prose">
                 Built automated payment reminders to reduce follow-up time.
               </p>
             </article>
           </div>
           <div>
             <article className="achievement-card h-full rounded-3xl p-6">
-              <p className="text-xs uppercase tracking-wide text-slate-400">
+              <p className="text-xs uppercase tracking-wide text-muted-prose">
                 2023
               </p>
               <h3 className="text-xl font-semibold">Full-Stack Growth</h3>
-              <p className="m-0 text-slate-400">
+              <p className="m-0 text-muted-prose">
                 Strengthened front-end and back-end development skills.
               </p>
             </article>

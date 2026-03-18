@@ -52,7 +52,7 @@ export function SkillsSection() {
             <h2 className="section-title" id="skills-title">
               Skills
             </h2>
-            <p className="m-0 text-slate-400">
+            <p className="m-0 text-muted-prose">
               Built around web development, automation, and teamwork.
             </p>
           </div>
@@ -65,7 +65,7 @@ export function SkillsSection() {
             <div key={skill.title}>
               <div className="skill-card h-full rounded-3xl p-6">
                 <h3 className="text-xl font-semibold">{skill.title}</h3>
-                <p className="text-slate-400">{skill.description}</p>
+                <p className="text-muted-prose">{skill.description}</p>
                 <div
                   className="h-3 mt-4 overflow-hidden rounded-full bg-[#f0e7de]"
                   role="progressbar"

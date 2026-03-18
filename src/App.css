@@ -74,6 +74,15 @@ body {
   min-height: 100%;
 }
 
+/* Secondary copy: slate-400 (dark) → slate-700 (light) */
+.text-muted-prose {
+  color: #94a3b8;
+}
+
+[data-theme="light"] .text-muted-prose {
+  color: #334155;
+}
+
 .app-shell {
   position: relative;
 }

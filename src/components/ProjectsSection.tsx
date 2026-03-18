@@ -11,7 +11,7 @@ export function ProjectsSection() {
             <h2 className="section-title" id="experience-title">
               Projects &amp; Experience
             </h2>
-            <p className="m-0 text-slate-400">
+            <p className="m-0 text-muted-prose">
               Academic and automation projects I have delivered.
             </p>
           </div>
@@ -25,13 +25,13 @@ export function ProjectsSection() {
         <div className="grid gap-4 lg:grid-cols-3">
           <div>
             <div className="panel-card h-full rounded-3xl p-6">
-              <p className="text-xs uppercase tracking-wide text-slate-400">
+              <p className="text-xs uppercase tracking-wide text-muted-prose">
                 2025
               </p>
               <h3 className="text-xl font-semibold">
                 National ID Integration System
               </h3>
-              <ul className="experience-list mb-0 text-slate-400">
+              <ul className="experience-list mb-0 text-muted-prose">
                 <li>Designed the flow for secure identity validation.</li>
                 <li>Built a clean interface for data verification steps.</li>
                 <li>Connected front-end and back-end workflows.</li>
@@ -40,13 +40,13 @@ export function ProjectsSection() {
           </div>
           <div>
             <div className="panel-card h-full rounded-3xl p-6">
-              <p className="text-xs uppercase tracking-wide text-slate-400">
+              <p className="text-xs uppercase tracking-wide text-muted-prose">
                 2024
               </p>
               <h3 className="text-xl font-semibold">
                 Payment Reminder Automation
               </h3>
-              <ul className="experience-list mb-0 text-slate-400">
+              <ul className="experience-list mb-0 text-muted-prose">
                 <li>Automated scheduled reminders for payment follow-ups.</li>
                 <li>Tracked delivery status and alert history.</li>
                 <li>Focused on reliability and clear reporting.</li>
@@ -56,7 +56,7 @@ export function ProjectsSection() {
           <div>
             <div className="panel-card h-full rounded-3xl p-6">
               <div className="mb-2 flex items-center justify-between gap-2">
-                <p className="m-0 text-xs uppercase tracking-wide text-slate-400">
+                <p className="m-0 text-xs uppercase tracking-wide text-muted-prose">
                   2026 - Present
                 </p>
                 <span className="rounded-full border border-[#18023ae6] px-2 py-1 text-[11px] font-semibold uppercase tracking-wide text-[#18023ae6]">
@@ -66,7 +66,7 @@ export function ProjectsSection() {
               <h3 className="text-xl font-semibold">
                 Architectural Design Posting Website
               </h3>
-              <ul className="experience-list mb-0 text-slate-400">
+              <ul className="experience-list mb-0 text-muted-prose">
                 <li>
                   Building an e-commerce style website for architectural design
                   publishing and discovery.

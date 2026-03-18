@@ -43,7 +43,7 @@ export function SiteHeader() {
                   Building reliable, user-focused web products from front-end to
                   back-end.
                 </h1>
-                <p className="mt-4 text-lg text-slate-400">
+                <p className="mt-4 text-lg text-muted-prose">
                   Based in Adama (often in Hawasa), I build responsive
                   interfaces and dependable back-end systems with clean,
                   maintainable code.
@@ -66,14 +66,14 @@ export function SiteHeader() {
                 <div className="hero-metrics mt-6">
                   <div>
                     <p className="metric-value">End-to-end</p>
-                    <p className=" text-slate-400">
+                    <p className=" text-muted-prose">
                       UI, API, and delivery focus
                     </p>
                   </div>
 
                   <div>
                     <p className="metric-value">Open</p>
-                    <p className=" text-slate-400">
+                    <p className=" text-muted-prose">
                       Internships and collaborations
                     </p>
                   </div>
@@ -91,7 +91,7 @@ export function SiteHeader() {
                       <p className="mb-1 font-semibold pl-4">
                         Available for internships and junior roles
                       </p>
-                      <p className="m-0 text-slate-400 pl-4">
+                      <p className="m-0 text-muted-prose pl-4">
                         Adama, Ethiopia · Often in Hawasa
                       </p>
                     </div>
@@ -110,7 +110,7 @@ export function SiteHeader() {
               <h2 className="section-title" id="about-title">
                 About me
               </h2>
-              <p className="text-slate-400">
+              <p className="text-muted-prose">
                 I'm Endrias, a freelance full-stack developer focused on
                 delivering complete features from planning and UI design to
                 back-end logic and deployment support.
