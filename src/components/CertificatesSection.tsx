@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import type { Certificate } from "../types/certificate";
-import { ExpandableGridList } from "./ExpandableGridList";
+import { ExpandableCertificateList } from "./ExpandableCertificateList";
 
 interface CertificatesSectionProps {
   certificates: Certificate[];
@@ -113,7 +113,7 @@ export function CertificatesSection({
           </div>
           <div>
             <h3 className="mb-3 text-xl font-semibold">Latest credentials</h3>
-            <ExpandableGridList
+            <ExpandableCertificateList
               items={sortedCertificates}
               initialVisibleCount={initialVisibleCertificates}
               keyExtractor={(c) => c.id}

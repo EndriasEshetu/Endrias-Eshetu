@@ -1,7 +1,7 @@
 import { useId, useState } from "react";
 import type { ReactNode } from "react";
 
-type ExpandableGridListProps<T> = {
+type ExpandableCertificateListProps<T> = {
   items: T[];
   /** Items shown before "See more" (default 4) */
   initialVisibleCount?: number;
@@ -17,7 +17,7 @@ type ExpandableGridListProps<T> = {
 /**
  * Grid list with See more / See less. Smooth height animation via CSS grid-template-rows 0fr → 1fr.
  */
-export function ExpandableGridList<T>({
+export function ExpandableCertificateList<T>({
   items,
   initialVisibleCount = 4,
   renderItem,
@@ -25,7 +25,7 @@ export function ExpandableGridList<T>({
   gridClassName = "grid gap-3 md:grid-cols-2",
   emptyFallback,
   listId,
-}: ExpandableGridListProps<T>) {
+}: ExpandableCertificateListProps<T>) {
   const [expanded, setExpanded] = useState(false);
   const moreRegionId = useId();
   const total = items.length;
