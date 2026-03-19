@@ -3,7 +3,6 @@ import {
   CONTACT_EMAIL,
   CONTACT_PHONE,
   CONTACT_PHONE_DISPLAY,
-  SOCIAL_LINKS,
 } from "../data/contact";
 
 type SubmitStatus = "idle" | "submitting" | "success" | "error";
@@ -90,19 +89,8 @@ export function ContactSection() {
               <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
               <p className="mb-1 mt-3">Phone</p>
               <a href={`tel:${CONTACT_PHONE}`}>{CONTACT_PHONE_DISPLAY}</a>
-              <p className="mb-1 mt-3">Social</p>
-              <div className="flex gap-3">
-                {SOCIAL_LINKS.map((social) => (
-                  <a
-                    key={social.icon}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {social.label}
-                  </a>
-                ))}
-              </div>
+              <p className="mb-1 mt-3">Location</p>
+              <p className="text-(--ink)">Addis Ababa, Ethiopia</p>
             </div>
           </div>
           <div>
