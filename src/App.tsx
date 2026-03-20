@@ -18,24 +18,44 @@ function App() {
   const certificates = OWNER_CERTIFICATES;
   const currentYear = useMemo(() => new Date().getFullYear(), []);
 
-  const particleColors = useMemo(
-    () =>
-      theme === "light"
-        ? ["#c4b5fd", "#a78bfa", "#e9d5ff"]
-        : ["#ff00ff"],
-    [theme],
-  );
+  const particlePreset = useMemo(() => {
+    if (theme === "light") {
+      return {
+        colors: ["#7c2d12", "#92400e", "#a16207", "#b45309", "#57534e"],
+        count: 480,
+        spread: 15,
+        speed: 0.08,
+        baseSize: 122,
+        alphaScale: 1.48,
+        shimmerMix: 0.12,
+        rgbLift: 0.04,
+      };
+    }
+    return {
+      colors: ["#f4c94a", "#e8c547", "#c9a227", "#a67c1a"],
+      count: 320,
+      spread: 18,
+      speed: 0.1,
+      baseSize: 104,
+      alphaScale: 1,
+      shimmerMix: 0.3,
+      rgbLift: 0.2,
+    };
+  }, [theme]);
 
   return (
     <div className="app-shell">
       <div className="app-background" aria-hidden="true">
         <Particles
-          particleCount={380}
-          particleSpread={17}
-          speed={0.1}
-          particleColors={particleColors}
+          particleCount={particlePreset.count}
+          particleSpread={particlePreset.spread}
+          speed={particlePreset.speed}
+          particleColors={particlePreset.colors}
           alphaParticles
-          particleBaseSize={108}
+          particleAlphaScale={particlePreset.alphaScale}
+          particleShimmerMix={particlePreset.shimmerMix}
+          particleRgbLift={particlePreset.rgbLift}
+          particleBaseSize={particlePreset.baseSize}
           sizeRandomness={1.1}
           cameraDistance={18}
           disableRotation={false}

@@ -1,3 +1,5 @@
+import { ScrollReveal } from "./ScrollReveal";
+
 export function ProjectsSection() {
   return (
     <section
@@ -7,23 +9,27 @@ export function ProjectsSection() {
     >
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
-          <div>
-            <h2 className="section-title" id="experience-title">
-              Projects &amp; Experience
-            </h2>
-            <p className="m-0 text-muted-prose">
-              Academic and automation projects I have delivered.
-            </p>
-          </div>
-          <a
-            className="inline-flex items-center justify-center rounded-lg border border-[#18023ae6] px-5 py-2.5 font-medium text-[#18023ae6]"
-            href="#contact"
-          >
-            Request CV
-          </a>
+          <ScrollReveal variant="slide-left" className="min-w-0">
+            <div>
+              <h2 className="section-title" id="experience-title">
+                Projects &amp; Experience
+              </h2>
+              <p className="m-0 text-muted-prose">
+                Academic and automation projects I have delivered.
+              </p>
+            </div>
+          </ScrollReveal>
+          <ScrollReveal variant="slide-left" className="shrink-0">
+            <a
+              className="inline-flex items-center justify-center rounded-lg border border-(--accent) px-5 py-2.5 font-medium text-(--accent)"
+              href="#contact"
+            >
+              Request CV
+            </a>
+          </ScrollReveal>
         </div>
         <div className="grid gap-4 lg:grid-cols-3">
-          <div>
+          <ScrollReveal variant="fade-up" className="min-w-0 h-full">
             <div className="panel-card h-full rounded-3xl p-6">
               <p className="text-xs uppercase tracking-wide text-muted-prose">
                 2025
@@ -37,8 +43,8 @@ export function ProjectsSection() {
                 <li>Connected front-end and back-end workflows.</li>
               </ul>
             </div>
-          </div>
-          <div>
+          </ScrollReveal>
+          <ScrollReveal variant="fade-up" className="min-w-0 h-full">
             <div className="panel-card h-full rounded-3xl p-6">
               <p className="text-xs uppercase tracking-wide text-muted-prose">
                 2024
@@ -52,14 +58,14 @@ export function ProjectsSection() {
                 <li>Focused on reliability and clear reporting.</li>
               </ul>
             </div>
-          </div>
-          <div>
+          </ScrollReveal>
+          <ScrollReveal variant="fade-up" className="min-w-0 h-full">
             <div className="panel-card h-full rounded-3xl p-6">
               <div className="mb-2 flex items-center justify-between gap-2">
                 <p className="m-0 text-xs uppercase tracking-wide text-muted-prose">
                   2026 - Present
                 </p>
-                <span className="rounded-full border border-[#18023ae6] px-2 py-1 text-[11px] font-semibold uppercase tracking-wide text-[#18023ae6]">
+                <span className="rounded-full border border-(--accent) px-2 py-1 text-[11px] font-semibold uppercase tracking-wide text-(--accent)">
                   In Progress
                 </span>
               </div>
@@ -81,7 +87,7 @@ export function ProjectsSection() {
                 </li>
               </ul>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

@@ -14,8 +14,10 @@ export function Navbar() {
 
       const sectionIds = [
         "about",
+        "skills",
         "experience",
         "achievements",
+        "projects",
         "certificates",
         "contact",
       ];
@@ -74,9 +76,9 @@ export function Navbar() {
   return (
     <nav
       ref={navRef}
-      className={`fixed top-0 z-1030 w-full py-3 portfolio-navbar ${isScrolled ? "is-scrolled" : ""}`}
+      className={`fixed top-0 z-1030 w-full overflow-visible py-3 portfolio-navbar ${isScrolled ? "is-scrolled" : ""}`}
     >
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex w-full max-w-6xl items-center justify-between overflow-visible px-4 sm:px-6 lg:px-8">
         <a
           className="navbar-brand min-w-0 shrink text-lg font-semibold"
           href="#top"
@@ -91,7 +93,7 @@ export function Navbar() {
         </a>
         <div className="ml-auto flex shrink-0 items-center gap-2 pl-2 lg:contents">
           <button
-            className="navbar-theme-toggle inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#334155] text-white opacity-95 transition hover:opacity-100 lg:order-last"
+            className="navbar-theme-toggle inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-(--toggle-bg) text-(--navbar-text) opacity-95 transition hover:opacity-100 lg:order-last"
             type="button"
             aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
             onClick={toggleTheme}
@@ -132,46 +134,108 @@ export function Navbar() {
           </button>
         </div>
         <div
-          className={`${isMenuOpen ? "flex" : "hidden"} absolute right-4 top-full mt-2 rounded-2xl p-4 shadow-lg lg:static lg:mt-0 lg:flex lg:flex-1 lg:justify-end lg:bg-transparent lg:p-0 lg:shadow-none [background:var(--card)] `}
+          className={`${isMenuOpen ? "flex" : "hidden"} absolute right-4 top-full z-[1045] mt-2 overflow-visible rounded-2xl p-4 shadow-lg lg:static lg:z-auto lg:mt-0 lg:flex lg:flex-1 lg:justify-end lg:bg-transparent lg:p-0 lg:shadow-none [background:var(--card)] `}
           id="siteNav"
         >
-          <ul className="flex flex-col gap-2 lg:ml-auto lg:flex-row lg:items-center lg:gap-4">
+          <ul className="flex flex-col gap-2 overflow-visible lg:ml-auto lg:flex-row lg:items-center lg:gap-4">
             <li>
               <a
                 className={`nav-link block rounded-lg px-3 py-2 transition lg:px-2 ${activeNav === "#about" ? "is-active" : ""}`}
-                href="#about"
+                href="#top"
                 onClick={() => {
-                  setActiveNav("#about");
+                  setActiveNav("#top");
                   setIsMenuOpen(false);
                 }}
               >
-                About Me
+                Home
               </a>
             </li>
 
-            <li>
-              <a
-                className={`nav-link block rounded-lg px-3 py-2 transition lg:px-2 ${activeNav === "#experience" ? "is-active" : ""}`}
-                href="#experience"
-                onClick={() => {
-                  setActiveNav("#experience");
-                  setIsMenuOpen(false);
-                }}
+            <li className="nav-dropdown">
+              <p className="mb-1 px-3 text-xs font-semibold uppercase tracking-wide text-(--metric-label) lg:hidden">
+                Experience
+              </p>
+              <button
+                type="button"
+                className={`nav-link hidden w-full items-center gap-1 rounded-lg border-0 bg-transparent px-3 py-2 text-left font-inherit text-inherit transition lg:flex lg:px-2 ${activeNav === "#skills" || activeNav === "#experience" ? "is-active" : ""}`}
+                aria-haspopup="true"
+                aria-expanded="false"
+                tabIndex={0}
               >
                 Experience
-              </a>
+                <span className="text-[0.65rem] opacity-70" aria-hidden>
+                  ▾
+                </span>
+              </button>
+              <ul className="nav-dropdown-panel" role="list">
+                <li>
+                  <a
+                    className={`nav-link block rounded-lg px-3 py-2 transition lg:px-3 ${activeNav === "#skills" ? "is-active" : ""}`}
+                    href="#skills"
+                    onClick={() => {
+                      setActiveNav("#skills");
+                      setIsMenuOpen(false);
+                    }}
+                  >
+                    Skills
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className={`nav-link block rounded-lg px-3 py-2 transition lg:px-3 ${activeNav === "#experience" ? "is-active" : ""}`}
+                    href="#experience"
+                    onClick={() => {
+                      setActiveNav("#experience");
+                      setIsMenuOpen(false);
+                    }}
+                  >
+                    Projects
+                  </a>
+                </li>
+              </ul>
             </li>
-            <li>
-              <a
-                className={`nav-link block rounded-lg px-3 py-2 transition lg:px-2 ${activeNav === "#achievements" ? "is-active" : ""}`}
-                href="#achievements"
-                onClick={() => {
-                  setActiveNav("#achievements");
-                  setIsMenuOpen(false);
-                }}
+            <li className="nav-dropdown">
+              <p className="mb-1 px-3 text-xs font-semibold uppercase tracking-wide text-(--metric-label) lg:hidden">
+                Achievements
+              </p>
+              <button
+                type="button"
+                className={`nav-link hidden w-full items-center gap-1 rounded-lg border-0 bg-transparent px-3 py-2 text-left font-inherit text-inherit transition lg:flex lg:px-2 ${activeNav === "#achievements" || activeNav === "#projects" ? "is-active" : ""}`}
+                aria-haspopup="true"
+                aria-expanded="false"
+                tabIndex={0}
               >
                 Achievements
-              </a>
+                <span className="text-[0.65rem] opacity-70" aria-hidden>
+                  ▾
+                </span>
+              </button>
+              <ul className="nav-dropdown-panel" role="list">
+                <li>
+                  <a
+                    className={`nav-link block rounded-lg px-3 py-2 transition lg:px-3 ${activeNav === "#achievements" ? "is-active" : ""}`}
+                    href="#achievements"
+                    onClick={() => {
+                      setActiveNav("#achievements");
+                      setIsMenuOpen(false);
+                    }}
+                  >
+                    Achievements
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className={`nav-link block rounded-lg px-3 py-2 transition lg:px-3 ${activeNav === "#projects" ? "is-active" : ""}`}
+                    href="#projects"
+                    onClick={() => {
+                      setActiveNav("#projects");
+                      setIsMenuOpen(false);
+                    }}
+                  >
+                    Selected work
+                  </a>
+                </li>
+              </ul>
             </li>
             <li>
               <a

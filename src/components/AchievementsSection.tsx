@@ -1,3 +1,5 @@
+import { ScrollReveal } from "./ScrollReveal";
+
 export function AchievementsSection() {
   return (
     <section
@@ -7,20 +9,24 @@ export function AchievementsSection() {
     >
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
-          <div>
-            <h2 className="section-title" id="achievements-title">
-              Achievements
-            </h2>
-            <p className="m-0 text-muted-prose">
-              Milestones from my learning path.
-            </p>
-          </div>
-          <span className="rounded-full bg-fuchsia-950 px-3 py-1 text-sm font-semibold text-white">
-            Growing
-          </span>
+          <ScrollReveal variant="fade-up" className="min-w-0">
+            <div>
+              <h2 className="section-title" id="achievements-title">
+                Achievements
+              </h2>
+              <p className="m-0 text-muted-prose">
+                Milestones from my learning path.
+              </p>
+            </div>
+          </ScrollReveal>
+          <ScrollReveal variant="fade-up" className="shrink-0">
+            <span className="inline-block rounded-full bg-(--btn-accent-bg) px-3 py-1 text-sm font-semibold text-(--navbar-text)">
+              Growing
+            </span>
+          </ScrollReveal>
         </div>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          <div>
+          <ScrollReveal variant="slide-right" className="min-w-0 h-full">
             <article className="achievement-card h-full rounded-3xl p-6">
               <p className="text-xs uppercase tracking-wide text-muted-prose">
                 2025
@@ -32,8 +38,8 @@ export function AchievementsSection() {
                 Delivered a working prototype for identity integration.
               </p>
             </article>
-          </div>
-          <div>
+          </ScrollReveal>
+          <ScrollReveal variant="slide-right" className="min-w-0 h-full">
             <article className="achievement-card h-full rounded-3xl p-6">
               <p className="text-xs uppercase tracking-wide text-muted-prose">
                 2024
@@ -43,8 +49,8 @@ export function AchievementsSection() {
                 Built automated payment reminders to reduce follow-up time.
               </p>
             </article>
-          </div>
-          <div>
+          </ScrollReveal>
+          <ScrollReveal variant="slide-right" className="min-w-0 h-full">
             <article className="achievement-card h-full rounded-3xl p-6">
               <p className="text-xs uppercase tracking-wide text-muted-prose">
                 2023
@@ -54,7 +60,7 @@ export function AchievementsSection() {
                 Strengthened front-end and back-end development skills.
               </p>
             </article>
-          </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

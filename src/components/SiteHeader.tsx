@@ -1,5 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { SiExpress, SiMongodb } from "react-icons/si";
+import { ParallaxFloat } from "./ParallaxFloat";
+import { ScrollReveal } from "./ScrollReveal";
 import {
   faCss3Alt,
   faGitAlt,
@@ -35,52 +37,64 @@ export function SiteHeader() {
         <section className="section-alt hero" aria-labelledby="hero-title">
           <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="grid items-center gap-10 lg:grid-cols-2">
-              <div>
-                <h1
-                  className="hero-title text-4xl font-bold md:text-5xl"
-                  id="hero-title"
-                >
-                  Building reliable, user-focused web products from front-end to
-                  back-end.
-                </h1>
-                <p className="mt-4 text-lg text-muted-prose">
-                  Based in Adama (often in Hawasa), I build responsive
-                  interfaces and dependable back-end systems with clean,
-                  maintainable code.
-                </p>
-                <div className="mt-6 flex flex-wrap gap-3">
-                  <a
-                    className="btn-accent inline-flex items-center justify-center rounded-lg px-6 py-3 font-medium"
-                    href="/certificates/Endrias%20Eshetu%20CV%20Resume.pdf"
-                    download="Endrias-Eshetu-CV.pdf"
+              <div className="min-w-0">
+                <ScrollReveal variant="slide-right">
+                  <h1
+                    className="hero-title text-4xl font-bold md:text-5xl"
+                    id="hero-title"
                   >
-                    Download CV
-                  </a>
-                  <a
-                    className="hero-outline-btn inline-flex items-center justify-center rounded-lg border border-[#18023ae6] px-6 py-3 font-medium text-[#18023ae6]"
-                    href="#certificates"
-                  >
-                    View certificates
-                  </a>
-                </div>
+                    Building reliable, user-focused web products from front-end
+                    to back-end.
+                  </h1>
+                </ScrollReveal>
+                <ScrollReveal variant="slide-right" className="mt-4 block">
+                  <p className="text-lg text-muted-prose">
+                    Based in Adama (often in Hawasa), I build responsive
+                    interfaces and dependable back-end systems with clean,
+                    maintainable code.
+                  </p>
+                </ScrollReveal>
+                <ScrollReveal variant="fade-up" className="mt-6 block">
+                  <div className="flex flex-wrap gap-3">
+                    <a
+                      className="btn-accent inline-flex items-center justify-center rounded-lg px-6 py-3 font-medium"
+                      href="/certificates/Endrias%20Eshetu%20CV%20Resume.pdf"
+                      download="Endrias-Eshetu-CV.pdf"
+                    >
+                      Download CV
+                    </a>
+                    <a
+                      className="hero-outline-btn inline-flex items-center justify-center rounded-lg border border-(--accent) px-6 py-3 font-medium text-(--accent)"
+                      href="#experience"
+                    >
+                      View projects
+                    </a>
+                  </div>
+                </ScrollReveal>
                 <div className="hero-metrics mt-6">
-                  <div>
-                    <p className="metric-value">End-to-end</p>
-                    <p className=" text-muted-prose">
-                      UI, API, and delivery focus
-                    </p>
-                  </div>
-
-                  <div>
-                    <p className="metric-value">Open</p>
-                    <p className=" text-muted-prose">
-                      Internships and collaborations
-                    </p>
-                  </div>
+                  <ScrollReveal variant="fade-up" className="min-w-0">
+                    <div>
+                      <p className="metric-value">End-to-end</p>
+                      <p className=" text-muted-prose">
+                        UI, API, and delivery focus
+                      </p>
+                    </div>
+                  </ScrollReveal>
+                  <ScrollReveal variant="fade-up" className="min-w-0">
+                    <div>
+                      <p className="metric-value">Open</p>
+                      <p className=" text-muted-prose">
+                        Internships and collaborations
+                      </p>
+                    </div>
+                  </ScrollReveal>
                 </div>
               </div>
-              <div className="mx-auto w-8/12">
-                <div className="hero-card">
+              <ScrollReveal
+                variant="fade-scale"
+                className="mx-auto w-8/12"
+              >
+                <ParallaxFloat intensity={0.11} className="hero-card">
                   <div className="hero-card-inner">
                     <img
                       src="/155A2404.JPG"
@@ -96,8 +110,8 @@ export function SiteHeader() {
                       </p>
                     </div>
                   </div>
-                </div>
-              </div>
+                </ParallaxFloat>
+              </ScrollReveal>
             </div>
           </div>
         </section>
@@ -107,43 +121,52 @@ export function SiteHeader() {
         <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-6 lg:grid-cols-12">
             <div className="lg:col-span-5">
-              <h2 className="section-title" id="about-title">
-                About me
-              </h2>
-              <p className="text-muted-prose">
-                I'm Endrias, a freelance full-stack developer focused on
-                delivering complete features from planning and UI design to
-                back-end logic and deployment support.
-              </p>
-              <div className="mt-4 flex flex-wrap gap-3">
-                <a
-                  className="btn-accent inline-flex items-center justify-center rounded-lg p-3 font-medium"
-                  href="#contact"
-                >
-                  Hire me
-                </a>
-                <a
-                  className="inline-flex items-center justify-center p-2  underline-offset-4 hover:underline"
-                  href="#experience"
-                >
-                  See my journey
-                </a>
-              </div>
+              <ScrollReveal variant="fade-up">
+                <h2 className="section-title" id="about-title">
+                  About me
+                </h2>
+              </ScrollReveal>
+              <ScrollReveal variant="fade-up" className="mt-3 block">
+                <p className="text-muted-prose">
+                  I'm Endrias, a freelance full-stack developer focused on
+                  delivering complete features from planning and UI design to
+                  back-end logic and deployment support.
+                </p>
+              </ScrollReveal>
+              <ScrollReveal variant="fade-up" className="mt-4 block">
+                <div className="flex flex-wrap gap-3">
+                  <a
+                    className="btn-accent inline-flex items-center justify-center rounded-lg p-3 font-medium"
+                    href="#contact"
+                  >
+                    Hire me
+                  </a>
+                  <a
+                    className="inline-flex items-center justify-center p-2  underline-offset-4 hover:underline"
+                    href="#experience"
+                  >
+                    See my journey
+                  </a>
+                </div>
+              </ScrollReveal>
             </div>
-            <div className="lg:col-span-7">
+            <div className="min-w-0 lg:col-span-7">
               <div className="panel-card rounded-3xl p-6">
                 <div className="grid gap-6 md:grid-cols-2">
-                  <div>
-                    <h3 className="text-sm font-semibold uppercase tracking-wide">
-                      Focus areas
-                    </h3>
-                    <ul className="m-0 list-none mt-2 p-0">
-                      <li>Front-end development</li>
-                      <li>Back-end development</li>
-                      <li>Full-stack project delivery</li>
-                    </ul>
-                  </div>
-                  <div>
+                  <ScrollReveal variant="fade-up" className="min-w-0">
+                    <div>
+                      <h3 className="text-sm font-semibold uppercase tracking-wide">
+                        Focus areas
+                      </h3>
+                      <ul className="m-0 list-none mt-2 p-0">
+                        <li>Front-end development</li>
+                        <li>Back-end development</li>
+                        <li>Full-stack project delivery</li>
+                      </ul>
+                    </div>
+                  </ScrollReveal>
+                  <ScrollReveal variant="fade-up" className="min-w-0">
+                    <div>
                     <h3 className="text-sm font-semibold uppercase tracking-wide">
                       Tools I love
                     </h3>
@@ -228,14 +251,17 @@ export function SiteHeader() {
                         <span className="sr-only">MongoDB</span>
                       </li>
                     </ul>
+                    </div>
+                  </ScrollReveal>
+                </div>
+                <ScrollReveal variant="fade-up" className="mt-4 block">
+                  <div className="panel-card mt-4 p-4">
+                    <p className="mb-1 font-semibold">Signature strength</p>
+                    <p className="">
+                      Delivering end-to-end features with clarity and care.
+                    </p>
                   </div>
-                </div>
-                <div className="panel-card mt-4 p-4">
-                  <p className="mb-1 font-semibold">Signature strength</p>
-                  <p className="">
-                    Delivering end-to-end features with clarity and care.
-                  </p>
-                </div>
+                </ScrollReveal>
               </div>
             </div>
           </div>

@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import type { Certificate } from "../types/certificate";
 import { ExpandableCertificateList } from "./ExpandableCertificateList";
+import { ScrollReveal } from "./ScrollReveal";
 
 interface CertificatesSectionProps {
   certificates: Certificate[];
@@ -59,7 +60,7 @@ function CertificateCard({ certificate }: { certificate: Certificate }) {
         <div className="flex flex-wrap gap-2">
           {certificate.pdfLink ? (
             <a
-              className="certificate-link inline-flex items-center justify-center rounded-lg border border-fuchsia-950 px-3 py-1.5 text-sm font-medium text-white hover:bg-fuchsia-950"
+              className="certificate-link btn-accent inline-flex items-center justify-center rounded-lg px-3 py-1.5 text-sm font-medium"
               href={certificate.pdfLink}
               target="_blank"
               rel="noreferrer"
@@ -69,7 +70,7 @@ function CertificateCard({ certificate }: { certificate: Certificate }) {
           ) : null}
           {certificate.link ? (
             <a
-              className="certificate-link inline-flex items-center justify-center rounded-lg border border-fuchsia-950 px-3 py-1.5 text-sm font-medium text-white hover:bg-fuchsia-950"
+              className="certificate-link btn-accent inline-flex items-center justify-center rounded-lg px-3 py-1.5 text-sm font-medium"
               href={certificate.link}
               target="_blank"
               rel="noreferrer"
@@ -103,26 +104,32 @@ export function CertificatesSection({
     >
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="space-y-8">
+          <ScrollReveal variant="fade-up">
+            <div>
+              <h2 className="section-title" id="certificates-title">
+                Certificates
+              </h2>
+              <p className="text-muted-prose">
+                Curated credentials published by the site owner.
+              </p>
+            </div>
+          </ScrollReveal>
           <div>
-            <h2 className="section-title" id="certificates-title">
-              Certificates
-            </h2>
-            <p className="text-muted-prose">
-              Curated credentials published by the site owner.
-            </p>
-          </div>
-          <div>
-            <h3 className="mb-3 text-xl font-semibold">Latest credentials</h3>
+            <ScrollReveal variant="fade-up" className="mb-3 block">
+              <h3 className="text-xl font-semibold">Latest credentials</h3>
+            </ScrollReveal>
             <ExpandableCertificateList
               items={sortedCertificates}
               initialVisibleCount={initialVisibleCertificates}
               keyExtractor={(c) => c.id}
               listId="certificate-list"
               renderItem={(certificate) => (
-                <CertificateCard certificate={certificate} />
+                <ScrollReveal variant="fade-up" className="h-full">
+                  <CertificateCard certificate={certificate} />
+                </ScrollReveal>
               )}
               emptyFallback={
-                <p className="mt-3 text-slate-300" id="certificate-empty">
+                <p className="mt-3 text-(--muted)" id="certificate-empty">
                   No certificates published yet.
                 </p>
               }

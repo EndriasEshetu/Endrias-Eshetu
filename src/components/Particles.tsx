@@ -9,6 +9,12 @@ interface ParticlesProps {
   moveParticlesOnHover?: boolean;
   particleHoverFactor?: number;
   alphaParticles?: boolean;
+  /** Multiplies soft-particle alpha (e.g. >1 on light canvases for contrast) */
+  particleAlphaScale?: number;
+  /** Scales the shimmer term; lower on light themes keeps saturated base colors */
+  particleShimmerMix?: number;
+  /** Added to final RGB; lower on light themes avoids washing out dark particles */
+  particleRgbLift?: number;
   particleBaseSize?: number;
   sizeRandomness?: number;
   cameraDistance?: number;
@@ -81,14 +87,17 @@ const fragment = /* glsl */ `
   
   uniform float uTime;
   uniform float uAlphaParticles;
+  uniform float uAlphaScale;
+  uniform float uShimmerMix;
+  uniform float uRgbLift;
   varying vec4 vRandom;
   varying vec3 vColor;
   
   void main() {
     vec2 uv = gl_PointCoord.xy;
     float d = length(uv - vec2(0.5));
-    vec3 shimmer = vColor + 0.3 * sin(uv.yxx + uTime + vRandom.y * 6.28);
-    vec3 lightColor = shimmer + vec3(0.2);
+    vec3 shimmer = vColor + uShimmerMix * sin(uv.yxx + uTime + vRandom.y * 6.28);
+    vec3 lightColor = shimmer + vec3(uRgbLift);
     
     if(uAlphaParticles < 0.5) {
       if(d > 0.5) {
@@ -96,7 +105,7 @@ const fragment = /* glsl */ `
       }
       gl_FragColor = vec4(lightColor, 1.0);
     } else {
-      float circle = smoothstep(0.5, 0.4, d) * 0.95;
+      float circle = min(smoothstep(0.5, 0.4, d) * 0.95 * uAlphaScale, 1.0);
       gl_FragColor = vec4(lightColor, circle);
     }
   }
@@ -110,6 +119,9 @@ export const Particles = ({
   moveParticlesOnHover = false,
   particleHoverFactor = 1,
   alphaParticles = false,
+  particleAlphaScale = 1,
+  particleShimmerMix = 0.3,
+  particleRgbLift = 0.2,
   particleBaseSize = 100,
   sizeRandomness = 1,
   cameraDistance = 20,
@@ -207,6 +219,9 @@ export const Particles = ({
         uBaseSize: { value: particleBaseSize * pixelRatio },
         uSizeRandomness: { value: sizeRandomness },
         uAlphaParticles: { value: alphaParticles ? 1 : 0 },
+        uAlphaScale: { value: particleAlphaScale },
+        uShimmerMix: { value: particleShimmerMix },
+        uRgbLift: { value: particleRgbLift },
       },
       transparent: true,
       depthTest: false,
@@ -263,6 +278,9 @@ export const Particles = ({
     moveParticlesOnHover,
     particleHoverFactor,
     alphaParticles,
+    particleAlphaScale,
+    particleShimmerMix,
+    particleRgbLift,
     particleBaseSize,
     sizeRandomness,
     cameraDistance,
