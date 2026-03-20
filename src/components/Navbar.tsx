@@ -134,7 +134,7 @@ export function Navbar() {
           </button>
         </div>
         <div
-          className={`${isMenuOpen ? "flex" : "hidden"} absolute right-4 top-full z-[1045] mt-2 overflow-visible rounded-2xl p-4 shadow-lg lg:static lg:z-auto lg:mt-0 lg:flex lg:flex-1 lg:justify-end lg:bg-transparent lg:p-0 lg:shadow-none [background:var(--card)] `}
+          className={`${isMenuOpen ? "flex" : "hidden"} absolute right-4 top-full z-1045 mt-2 overflow-visible rounded-2xl p-4 shadow-lg lg:static lg:z-auto lg:mt-0 lg:flex lg:flex-1 lg:justify-end lg:bg-transparent lg:p-0 lg:shadow-none [background:var(--card)] `}
           id="siteNav"
         >
           <ul className="flex flex-col gap-2 overflow-visible lg:ml-auto lg:flex-row lg:items-center lg:gap-4">
