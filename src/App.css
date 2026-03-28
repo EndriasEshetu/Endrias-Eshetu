@@ -334,11 +334,11 @@ a:focus {
 }
 
 .hero-card-inner {
-  background: var(--card);
-  border: 1px solid var(--line);
-  padding: 1.5rem;
+  background: transparent;
+  border: none;
+  padding: 0;
   border-radius: 2rem;
-  box-shadow: var(--shadow);
+  box-shadow: none;
 }
 
 .hero-card-meta {
@@ -390,7 +390,6 @@ a:focus {
   box-shadow: var(--card-elev-shadow);
 }
 
-.hero-card-inner,
 .panel-card,
 .skill-card,
 .achievement-card,
@@ -401,7 +400,6 @@ a:focus {
     box-shadow 0.25s ease;
 }
 
-.hero-card-inner:hover,
 .panel-card:hover,
 .skill-card:hover,
 .achievement-card:hover,

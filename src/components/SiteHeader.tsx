@@ -97,15 +97,21 @@ export function SiteHeader() {
                 <ParallaxFloat intensity={0.11} className="hero-card">
                   <div className="hero-card-inner">
                     <img
-                      src="/155A2404.JPG"
+                      src="/professional-image.png"
                       alt="Photo of me working on a laptop, smiling at the camera"
-                      className="h-auto w-full rounded-3xl shadow"
+                      className="h-auto w-full rounded-3xl"
+                      style={{
+                        maskImage:
+                          "linear-gradient(to bottom, black 75%, transparent 100%)",
+                        WebkitMaskImage:
+                          "linear-gradient(to bottom, black 75%, transparent 100%)",
+                      }}
                     />
-                    <div className="panel-card mt-4 p-2.5">
-                      <p className="mb-1 font-semibold pl-4">
+                    <div className="mt-4 px-2">
+                      <p className="mb-1 font-semibold">
                         Available for internships and junior roles
                       </p>
-                      <p className="m-0 text-muted-prose pl-4">
+                      <p className="m-0 text-muted-prose">
                         Adama, Ethiopia · Often in Hawasa
                       </p>
                     </div>

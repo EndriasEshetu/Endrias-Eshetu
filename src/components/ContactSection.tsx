@@ -134,7 +134,7 @@ export function ContactSection() {
                       className="w-full rounded-lg border border-(--line) bg-(--input-bg) px-3 py-2 text-(--input-text) outline-none transition focus:border-(--accent)"
                       id="contact-email"
                       name="email"
-                      placeholder="you@example.com"
+                      placeholder="endriaseshetu@gmail.com"
                       required
                     />
                   </div>
