@@ -82,7 +82,7 @@ export function SiteHeader() {
               </ScrollReveal>
               <div className="hero-intro-block order-3 min-w-0 lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:mt-0">
                 <ScrollReveal variant="slide-right" className="block">
-                  <p className="text-lg text-muted-prose">
+                  <p className="text-3xl text-muted-prose">
                     Based in Adama (often in Hawasa), I build responsive
                     interfaces and dependable back-end systems with clean,
                     maintainable code.
