@@ -74,6 +74,7 @@ body {
   color: var(--ink);
   background-color: var(--app-bg);
   min-height: 100%;
+  font-family: "Sofia Pro", sans-serif;
 }
 
 /* Secondary copy: slate-400 (dark) → slate-700 (light) */
@@ -317,9 +318,10 @@ a:focus {
   z-index: 1;
 }
 
-.hero-title {
-  line-height: 1.15;
-  margin-bottom: 1rem;
+.hero .hero-title {
+  font-family: "Inter", "Open Sans", sans-serif;
+  font-style: oblique;
+  line-height: 1.5;
 }
 
 .eyebrow {
@@ -615,6 +617,13 @@ a:focus {
   .portfolio-navbar .nav-link:hover,
   .portfolio-navbar .nav-link:focus {
     color: var(--navbar-text);
+  }
+
+  /* Hero intro column: default scroll-reveal is 1.45s — snappier on laptop */
+  .hero-intro-block .scroll-reveal.is-inview {
+    transition:
+      opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
   }
 }
 

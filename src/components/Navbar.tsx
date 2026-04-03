@@ -91,7 +91,7 @@ export function Navbar() {
           />
           Endrias Eshetu
         </a>
-        <div className="ml-auto flex shrink-0 items-center gap-2 pl-2 lg:contents">
+        <div className="ml-auto flex shrink-0 items-center gap-5 pl-2 lg:contents">
           <button
             className="navbar-theme-toggle inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-(--toggle-bg) text-(--navbar-text) opacity-95 transition hover:opacity-100 lg:order-last"
             type="button"
@@ -110,7 +110,7 @@ export function Navbar() {
             )}
           </button>
           <button
-            className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-current opacity-90 lg:hidden"
+            className="inline-flex h-10 w-10 shrink-0 items-center mr-5 justify-center rounded-md border border-current opacity-90 lg:hidden"
             type="button"
             aria-controls="siteNav"
             aria-expanded={isMenuOpen}
