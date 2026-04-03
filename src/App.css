@@ -320,8 +320,7 @@ a:focus {
 
 .hero .hero-title {
   font-family: "Inter", "Open Sans", sans-serif;
-  font-style: oblique;
-  line-height: 1.5;
+  transform: scaleY(1.5);
 }
 
 .eyebrow {
