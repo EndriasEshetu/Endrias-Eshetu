@@ -75,7 +75,7 @@ export function ContactSection() {
 
   return (
     <section className="section" id="contact" aria-labelledby="contact-title">
-      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto w-full max-w-6xl min-[1440px]:max-w-360 px-4 sm:px-6 lg:px-8">
         <div className="grid items-center gap-6 lg:grid-cols-2">
           <ScrollReveal variant="slide-right" className="min-w-0">
             <div>

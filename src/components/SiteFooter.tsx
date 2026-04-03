@@ -40,7 +40,7 @@ const navLinks: NavLink[] = [
 export function SiteFooter({ currentYear }: SiteFooterProps) {
   return (
     <footer className="site-footer">
-      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto w-full max-w-6xl min-[1440px]:max-w-360 px-4 sm:px-6 lg:px-8">
         <div className="site-footer-grid grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           <ScrollReveal variant="fade-up" className="min-w-0">
             <div>

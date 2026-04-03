@@ -7,7 +7,7 @@ export function AchievementsSection() {
       id="achievements"
       aria-labelledby="achievements-title"
     >
-      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto w-full max-w-6xl min-[1440px]:max-w-360 px-4 sm:px-6 lg:px-8">
         <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
           <ScrollReveal variant="fade-up" className="min-w-0">
             <div>

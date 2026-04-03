@@ -77,6 +77,18 @@ body {
   font-family: "Sofia Pro", sans-serif;
 }
 
+/* Below Tailwind `lg` (1024px): prevent stray horizontal scroll */
+@media (max-width: 1023px) {
+  html,
+  body,
+  #root,
+  .app-shell,
+  .app-content {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+}
+
 /* Secondary copy: slate-400 (dark) → slate-700 (light) */
 .text-muted-prose {
   color: #94a3b8;

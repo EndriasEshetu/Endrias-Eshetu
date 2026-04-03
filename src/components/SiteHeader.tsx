@@ -35,7 +35,7 @@ export function SiteHeader() {
 
       <header className="site-header" id="top">
         <section className="section-alt hero" aria-labelledby="hero-title">
-          <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto w-full max-w-6xl min-[1440px]:max-w-360 px-4 sm:px-6 lg:px-8">
             <div className="grid items-center gap-5 lg:grid-cols-3 lg:gap-x-10 lg:gap-y-0">
               <div className="order-1 min-w-0 lg:col-span-2 lg:col-start-1 lg:row-start-1 ">
                 <ScrollReveal variant="slide-right">
@@ -130,7 +130,7 @@ export function SiteHeader() {
       </header>
 
       <section className="section" id="about" aria-labelledby="about-title">
-        <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto w-full max-w-6xl min-[1440px]:max-w-360 px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-6 lg:grid-cols-12">
             <div className="lg:col-span-5">
               <ScrollReveal variant="fade-up">

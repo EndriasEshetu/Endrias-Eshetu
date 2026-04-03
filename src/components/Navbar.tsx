@@ -78,7 +78,7 @@ export function Navbar() {
       ref={navRef}
       className={`fixed top-0 z-1030 w-full overflow-visible py-3 portfolio-navbar ${isScrolled ? "is-scrolled" : ""}`}
     >
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between overflow-visible px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex w-full max-w-6xl min-[1440px]:max-w-360 items-center justify-between overflow-visible px-4 sm:px-6 lg:px-8">
         <a
           className="navbar-brand min-w-0 shrink text-lg font-semibold"
           href="#top"
