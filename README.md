@@ -1,145 +1,76 @@
 # Endrias Eshetu Portfolio
 
-## Purpose
+Responsive portfolio site built with React, TypeScript, Vite, and Express.
 
-This repository contains a professional web portfolio that presents technical experience, selected projects, certifications, achievements, and a contact channel for collaboration opportunities.
+## What It Does
 
-The application is designed to:
+- Presents professional skills and technical experience
+- Showcases selected projects and work samples
+- Lists achievements and certificates
+- Provides a contact form backed by an API
+- Stores submissions locally and sends email notifications when configured
 
-- Establish a clear online professional presence
-- Showcase practical software engineering work and skills
-- Enable visitors to submit contact requests through a secure backend API
-
-## Overview
-
-The project consists of:
-
-- A frontend single-page application built with React, TypeScript, and Vite
-- A backend Express API that receives contact form submissions
-- **Resend**-powered email delivery for incoming contact messages (no SMTP setup)
-- Local JSON persistence for submitted contact messages
-
-## Technology Stack
-
-- React 19
-- TypeScript
-- Vite
-- Express.js
-- Resend (transactional email API)
-- ESLint
-
-## Project Structure
-
-- `src/` Frontend application source code
-- `server/` Backend API and storage logic
-- `server/data/contact-messages.json` Local storage for contact submissions
-- `public/` Static assets
-
-## Prerequisites
-
-- Node.js 18+ (recommended LTS)
-- npm 9+
-
-## Installation
+## Setup
 
 ```bash
 npm install
 ```
 
-## Environment Configuration
+Create a `.env` file from `.env.example` and set the required values:
 
-Create a `.env` file in the project root (you can copy `.env.example`).
+- `PORT`
+- `FRONTEND_ORIGIN`
+- `VITE_API_BASE_URL`
+- `CONTACT_RECEIVER_EMAIL`
+- `RESEND_API_KEY`
 
-Required and optional variables:
-
-- `PORT` Backend server port (default: `4000`)
-- `FRONTEND_ORIGIN` Allowed CORS origin(s) for frontend access
-- `VITE_API_BASE_URL` Frontend API base URL
-- `CONTACT_RECEIVER_EMAIL` Destination email for contact notifications
-- `RESEND_API_KEY` Your [Resend](https://resend.com) API key for sending contact emails
-
-If `RESEND_API_KEY` is not set, messages are still stored locally; email delivery will fail and the API responds with “Message saved but email delivery failed.” Get an API key from [Resend](https://resend.com) (free tier available).
-
-For split hosting (frontend on Vercel and backend on Render):
-
-- Set backend `FRONTEND_ORIGIN` to your Vercel site URL (for CORS)
-- Set frontend `VITE_API_BASE_URL` to your Render API URL
-- Example: `https://your-api.onrender.com`
-
-## Running the Application
-
-Run frontend and backend together:
-
-```bash
-npm run dev:full
-```
-
-Run backend only:
-
-```bash
-npm run server
-```
-
-Run frontend only:
+## Run
 
 ```bash
 npm run dev
 ```
 
-## Available Scripts
+Starts the frontend and backend together.
 
-- `npm run dev` Start Vite development server
-- `npm run dev:client` Start frontend development server
-- `npm run server` Start backend API server
-- `npm run dev:full` Start frontend and backend concurrently
-- `npm run build` Build production frontend bundle
-- `npm run preview` Preview production build locally
-- `npm run lint` Run ESLint checks
+```bash
+npm run dev:client
+```
 
-## API Endpoints
+Starts the frontend only.
 
-- `GET /api/health` Health check endpoint
-- `POST /api/contact` Accepts contact form payload and stores message
+```bash
+npm run server
+```
 
-## Deploy Backend To Render
+Starts the backend only.
 
-This repository can run as a Render Web Service without code changes.
+## Scripts
 
-1. Push your latest code to GitHub.
-2. In Render, create a new `Web Service` from this repository.
-3. Use these settings:
+- `npm run dev` Start frontend and backend together
+- `npm run dev:client` Start the frontend only
+- `npm run server` Start the backend only
+- `npm run build` Build the frontend
+- `npm run preview` Preview the production build
+- `npm run lint` Run ESLint
 
-- Runtime: `Node`
-- Build Command: `npm install`
-- Start Command: `npm run server`
-- Health Check Path: `/api/health`
+## API
 
-4. Add Render environment variables:
+- `GET /api/health` Health check
+- `POST /api/contact` Submit contact form data
 
-- `FRONTEND_ORIGIN` = `https://<your-vercel-domain>`
-- `CONTACT_RECEIVER_EMAIL`
-- `RESEND_API_KEY` (from [Resend](https://resend.com))
+## Deployment
 
-5. Deploy and copy your Render service URL (example: `https://your-api.onrender.com`).
+Backend:
 
-## Connect Frontend (Vercel) To Render Backend
+- Start command: `npm run server`
+- Health check: `/api/health`
+- Set `FRONTEND_ORIGIN`, `CONTACT_RECEIVER_EMAIL`, and `RESEND_API_KEY`
 
-In Vercel project environment variables, set:
+Frontend:
 
-- `VITE_API_BASE_URL` = `https://your-api.onrender.com`
+- Set `VITE_API_BASE_URL` to the backend URL
 
-Then redeploy the frontend.
+## Notes
 
-## Contact Message Handling
-
-Each contact submission is:
-
-- Validated on the server
-- Stored in `server/data/contact-messages.json`
-- Delivered by email via **Resend** when `RESEND_API_KEY` is set (no SMTP configuration required)
-
-Note: on most cloud hosts (including Render Web Services), local filesystem writes are not durable across deploys/restarts. Use a database for long-term message storage.
-
-## License
-
-This project is intended for personal professional portfolio use.
+- Contact messages are stored locally in `server/data/contact-messages.json`.
+- Email delivery uses Resend when `RESEND_API_KEY` is set.
