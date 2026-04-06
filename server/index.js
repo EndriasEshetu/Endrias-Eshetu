@@ -67,7 +67,7 @@ app.use(
     allowedHeaders: ["Content-Type"],
   }),
 );
-app.options("*", cors({ origin: corsOrigin }));
+app.use(cors({ origin: corsOrigin }));
 app.use(express.json({ limit: "100kb" }));
 
 const topics = new Set(["fullstack", "automation", "networking", "other"]);
