@@ -26,6 +26,13 @@ const messagesFile = path.join(dataDir, "contact-messages.json");
 
 const MESSAGE_LIMIT = 500;
 
+const defaultAllowedOrigins = [
+  "https://endrias.tech",
+  "https://endrias.vercel.app",
+  "http://localhost:5173",
+  "http://localhost:5174",
+];
+
 const configuredOrigins = process.env.FRONTEND_ORIGIN
   ? process.env.FRONTEND_ORIGIN.split(",").map((o) => o.trim())
   : [];
@@ -34,7 +41,11 @@ function normalizeOrigin(origin) {
   return typeof origin === "string" ? origin.replace(/\/$/, "") : "";
 }
 
-const allowedOrigins = new Set(configuredOrigins.map(normalizeOrigin));
+const allowedOrigins = new Set(
+  [...defaultAllowedOrigins, ...configuredOrigins]
+    .map(normalizeOrigin)
+    .filter(Boolean),
+);
 
 const corsOrigin = (origin, callback) => {
   if (!origin) return callback(null, true);
@@ -49,7 +60,14 @@ const corsOrigin = (origin, callback) => {
   callback(new Error("Not allowed by CORS"));
 };
 
-app.use(cors({ origin: corsOrigin }));
+app.use(
+  cors({
+    origin: corsOrigin,
+    methods: ["GET", "POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type"],
+  }),
+);
+app.options("*", cors({ origin: corsOrigin }));
 app.use(express.json({ limit: "100kb" }));
 
 const topics = new Set(["fullstack", "automation", "networking", "other"]);

@@ -9,7 +9,7 @@ services:
     autoDeploy: true
     envVars:
       - key: FRONTEND_ORIGIN
-        sync: false
+        value: https://endrias.tech,https://endrias.vercel.app
       - key: CONTACT_RECEIVER_EMAIL
         sync: false
       - key: RESEND_API_KEY
