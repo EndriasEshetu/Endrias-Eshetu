@@ -8,9 +8,55 @@ import {
 
 type SubmitStatus = "idle" | "submitting" | "success" | "error";
 
+function validateEmail(email: string) {
+  const normalized = email.trim().toLowerCase();
+
+  if (!normalized) {
+    return "Email address is required.";
+  }
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalized)) {
+    return "Enter a valid email address.";
+  }
+
+  return "";
+}
+
+function validateContactForm(payload: {
+  name: string;
+  email: string;
+  topic: string;
+  message: string;
+}) {
+  const name = payload.name.trim();
+  const email = payload.email.trim();
+  const topic = payload.topic.trim();
+  const message = payload.message.trim();
+
+  if (name.length < 2 || name.length > 80) {
+    return "Please enter a name between 2 and 80 characters.";
+  }
+
+  const emailError = validateEmail(email);
+  if (emailError) {
+    return emailError;
+  }
+
+  if (!["fullstack", "automation", "networking", "other"].includes(topic)) {
+    return "Please choose a valid topic.";
+  }
+
+  if (message.length < 10 || message.length > 2000) {
+    return "Please enter a message between 10 and 2000 characters.";
+  }
+
+  return "";
+}
+
 export function ContactSection() {
   const [status, setStatus] = useState<SubmitStatus>("idle");
   const [feedback, setFeedback] = useState("");
+  const [emailError, setEmailError] = useState("");
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -24,6 +70,17 @@ export function ContactSection() {
       topic: String(formData.get("topic") ?? ""),
       message: String(formData.get("message") ?? ""),
     };
+
+    const formValidationError = validateContactForm(payload);
+
+    if (formValidationError) {
+      setStatus("error");
+      setEmailError(validateEmail(payload.email));
+      setFeedback(formValidationError);
+      return;
+    }
+
+    setEmailError("");
 
     setStatus("submitting");
     setFeedback("Sending your message...");
@@ -60,7 +117,7 @@ export function ContactSection() {
 
       if (error instanceof TypeError) {
         setFeedback(
-          "Cannot reach contact server. Check the backend URL and CORS settings.",
+          "Cannot reach contact server. Please check your internet connection.",
         );
         return;
       }
@@ -100,6 +157,7 @@ export function ContactSection() {
             <form
               className="panel-card rounded-3xl p-6"
               aria-label="Contact form"
+              noValidate
               onSubmit={handleSubmit}
             >
               <div className="grid gap-3 md:grid-cols-2">
@@ -135,8 +193,14 @@ export function ContactSection() {
                       id="contact-email"
                       name="email"
                       placeholder="endriaseshetu@gmail.com"
+                      onChange={(event) => {
+                        setEmailError(validateEmail(event.currentTarget.value));
+                      }}
                       required
                     />
+                    {emailError ? (
+                      <p className="mt-1 text-sm text-red-500">{emailError}</p>
+                    ) : null}
                   </div>
                 </ScrollReveal>
                 <ScrollReveal
@@ -206,7 +270,7 @@ export function ContactSection() {
                       aria-live="polite"
                     >
                       {feedback ||
-                        "Your message will be delivered to the backend API."}
+                        "Your message will be sent to my email inbox. I typically respond within a few days."}
                     </p>
                   </div>
                 </ScrollReveal>

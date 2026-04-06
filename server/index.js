@@ -76,26 +76,30 @@ function normalizeText(value) {
   return typeof value === "string" ? value.trim() : "";
 }
 
+function normalizeEmail(value) {
+  return normalizeText(value).toLowerCase();
+}
+
 function validateContactPayload(payload) {
   const name = normalizeText(payload?.name);
-  const email = normalizeText(payload?.email);
+  const email = normalizeEmail(payload?.email);
   const topic = normalizeText(payload?.topic);
   const message = normalizeText(payload?.message);
 
   if (!name || name.length < 2 || name.length > 80) {
-    return { error: "Name must be between 2 and 80 characters." };
+    return { error: "Please enter a name between 2 and 80 characters." };
   }
 
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return { error: "Valid email required." };
+    return { error: "Please enter a valid email address." };
   }
 
   if (!topics.has(topic)) {
-    return { error: "Invalid topic." };
+    return { error: "Please choose a valid topic." };
   }
 
   if (!message || message.length < 10 || message.length > 2000) {
-    return { error: "Message must be between 10 and 2000 characters." };
+    return { error: "Please enter a message between 10 and 2000 characters." };
   }
 
   return {
