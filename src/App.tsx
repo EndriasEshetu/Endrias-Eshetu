@@ -1,6 +1,5 @@
 import { useMemo } from "react";
 import { useTheme } from "./contexts/ThemeContext";
-import { AchievementsSection } from "./components/AchievementsSection";
 import { CertificatesSection } from "./components/CertificatesSection";
 import { ContactSection } from "./components/ContactSection";
 import { ProjectsSection } from "./components/ProjectsSection";
@@ -10,6 +9,7 @@ import { SelectedWork } from "./components/SelectedWork";
 import { SiteFooter } from "./components/SiteFooter";
 import { SiteHeader } from "./components/SiteHeader";
 import { SkillsSection } from "./components/SkillsSection";
+import { TechStacks } from "./components/TechStacks";
 import { OWNER_CERTIFICATES } from "./data/certificates";
 import "./App.css";
 
@@ -72,7 +72,7 @@ function App() {
           <SkillsSection />
           <ProjectsSection />
 
-          <AchievementsSection />
+          <TechStacks />
           <SelectedWork />
           <CertificatesSection certificates={certificates} />
           <ContactSection />

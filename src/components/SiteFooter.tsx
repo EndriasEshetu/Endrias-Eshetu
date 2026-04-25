@@ -33,7 +33,7 @@ const byPrefixAndName = {
 const navLinks: NavLink[] = [
   { label: "About", href: "#about" },
   { label: "Experience", href: "#experience" },
-  { label: "Achievements", href: "#achievements" },
+  { label: "Selected work", href: "#projects" },
   { label: "Certificates", href: "#certificates" },
 ];
 
@@ -94,7 +94,11 @@ export function SiteFooter({ currentYear }: SiteFooterProps) {
                     className="social-link inline-flex h-10 w-10 items-center justify-center rounded-full"
                   >
                     <FontAwesomeIcon
-                      icon={byPrefixAndName.fab[social.icon as keyof typeof byPrefixAndName.fab]}
+                      icon={
+                        byPrefixAndName.fab[
+                          social.icon as keyof typeof byPrefixAndName.fab
+                        ]
+                      }
                       className="h-5 w-5"
                     />
                   </a>
@@ -115,7 +119,10 @@ export function SiteFooter({ currentYear }: SiteFooterProps) {
           </ScrollReveal>
         </div>
 
-        <ScrollReveal variant="fade" className="site-footer-bottom mt-8 border-t border-white/10 pt-5 text-center text-sm">
+        <ScrollReveal
+          variant="fade"
+          className="site-footer-bottom mt-8 border-t border-white/10 pt-5 text-center text-sm"
+        >
           Copyright © {currentYear}, Endrias Eshetu, All Rights Reserved.
         </ScrollReveal>
       </div>

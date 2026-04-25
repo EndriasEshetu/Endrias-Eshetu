@@ -395,17 +395,14 @@ a:focus {
 
 .panel-card,
 .skill-card,
-.achievement-card,
 .project-card {
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 1.5rem;
   box-shadow: var(--card-elev-shadow);
 }
 
 .panel-card,
 .skill-card,
-.achievement-card,
 .project-card,
 .certificate-card {
   transition:
@@ -415,7 +412,6 @@ a:focus {
 
 .panel-card:hover,
 .skill-card:hover,
-.achievement-card:hover,
 .project-card:hover,
 .certificate-card:hover {
   transform: translateY(-4px);
@@ -444,10 +440,6 @@ a:focus {
   left: 0;
   color: var(--accent);
   font-weight: 700;
-}
-
-.achievement-card {
-  background: var(--card);
 }
 
 .project-card {

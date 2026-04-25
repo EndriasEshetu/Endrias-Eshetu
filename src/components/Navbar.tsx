@@ -16,7 +16,6 @@ export function Navbar() {
         "about",
         "skills",
         "experience",
-        "achievements",
         "projects",
         "certificates",
         "contact",
@@ -95,16 +94,34 @@ export function Navbar() {
           <button
             className="navbar-theme-toggle inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-(--toggle-bg) text-(--navbar-text) opacity-95 transition hover:opacity-100 lg:order-last"
             type="button"
-            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            aria-label={
+              theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+            }
             onClick={toggleTheme}
           >
             {theme === "dark" ? (
-              <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+              <svg
+                className="h-5 w-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                aria-hidden="true"
+              >
                 <circle cx="12" cy="12" r="4" />
                 <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
               </svg>
             ) : (
-              <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+              <svg
+                className="h-5 w-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                aria-hidden="true"
+              >
                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
               </svg>
             )}
@@ -194,48 +211,17 @@ export function Navbar() {
                 </li>
               </ul>
             </li>
-            <li className="nav-dropdown">
-              <p className="mb-1 px-3 text-xs font-semibold uppercase tracking-wide text-(--metric-label) lg:hidden">
-                Achievements
-              </p>
-              <button
-                type="button"
-                className={`nav-link hidden w-full items-center gap-1 rounded-lg border-0 bg-transparent px-3 py-2 text-left font-inherit text-inherit transition lg:flex lg:px-2 ${activeNav === "#achievements" || activeNav === "#projects" ? "is-active" : ""}`}
-                aria-haspopup="true"
-                aria-expanded="false"
-                tabIndex={0}
+            <li>
+              <a
+                className={`nav-link block rounded-lg px-3 py-2 transition lg:px-2 ${activeNav === "#projects" ? "is-active" : ""}`}
+                href="#projects"
+                onClick={() => {
+                  setActiveNav("#projects");
+                  setIsMenuOpen(false);
+                }}
               >
-                Achievements
-                <span className="text-[0.65rem] opacity-70" aria-hidden>
-                  ▾
-                </span>
-              </button>
-              <ul className="nav-dropdown-panel" role="list">
-                <li>
-                  <a
-                    className={`nav-link block rounded-lg px-3 py-2 transition lg:px-3 ${activeNav === "#achievements" ? "is-active" : ""}`}
-                    href="#achievements"
-                    onClick={() => {
-                      setActiveNav("#achievements");
-                      setIsMenuOpen(false);
-                    }}
-                  >
-                    Achievements
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className={`nav-link block rounded-lg px-3 py-2 transition lg:px-3 ${activeNav === "#projects" ? "is-active" : ""}`}
-                    href="#projects"
-                    onClick={() => {
-                      setActiveNav("#projects");
-                      setIsMenuOpen(false);
-                    }}
-                  >
-                    Selected work
-                  </a>
-                </li>
-              </ul>
+                Selected work
+              </a>
             </li>
             <li>
               <a
