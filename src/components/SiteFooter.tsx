@@ -33,7 +33,6 @@ const byPrefixAndName = {
 const navLinks: NavLink[] = [
   { label: "About", href: "#about" },
   { label: "Experience", href: "#experience" },
-  { label: "Selected work", href: "#projects" },
   { label: "Certificates", href: "#certificates" },
 ];
 

@@ -5,7 +5,6 @@ import { ContactSection } from "./components/ContactSection";
 import { ProjectsSection } from "./components/ProjectsSection";
 import { Navbar } from "./components/Navbar";
 import { Particles } from "./components/Particles";
-import { SelectedWork } from "./components/SelectedWork";
 import { SiteFooter } from "./components/SiteFooter";
 import { SiteHeader } from "./components/SiteHeader";
 import { SkillsSection } from "./components/SkillsSection";
@@ -73,7 +72,6 @@ function App() {
           <ProjectsSection />
 
           <TechStacks />
-          <SelectedWork />
           <CertificatesSection certificates={certificates} />
           <ContactSection />
         </main>

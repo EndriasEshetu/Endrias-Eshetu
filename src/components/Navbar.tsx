@@ -16,7 +16,6 @@ export function Navbar() {
         "about",
         "skills",
         "experience",
-        "projects",
         "certificates",
         "contact",
       ];
@@ -166,26 +165,8 @@ export function Navbar() {
               >
                 Home
               </a>
-            </li>
-
-            <li className="nav-dropdown">
-              <p className="mb-1 px-3 text-xs font-semibold uppercase tracking-wide text-(--metric-label) lg:hidden">
-                Experience
-              </p>
-              <button
-                type="button"
-                className={`nav-link hidden w-full items-center gap-1 rounded-lg border-0 bg-transparent px-3 py-2 text-left font-inherit text-inherit transition lg:flex lg:px-2 ${activeNav === "#skills" || activeNav === "#experience" ? "is-active" : ""}`}
-                aria-haspopup="true"
-                aria-expanded="false"
-                tabIndex={0}
-              >
-                Experience
-                <span className="text-[0.65rem] opacity-70" aria-hidden>
-                  ▾
-                </span>
-              </button>
-              <ul className="nav-dropdown-panel" role="list">
-                <li>
+            </li>          
+            <li>
                   <a
                     className={`nav-link block rounded-lg px-3 py-2 transition lg:px-3 ${activeNav === "#skills" ? "is-active" : ""}`}
                     href="#skills"
@@ -196,8 +177,8 @@ export function Navbar() {
                   >
                     Skills
                   </a>
-                </li>
-                <li>
+            </li>
+            <li>
                   <a
                     className={`nav-link block rounded-lg px-3 py-2 transition lg:px-3 ${activeNav === "#experience" ? "is-active" : ""}`}
                     href="#experience"
@@ -209,20 +190,6 @@ export function Navbar() {
                     Projects
                   </a>
                 </li>
-              </ul>
-            </li>
-            <li>
-              <a
-                className={`nav-link block rounded-lg px-3 py-2 transition lg:px-2 ${activeNav === "#projects" ? "is-active" : ""}`}
-                href="#projects"
-                onClick={() => {
-                  setActiveNav("#projects");
-                  setIsMenuOpen(false);
-                }}
-              >
-                Selected work
-              </a>
-            </li>
             <li>
               <a
                 className={`nav-link block rounded-lg px-3 py-2 transition lg:px-2 ${activeNav === "#certificates" ? "is-active" : ""}`}
