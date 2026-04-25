@@ -424,24 +424,6 @@ a:focus {
   border-radius: 1rem;
 }
 
-.experience-list {
-  list-style: none;
-  padding-left: 0;
-}
-
-.experience-list li {
-  position: relative;
-  padding-left: 1.4rem;
-}
-
-.experience-list li::before {
-  content: "✔";
-  position: absolute;
-  left: 0;
-  color: var(--accent);
-  font-weight: 700;
-}
-
 .project-card {
   background: var(--card);
 }

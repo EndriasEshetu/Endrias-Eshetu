@@ -15,7 +15,7 @@ export function Navbar() {
       const sectionIds = [
         "about",
         "skills",
-        "experience",
+        "project",
         "certificates",
         "contact",
       ];
@@ -180,10 +180,10 @@ export function Navbar() {
             </li>
             <li>
                   <a
-                    className={`nav-link block rounded-lg px-3 py-2 transition lg:px-3 ${activeNav === "#experience" ? "is-active" : ""}`}
-                    href="#experience"
+                    className={`nav-link block rounded-lg px-3 py-2 transition lg:px-3 ${activeNav === "#project" ? "is-active" : ""}`}
+                    href="#project"
                     onClick={() => {
-                      setActiveNav("#experience");
+                      setActiveNav("#project");
                       setIsMenuOpen(false);
                     }}
                   >

@@ -74,15 +74,10 @@ const techStackItems: TechStackItem[] = [
 
 export function TechStacks() {
   return (
-    <section
-      className="section panel-card"
-      id="tech-stacks"
-      aria-labelledby="tech-stacks-title"
-    >
-      <div className="mx-auto w-full max-w-6xl min-[1440px]:max-w-360 px-4 sm:px-6 lg:px-8">
-        <h2 className="section-title" id="tech-stacks-title">
-          Tech stacks
-        </h2>
+          <div className="mt-6 mx-auto w-full max-w-6xl min-[1440px]:max-w-360 px-4 sm:px-6 lg:px-8">
+        <h3 className="text-2xl font-semibold" id="tech-stacks-title">
+          Tech Stacks Highlights
+        </h3>
         <p className="m-0 text-muted-prose">
           Core technologies I use to design, build, and ship full-stack
           products.
@@ -114,7 +109,6 @@ export function TechStacks() {
             ))}
           </ul>
         </ScrollReveal>
-      </div>
-    </section>
+      </div>   
   );
 }

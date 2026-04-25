@@ -55,14 +55,14 @@ export function ProjectsSection() {
   return (
     <section
       className="section"
-      id="experience"
-      aria-labelledby="experience-title"
+      id="project"
+      aria-labelledby="project-title"
     >
       <div className="mx-auto w-full max-w-6xl min-[1440px]:max-w-360 overflow-x-hidden px-4 sm:px-6 lg:px-8">
         <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
           <ScrollReveal variant="slide-left" className="min-w-0">
             <div>
-              <h2 className="section-title" id="experience-title">
+              <h2 className="section-title" id="project-title">
                 Projects &amp; Experience
               </h2>
               <p className="m-0 text-muted-prose">

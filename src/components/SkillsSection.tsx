@@ -1,4 +1,5 @@
 import { ScrollReveal } from "./ScrollReveal";
+import { TechStacks } from "./TechStacks";
 
 const skills = [
   {
@@ -68,7 +69,7 @@ export function SkillsSection() {
           <ScrollReveal variant="fade-up" className="min-w-0">
             <div>
               <h2 className="section-title" id="skills-title">
-                Skills
+                Technical Skills
               </h2>
               <p className="m-0 text-muted-prose">
                 Built around web development, automation, and teamwork.
@@ -125,6 +126,7 @@ export function SkillsSection() {
           ))}
         </div>
       </div>
+      <TechStacks />
     </section>
   );
 }

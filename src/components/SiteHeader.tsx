@@ -77,7 +77,7 @@ export function SiteHeader() {
                     </a>
                     <a
                       className="hero-outline-btn inline-flex items-center justify-center rounded-lg border border-(--accent) px-6 py-3 font-medium text-(--accent)"
-                      href="#experience"
+                      href="#project"
                     >
                       View projects
                     </a>
@@ -133,7 +133,7 @@ export function SiteHeader() {
                   </a>
                   <a
                     className="inline-flex items-center justify-center p-2  underline-offset-4 hover:underline"
-                    href="#experience"
+                    href="#project"
                   >
                     See my journey
                   </a>
