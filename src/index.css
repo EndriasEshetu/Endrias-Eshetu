@@ -4,3 +4,21 @@ body {
   margin: 0;
   min-width: 320px;
 }
+
+.projects-scroller {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(168, 134, 44, 0.9) transparent;
+}
+
+.projects-scroller::-webkit-scrollbar {
+  height: 4px;
+}
+
+.projects-scroller::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.projects-scroller::-webkit-scrollbar-thumb {
+  background-color: rgba(168, 134, 44, 0.9);
+  border-radius: 9999px;
+}
