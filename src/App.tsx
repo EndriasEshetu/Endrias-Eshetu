@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { useTheme } from "./contexts/ThemeContext";
 import { CertificatesSection } from "./components/CertificatesSection";
 import { ContactSection } from "./components/ContactSection";
+import { MyJourney } from "./components/MyJourney";
 import { ProjectsSection } from "./components/ProjectsSection";
 import { Navbar } from "./components/Navbar";
 import { Particles } from "./components/Particles";
@@ -66,6 +67,8 @@ function App() {
         <SiteHeader />
 
         <main id="main">
+          <MyJourney />
+
           <ProjectsSection />
 
           <CertificatesSection certificates={certificates} />

@@ -133,7 +133,7 @@ export function SiteHeader() {
                   </a>
                   <a
                     className="inline-flex items-center justify-center p-2  underline-offset-4 hover:underline"
-                    href="#project"
+                    href="#journey"
                   >
                     See my journey
                   </a>
