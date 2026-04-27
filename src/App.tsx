@@ -17,49 +17,44 @@ function App() {
   const currentYear = useMemo(() => new Date().getFullYear(), []);
 
   const particlePreset = useMemo(() => {
-    if (theme === "light") {
+    if (theme === "dark") {
       return {
-        colors: ["#7c2d12", "#92400e", "#a16207", "#b45309", "#57534e"],
-        count: 480,
-        spread: 15,
-        speed: 0.08,
-        baseSize: 122,
-        alphaScale: 1.48,
-        shimmerMix: 0.12,
-        rgbLift: 0.04,
+        colors: ["#f4c94a", "#e8c547", "#c9a227", "#a67c1a"],
+        count: 320,
+        spread: 18,
+        speed: 0.1,
+        baseSize: 104,
+        alphaScale: 1,
+        shimmerMix: 0.3,
+        rgbLift: 0.2,
+        disableRotation: false,
       };
     }
-    return {
-      colors: ["#f4c94a", "#e8c547", "#c9a227", "#a67c1a"],
-      count: 320,
-      spread: 18,
-      speed: 0.1,
-      baseSize: 104,
-      alphaScale: 1,
-      shimmerMix: 0.3,
-      rgbLift: 0.2,
-    };
+
+    return null;
   }, [theme]);
 
   return (
     <div className="app-shell">
       <div className="app-background" aria-hidden="true">
-        <Particles
-          particleCount={particlePreset.count}
-          particleSpread={particlePreset.spread}
-          speed={particlePreset.speed}
-          particleColors={particlePreset.colors}
-          alphaParticles
-          particleAlphaScale={particlePreset.alphaScale}
-          particleShimmerMix={particlePreset.shimmerMix}
-          particleRgbLift={particlePreset.rgbLift}
-          particleBaseSize={particlePreset.baseSize}
-          sizeRandomness={1.1}
-          cameraDistance={18}
-          disableRotation={false}
-          pixelRatio={Math.min(window.devicePixelRatio || 1, 2)}
-          className="app-particles"
-        />
+        {particlePreset ? (
+          <Particles
+            particleCount={particlePreset.count}
+            particleSpread={particlePreset.spread}
+            speed={particlePreset.speed}
+            particleColors={particlePreset.colors}
+            alphaParticles
+            particleAlphaScale={particlePreset.alphaScale}
+            particleShimmerMix={particlePreset.shimmerMix}
+            particleRgbLift={particlePreset.rgbLift}
+            particleBaseSize={particlePreset.baseSize}
+            sizeRandomness={1.1}
+            cameraDistance={18}
+            disableRotation={particlePreset.disableRotation}
+            pixelRatio={Math.min(window.devicePixelRatio || 1, 2)}
+            className="app-particles"
+          />
+        ) : null}
       </div>
 
       <div className="app-content">
