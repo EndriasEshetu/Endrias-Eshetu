@@ -165,31 +165,31 @@ export function Navbar() {
               >
                 Home
               </a>
-            </li>          
-            <li>
-                  <a
-                    className={`nav-link block rounded-lg px-3 py-2 transition lg:px-3 ${activeNav === "#skills" ? "is-active" : ""}`}
-                    href="#skills"
-                    onClick={() => {
-                      setActiveNav("#skills");
-                      setIsMenuOpen(false);
-                    }}
-                  >
-                    Skills
-                  </a>
             </li>
             <li>
-                  <a
-                    className={`nav-link block rounded-lg px-3 py-2 transition lg:px-3 ${activeNav === "#project" ? "is-active" : ""}`}
-                    href="#project"
-                    onClick={() => {
-                      setActiveNav("#project");
-                      setIsMenuOpen(false);
-                    }}
-                  >
-                    Projects
-                  </a>
-                </li>
+              <a
+                className={`nav-link block rounded-lg px-3 py-2 transition lg:px-3 ${activeNav === "#skills" ? "is-active" : ""}`}
+                href="#skills"
+                onClick={() => {
+                  setActiveNav("#top");
+                  setIsMenuOpen(false);
+                }}
+              >
+                Skills
+              </a>
+            </li>
+            <li>
+              <a
+                className={`nav-link block rounded-lg px-3 py-2 transition lg:px-3 ${activeNav === "#project" ? "is-active" : ""}`}
+                href="#project"
+                onClick={() => {
+                  setActiveNav("#project");
+                  setIsMenuOpen(false);
+                }}
+              >
+                Projects
+              </a>
+            </li>
             <li>
               <a
                 className={`nav-link block rounded-lg px-3 py-2 transition lg:px-2 ${activeNav === "#certificates" ? "is-active" : ""}`}

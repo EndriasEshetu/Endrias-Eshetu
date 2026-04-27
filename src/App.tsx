@@ -7,7 +7,6 @@ import { Navbar } from "./components/Navbar";
 import { Particles } from "./components/Particles";
 import { SiteFooter } from "./components/SiteFooter";
 import { SiteHeader } from "./components/SiteHeader";
-import { SkillsSection } from "./components/SkillsSection";
 import { OWNER_CERTIFICATES } from "./data/certificates";
 import "./App.css";
 
@@ -67,9 +66,8 @@ function App() {
         <SiteHeader />
 
         <main id="main">
-          <SkillsSection />
           <ProjectsSection />
-          
+
           <CertificatesSection certificates={certificates} />
           <ContactSection />
         </main>
