@@ -4,6 +4,8 @@ import { CertificatesSection } from "./components/CertificatesSection";
 import { ContactSection } from "./components/ContactSection";
 import { MyJourney } from "./components/MyJourney";
 import { ProjectsSection } from "./components/ProjectsSection";
+import { SkillSection } from "./components/SkillSection";
+import { TechStack } from "./components/TechStack";
 import { Navbar } from "./components/Navbar";
 import { Particles } from "./components/Particles";
 import { SiteFooter } from "./components/SiteFooter";
@@ -63,6 +65,8 @@ function App() {
 
         <main id="main">
           <MyJourney />
+          <SkillSection />
+          <TechStack />
 
           <ProjectsSection />
 
