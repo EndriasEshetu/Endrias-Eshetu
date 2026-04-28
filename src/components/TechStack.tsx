@@ -106,7 +106,7 @@ export function TechStack() {
                         border: `1px solid ${
                           useBlackBorderInLightMode
                             ? "#000000"
-                            : BRAND_COLORS[tech.label] ?? "var(--line)"
+                            : (BRAND_COLORS[tech.label] ?? "var(--line)")
                         }`,
                       }}
                     >

@@ -335,13 +335,6 @@ a:focus {
   transform: scaleY(1.5);
 }
 
-.eyebrow {
-  letter-spacing: 0.2em;
-  font-weight: 600;
-  color: var(--navy);
-  margin-bottom: 1rem;
-}
-
 .hero-card {
   position: relative;
 }
@@ -352,13 +345,6 @@ a:focus {
   padding: 0;
   border-radius: 2rem;
   box-shadow: none;
-}
-
-.hero-card-meta {
-  margin-top: 1.5rem;
-  padding: 1rem 1.25rem;
-  background: var(--accent-soft);
-  border-radius: 1rem;
 }
 
 .hero-metrics {
@@ -394,8 +380,7 @@ a:focus {
 }
 
 .panel-card,
-.skill-card,
-.project-card {
+.skill-card {
   background: var(--card);
   border: 1px solid var(--line);
   box-shadow: var(--card-elev-shadow);
@@ -403,7 +388,6 @@ a:focus {
 
 .panel-card,
 .skill-card,
-.project-card,
 .certificate-card {
   transition:
     transform 0.25s ease,
@@ -412,20 +396,9 @@ a:focus {
 
 .panel-card:hover,
 .skill-card:hover,
-.project-card:hover,
 .certificate-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--card-hover-shadow);
-}
-
-.about-highlight {
-  padding: 1rem 1.25rem;
-  background: rgba(244, 201, 74, 0.12);
-  border-radius: 1rem;
-}
-
-.project-card {
-  background: var(--card);
 }
 
 .certificate-card {
@@ -465,10 +438,6 @@ a:focus {
 .site-footer a:hover,
 .site-footer a:focus {
   color: var(--accent);
-}
-
-.footer-brand {
-  letter-spacing: 0.02em;
 }
 
 .footer-title {
