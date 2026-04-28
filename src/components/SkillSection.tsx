@@ -208,14 +208,7 @@ const SKILL_GROUPS: SkillGroup[] = [
     accent: "#64748B",
     badgeIcon:
       "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg",
-    items: [
-      "Git",
-      "GitHub",
-      "Postman",
-      "Vite",
-      "Deployment (Vercel/Render)",
-      "Debugging",
-    ],
+    items: ["Git", "GitHub", "Postman", "Vite", "Deployment", "Debugging"],
   },
 ];
 
@@ -283,7 +276,7 @@ export function SkillSection() {
 
                       return (
                         <li
-                        key={skill}
+                          key={skill}
                           className="min-w-0 sm:snap-start sm:shrink-0 sm:basis-auto sm:min-w-40"
                         >
                           <div className="flex min-w-0 w-full items-center gap-2.5 rounded-2xl  px-3 py-2.5 sm:gap-3 sm:py-3">
