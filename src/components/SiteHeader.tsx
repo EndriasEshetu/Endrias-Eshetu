@@ -1,5 +1,98 @@
+import { useEffect, useRef, useState } from "react";
+import { useInView } from "../hooks/useInView";
+import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
 import { ParallaxFloat } from "./ParallaxFloat";
 import { ScrollReveal } from "./ScrollReveal";
+
+type StatCardProps = {
+  label: string;
+  target: number;
+  suffix?: string;
+  delayMs?: number;
+};
+
+function CountUpStat({
+  label,
+  target,
+  suffix = "+",
+  delayMs = 0,
+}: StatCardProps) {
+  const [ref, isInView] = useInView<HTMLDivElement>({
+    once: true,
+    threshold: 0.2,
+  });
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const [count, setCount] = useState(0);
+  const hasAnimatedRef = useRef(false);
+
+  useEffect(() => {
+    if (!isInView || hasAnimatedRef.current) {
+      return;
+    }
+
+    hasAnimatedRef.current = true;
+    let frameId = 0;
+
+    if (prefersReducedMotion) {
+      frameId = window.requestAnimationFrame(() => setCount(target));
+      return () => {
+        if (frameId) {
+          window.cancelAnimationFrame(frameId);
+        }
+      };
+    }
+
+    const durationMs = 1200;
+    let startTime = 0;
+
+    const step = (timestamp: number) => {
+      if (!startTime) {
+        startTime = timestamp;
+      }
+
+      const progress = Math.min((timestamp - startTime) / durationMs, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.round(target * eased));
+
+      if (progress < 1) {
+        frameId = window.requestAnimationFrame(step);
+      }
+    };
+
+    frameId = window.requestAnimationFrame(step);
+
+    return () => {
+      if (frameId) {
+        window.cancelAnimationFrame(frameId);
+      }
+    };
+  }, [isInView, prefersReducedMotion, target]);
+
+  return (
+    <ScrollReveal
+      variant="fade-up"
+      className="h-full"
+      style={{ transitionDelay: `${delayMs}ms` }}
+    >
+      <div
+        ref={ref}
+        className="bg-white/5 backdrop-blur-md rounded-xl p-6 shadow-md h-full"
+      >
+        <h3 className="text-4xl font-bold text-accent">
+          {count.toString().padStart(2, "0")}
+          {suffix}
+        </h3>
+        <p className="mt-2 text-sm text-muted-prose">{label}</p>
+      </div>
+    </ScrollReveal>
+  );
+}
+
+const ABOUT_STATS: StatCardProps[] = [
+  { label: "Years of Experience", target: 2, delayMs: 0 },
+  { label: "Projects Completed", target: 10, delayMs: 120 },
+  { label: "Satisfied Clients", target: 15, delayMs: 240 },
+];
 
 export function SiteHeader() {
   return (
@@ -139,6 +232,17 @@ export function SiteHeader() {
                   </a>
                 </div>
               </ScrollReveal>
+            </div>
+            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8 lg:mt-0">
+              {ABOUT_STATS.map((stat) => (
+                <CountUpStat
+                  key={stat.label}
+                  label={stat.label}
+                  target={stat.target}
+                  suffix={stat.suffix}
+                  delayMs={stat.delayMs}
+                />
+              ))}
             </div>
           </div>
         </div>
