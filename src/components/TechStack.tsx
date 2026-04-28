@@ -94,13 +94,20 @@ export function TechStack() {
                   const needsDarkBoost =
                     isDarkMode &&
                     (tech.label === "Express" || tech.label === "GitHub");
+                  const useBlackBorderInLightMode =
+                    !isDarkMode &&
+                    (tech.label === "Express" || tech.label === "GitHub");
 
                   return (
                     <div
                       key={tech.label}
                       className="w-28 h-28 rounded-2xl flex flex-col items-center justify-center p-3"
                       style={{
-                        border: `1px solid ${BRAND_COLORS[tech.label] ?? "var(--line)"}`,
+                        border: `1px solid ${
+                          useBlackBorderInLightMode
+                            ? "#000000"
+                            : BRAND_COLORS[tech.label] ?? "var(--line)"
+                        }`,
                       }}
                     >
                       <img

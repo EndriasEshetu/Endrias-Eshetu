@@ -67,9 +67,7 @@ function App() {
           <MyJourney />
           <SkillSection />
           <TechStack />
-
           <ProjectsSection />
-
           <CertificatesSection certificates={certificates} />
           <ContactSection />
         </main>

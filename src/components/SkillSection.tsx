@@ -1,17 +1,48 @@
 import { ScrollReveal } from "./ScrollReveal";
 import { useTheme } from "../contexts/ThemeContext";
+import {
+  faAnchorLock,
+  faBug,
+  faCircleNodes,
+  faCode,
+  faDatabase,
+  faRotate,
+  faServer,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 type SkillGroup = {
   title: string;
   items: string[];
   accent: string;
   badgeIcon: string;
+  badgeFaIcon?: keyof typeof byPrefixAndName.fas;
+  badgeFaColor?: string;
 };
 
 type SkillItemIcon = {
   src: string;
   alt: string;
 };
+
+type SkillItemFaIcon = {
+  faIcon: keyof typeof byPrefixAndName.fas;
+  faColor?: string;
+};
+
+type SkillItemVisual = SkillItemIcon | SkillItemFaIcon;
+
+const byPrefixAndName = {
+  fas: {
+    "anchor-lock": faAnchorLock,
+    bug: faBug,
+    "circle-nodes": faCircleNodes,
+    code: faCode,
+    database: faDatabase,
+    rotate: faRotate,
+    server: faServer,
+  },
+} as const;
 
 const SKILL_ITEM_ICONS: Record<string, SkillItemIcon> = {
   React: {
@@ -72,7 +103,7 @@ const SKILL_ITEM_ICONS: Record<string, SkillItemIcon> = {
   },
 };
 
-function getSkillIcon(skill: string): SkillItemIcon | null {
+function getSkillIcon(skill: string): SkillItemVisual | null {
   if (skill.startsWith("Deployment")) {
     return {
       src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vercel/vercel-original.svg",
@@ -89,8 +120,8 @@ function getSkillIcon(skill: string): SkillItemIcon | null {
 
   if (skill === "Authentication") {
     return {
-      src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/auth0/auth0-original.svg",
-      alt: "Authentication",
+      faIcon: "anchor-lock",
+      faColor: "#10b981",
     };
   }
 
@@ -108,17 +139,24 @@ function getSkillIcon(skill: string): SkillItemIcon | null {
     };
   }
 
-  if (skill === "Data Modeling" || skill === "CRUD Operations") {
+  if (skill === "Data Modeling") {
     return {
-      src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg",
-      alt: skill,
+      faIcon: "circle-nodes",
+      faColor: "rgb(13, 148, 136)",
+    };
+  }
+
+  if (skill === "CRUD Operations") {
+    return {
+      faIcon: "rotate",
+      faColor: "rgb(16, 185, 129)",
     };
   }
 
   if (skill === "Debugging") {
     return {
-      src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/chrome/chrome-original.svg",
-      alt: "Debugging",
+      faIcon: "bug",
+      faColor: "rgb(255, 0, 0)",
     };
   }
 
@@ -129,8 +167,9 @@ const SKILL_GROUPS: SkillGroup[] = [
   {
     title: "Frontend Development",
     accent: "#61DAFB",
-    badgeIcon:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
+    badgeIcon: "",
+    badgeFaIcon: "code",
+    badgeFaColor: "#38BDF8",
     items: [
       "React",
       "TypeScript",
@@ -144,8 +183,9 @@ const SKILL_GROUPS: SkillGroup[] = [
   {
     title: "Backend Development",
     accent: "#34D399",
-    badgeIcon:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg",
+    badgeIcon: "",
+    badgeFaIcon: "server",
+    badgeFaColor: "#6366F1",
     items: [
       "Node.js",
       "Express.js",
@@ -158,15 +198,16 @@ const SKILL_GROUPS: SkillGroup[] = [
   {
     title: "Database & Data",
     accent: "#F59E0B",
-    badgeIcon:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg",
+    badgeIcon: "",
+    badgeFaIcon: "database",
+    badgeFaColor: "#F59E0B",
     items: ["MongoDB", "Mongoose", "Data Modeling", "CRUD Operations"],
   },
   {
     title: "Tools & Workflow",
-    accent: "#C084FC",
+    accent: "#64748B",
     badgeIcon:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg",
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg",
     items: [
       "Git",
       "GitHub",
@@ -210,14 +251,22 @@ export function SkillSection() {
                   aria-hidden="true"
                 />
                 <div
-                  className="flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-50 shadow-sm sm:h-12 sm:w-12"
+                  className="flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-800 shadow-sm sm:h-12 sm:w-12"
                   aria-hidden="true"
                 >
-                  <img
-                    src={group.badgeIcon}
-                    alt=""
-                    className="h-6 w-6 object-contain sm:h-7 sm:w-7"
-                  />
+                  {group.badgeFaIcon ? (
+                    <FontAwesomeIcon
+                      icon={byPrefixAndName.fas[group.badgeFaIcon]}
+                      style={{ color: group.badgeFaColor }}
+                      className="h-6 w-6 sm:h-7 sm:w-7"
+                    />
+                  ) : (
+                    <img
+                      src={group.badgeIcon}
+                      alt=""
+                      className="h-6 w-6 object-contain sm:h-7 sm:w-7"
+                    />
+                  )}
                 </div>
                 <h3
                   className={`mt-6 text-xl font-bold sm:mt-7 sm:text-2xl ${theme === "dark" ? "text-white" : "text-slate-900"}`}
@@ -234,17 +283,25 @@ export function SkillSection() {
 
                       return (
                         <li
-                          key={skill}
+                        key={skill}
                           className="min-w-0 sm:snap-start sm:shrink-0 sm:basis-auto sm:min-w-40"
                         >
                           <div className="flex min-w-0 w-full items-center gap-2.5 rounded-2xl  px-3 py-2.5 sm:gap-3 sm:py-3">
                             <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border sm:h-9 sm:w-9 dark:border-slate-300 dark:bg-slate-200">
                               {skillIcon ? (
-                                <img
-                                  src={skillIcon.src}
-                                  alt={skillIcon.alt}
-                                  className="h-4.5 w-4.5 object-contain sm:h-5 sm:w-5"
-                                />
+                                "faIcon" in skillIcon ? (
+                                  <FontAwesomeIcon
+                                    icon={byPrefixAndName.fas[skillIcon.faIcon]}
+                                    style={{ color: skillIcon.faColor }}
+                                    className="h-4.5 w-4.5 sm:h-5 sm:w-5"
+                                  />
+                                ) : (
+                                  <img
+                                    src={skillIcon.src}
+                                    alt={skillIcon.alt}
+                                    className="h-4.5 w-4.5 object-contain sm:h-5 sm:w-5"
+                                  />
+                                )
                               ) : (
                                 <span
                                   className="h-2.5 w-2.5 rounded-full"
