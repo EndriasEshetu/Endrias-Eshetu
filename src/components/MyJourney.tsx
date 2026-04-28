@@ -100,7 +100,7 @@ export function MyJourney() {
                 <div className="absolute left-4 top-1 z-10 h-3 w-3 -translate-x-1.5 rounded-full bg-amber-500 ring-4 ring-neutral-900 md:left-1/2 md:-translate-x-1.5" />
 
                 <article
-                  className={`ml-12 max-w-none md:w-1/2 md:ml-0 ${index % 2 === 0 ? "md:pr-16 md:text-right" : "md:pl-16"}`}
+                  className={`ml-12 max-w-none md:w-1/2 md:ml-0 ${index % 2 === 0 ? "md:pr-16 md:text-left" : "md:pl-16 md:text-left"}`}
                 >
                   <p className="mb-1 text-[10px] font-bold uppercase tracking-[0.3em] text-amber-400">
                     {step.phase}
