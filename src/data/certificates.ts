@@ -4,6 +4,14 @@ import type { Certificate } from "../types/certificate";
 export const OWNER_CERTIFICATES: Certificate[] = [
   {
     id: "dev-master-course-certificate",
+    title: "MERN Stack Front To Back",
+    issuer: "O'Reilly Media",
+    date: "Apr 23, 2026",
+    link: "https://www.credly.com/badges/df3e377b-e5bb-4d22-bdbd-845b33d0cd01/public_url",
+    pdfLink: "/certificates/ORMCertificate_MERN_Stack_Front_To_Back.pdf",
+  },
+  {
+    id: "dev-master-course-certificate",
     title: "Web Dev Mastery Course",
     issuer: "O'Reilly Media",
     date: "Mar 02, 2026",
