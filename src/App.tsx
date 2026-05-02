@@ -12,6 +12,7 @@ import { SiteFooter } from "./components/SiteFooter";
 import { SiteHeader } from "./components/SiteHeader";
 import { OWNER_CERTIFICATES } from "./data/certificates";
 import "./App.css";
+import { AboutSection } from "./components/About";
 
 function App() {
   const { theme } = useTheme();
@@ -62,6 +63,7 @@ function App() {
       <div className="app-content">
         <Navbar />
         <SiteHeader />
+        <AboutSection />
 
         <main id="main">
           <MyJourney />
