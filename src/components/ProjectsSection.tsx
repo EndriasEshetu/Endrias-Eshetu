@@ -4,6 +4,7 @@ import yosephdesign1 from "../assets/yosephdesign1.png";
 import mortgageCalculator from "../assets/mortgage-calculator.png";
 import alpacaImage from "../assets/alpaca-image.png";
 import mernStack from "../assets/mern-stack.png";
+import speedTyping from "../assets/speedtyping.png";
 import nationalIdIntegration from "../assets/national-id-integration.png";
 import paymentReminderAutomation from "../assets/payment-reminder-automation.png";
 
@@ -29,6 +30,14 @@ export function ProjectsSection() {
     },
     {
       year: "2026",
+      title: "Speed Typing Game",
+      description:
+        "A dynamic speed typing practice game featuring live WPM tracking, dynamic difficulties, a sliding-window typing mode, and custom weighted scoring. Built with Next.js and React. The game offers a responsive design for seamless play across devices, engaging users with real-time feedback and a visually appealing interface.",
+      image: speedTyping,
+      liveLink: "https://endrias-speedtyping.netlify.app",
+    },
+    {
+      year: "2026",
       title: "React Financial App or Mortgage Calculator",
       description:
         "This mortgage calculator app computes loan amount from purchase price and down payment, estimates monthly payments using the standard amortization formula, and correctly handles 0% interest as a special case. It validates user inputs with inline error messages, presents a clean loan snapshot with formatted USD currency values, and works smoothly across both mobile and desktop layouts.",
@@ -40,7 +49,7 @@ export function ProjectsSection() {
       title: "National ID Integration System",
       description:
         "Designed the flow for secure identity validation, built a clean interface for data verification steps, and connected front-end and back-end workflows.",
-      image:nationalIdIntegration,
+      image: nationalIdIntegration,
       liveLink: "https://example.com/national-id-integration",
     },
     {
@@ -56,8 +65,7 @@ export function ProjectsSection() {
       title: "Payment Reminder Automation",
       description:
         "Automated scheduled reminders for payment follow-ups, tracked delivery status and alert history, and focused on reliability with clear reporting.",
-      image:
-        paymentReminderAutomation,
+      image: paymentReminderAutomation,
       liveLink: "https://example.com/payment-reminder-automation",
     },
   ];
