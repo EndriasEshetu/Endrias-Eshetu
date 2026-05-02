@@ -267,7 +267,7 @@ export function SkillSection() {
                   {group.title}
                 </h3>
                 <div
-                  className="mt-5 overflow-x-auto pb-2 touch-pan-y [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mt-6"
+                  className="projects-scroller -mx-4 overflow-y-hidden touch-pan-x mt-5 overflow-x-auto pb-2 touch-pan-y [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mt-6"
                   aria-label={group.title}
                 >
                   <ul className="grid grid-cols-2 gap-2.5 sm:flex sm:min-w-full sm:flex-nowrap sm:gap-3 sm:snap-x sm:snap-mandatory">
