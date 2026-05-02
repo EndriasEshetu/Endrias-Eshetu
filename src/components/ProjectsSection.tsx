@@ -4,6 +4,8 @@ import yosephdesign1 from "../assets/yosephdesign1.png";
 import mortgageCalculator from "../assets/mortgage-calculator.png";
 import alpacaImage from "../assets/alpaca-image.png";
 import mernStack from "../assets/mern-stack.png";
+import nationalIdIntegration from "../assets/national-id-integration.png";
+import paymentReminderAutomation from "../assets/payment-reminder-automation.png";
 
 export function ProjectsSection() {
   const [expandedProject, setExpandedProject] = useState<string | null>(null);
@@ -38,8 +40,7 @@ export function ProjectsSection() {
       title: "National ID Integration System",
       description:
         "Designed the flow for secure identity validation, built a clean interface for data verification steps, and connected front-end and back-end workflows.",
-      image:
-        "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1200&q=80",
+      image:nationalIdIntegration,
       liveLink: "https://example.com/national-id-integration",
     },
     {
@@ -56,7 +57,7 @@ export function ProjectsSection() {
       description:
         "Automated scheduled reminders for payment follow-ups, tracked delivery status and alert history, and focused on reliability with clear reporting.",
       image:
-        "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=1200&q=80",
+        paymentReminderAutomation,
       liveLink: "https://example.com/payment-reminder-automation",
     },
   ];
