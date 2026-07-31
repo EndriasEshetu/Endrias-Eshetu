@@ -7,6 +7,7 @@ import mernStack from "../assets/mern-stack.png";
 import speedTyping from "../assets/speedtyping.png";
 import nationalIdIntegration from "../assets/national-id-integration.png";
 import paymentReminderAutomation from "../assets/payment-reminder-automation.png";
+import healthcareManagement from "../assets/healthcare.png";
 
 export function ProjectsSection() {
   const [expandedProject, setExpandedProject] = useState<string | null>(null);
@@ -19,6 +20,14 @@ export function ProjectsSection() {
         "Building an e-commerce style website for architectural design publishing and discovery. Includes posting interior and other design types with detailed specifications. Supports ordering design packages, project browsing, and admin-level content management.",
       image: yosephdesign1,
       liveLink: "https://yosephdesign.vercel.app",
+    },
+    {
+      year: "2026",
+      title: "Smart Healthcare Management Platform",
+      description:
+        "Built a modern hospital management system with secure JWT and bcrypt authentication, RBAC for Admin, Doctor, and Patient roles, protected routes, and persistent session handling via Zustand. Admins can manage users and monitor system health, doctors can manage availability, appointments, and patient records, and patients can book appointments, review medical history, and update their profile. Core features include real-time appointment tracking, digital medical records, prescription management, automated reminders with Trigger.dev, and a responsive UI built with Vite and Tailwind CSS.",
+      image: healthcareManagement,
+      liveLink: "https://hospital-management-system-endrias.vercel.app/",
     },
     {
       year: "2026",
