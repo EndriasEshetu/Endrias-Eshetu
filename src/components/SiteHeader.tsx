@@ -8,58 +8,16 @@ export function SiteHeader() {
       <header className="site-header" id="top">
         <section className="section-alt hero" aria-labelledby="hero-title">
           <div className="mx-auto w-full max-w-6xl min-[1440px]:max-w-360 px-4 sm:px-6 lg:px-8">
-            <div className="grid items-center gap-5 lg:grid-cols-3 lg:gap-x-10 lg:gap-y-0">
-              <div className="order-1 min-w-0 lg:col-span-2 lg:col-start-1 lg:row-start-1">
+            <div className="grid items-center gap-8 lg:grid-cols-3 lg:gap-x-10">
+              <div className="hero-intro-block order-2 min-w-0 lg:order-1 lg:col-span-2">
                 <h1
-                  className="hero-title text-2xl font-bold md:text-4xl"
                   id="hero-title"
+                  className="text-2xl font-medium leading-relaxed text-muted-prose sm:text-3xl md:text-4xl"
                 >
-                  Building reliable, user-focused web products from front-end to
-                  back-end.
-                </h1>
-              </div>
-
-              <div className="order-2 mx-auto w-full self-center sm:w-11/12 md:w-9/12 lg:col-span-1 lg:col-start-3 lg:row-span-2 lg:row-start-1 lg:w-full">
-                <div className="hero-card">
-                  <div className="hero-card-inner">
-                    <div className="relative">
-                      <img
-                        src="/professional-image.webp"
-                        alt="Photo of Endrias Eshetu working on a laptop"
-                        loading="eager"
-                        fetchPriority="high"
-                        decoding="async"
-                        width={700}
-                        height={900}
-                        className="mt-4 block h-auto w-full rounded-3xl object-cover lg:mt-0"
-                      />
-
-                      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 rounded-b-3xl bg-linear-to-t from-black/35 via-black/10 to-transparent" />
-
-                      <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 md:bottom-5 md:left-2">
-                        <div className="rounded-2xl bg-black/40 px-3 py-2 text-white sm:px-4 sm:py-3">
-                          <p className="mb-1 text-base font-semibold leading-tight sm:text-lg md:text-xl">
-                            Endrias Eshetu
-                          </p>
-                          <p className="m-0 text-sm text-white/85 sm:text-sm md:text-base">
-                            Full-Stack Developer and
-                            <span className="block">
-                              Computer Science Engineer
-                            </span>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="hero-intro-block order-3 min-w-0 lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:mt-0">
-                <p className="text-3xl text-muted-prose">
-                  Based in Adama (often in Hawasa), I build responsive
+                  Based in Addis Ababa, Ethiopia, I build responsive
                   interfaces and dependable back-end systems with clean,
                   maintainable code.
-                </p>
+                </h1>
 
                 <div className="mt-6 flex flex-wrap gap-3">
                   <a
@@ -91,6 +49,41 @@ export function SiteHeader() {
                     <p className="text-muted-prose">
                       Internships and collaborations
                     </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="hero-card-col order-1 mx-auto w-full max-w-sm sm:max-w-md lg:order-2 lg:col-span-1 lg:max-w-none">
+                <div className="hero-card">
+                  <div className="hero-card-inner">
+                    <div className="relative overflow-hidden rounded-3xl shadow-xl">
+                      <img
+                        src="/ephoto.png"
+                        alt="Photo of Endrias Eshetu"
+                        loading="eager"
+                        fetchPriority="high"
+                        decoding="async"
+                        width={1085}
+                        height={1450}
+                        className="block h-auto w-full object-cover"
+                      />
+
+                      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-linear-to-t from-black/60 via-black/20 to-transparent" />
+
+                      <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 md:bottom-5 md:left-5">
+                        <div className="rounded-2xl border border-white/10 bg-black/50 px-3.5 py-2.5 text-white shadow-lg backdrop-blur-md sm:px-4 sm:py-3">
+                          <p className="mb-0.5 text-base font-semibold leading-tight sm:text-lg md:text-xl">
+                            Endrias Eshetu
+                          </p>
+                          <p className="m-0 text-xs text-white/90 sm:text-sm">
+                            Full-Stack Developer and
+                            <span className="block">
+                              Computer Science Engineer
+                            </span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
