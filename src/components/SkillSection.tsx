@@ -262,7 +262,7 @@ export function SkillSection() {
                   )}
                 </div>
                 <h3
-                  className={`mt-6 text-xl font-bold sm:mt-7 sm:text-2xl ${theme === "dark" ? "text-white" : "text-slate-900"}`}
+                  className={`mt-6 text-center text-xl font-bold sm:mt-7 sm:text-2xl ${theme === "dark" ? "text-white" : "text-slate-900"}`}
                 >
                   {group.title}
                 </h3>
