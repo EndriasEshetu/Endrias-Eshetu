@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { ScrollReveal } from "./ScrollReveal";
 import { useTheme } from "../contexts/ThemeContext";
 
@@ -47,6 +48,55 @@ export function MyJourney() {
   const titleClass = isLight ? "text-slate-900" : "text-white";
   const bodyClass = isLight ? "text-slate-700" : "text-slate-300";
 
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const [progress, setProgress] = useState(0);
+  const [arrowTop, setArrowTop] = useState(0);
+
+  useEffect(() => {
+    let ticking = false;
+
+    const updateScroll = () => {
+      const el = timelineRef.current;
+      if (!el) {
+        ticking = false;
+        return;
+      }
+
+      const rect = el.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      const triggerY = viewportHeight * 0.45;
+      const totalHeight = rect.height;
+
+      if (totalHeight > 0) {
+        const currentScroll = triggerY - rect.top;
+        const currentProgress = Math.max(
+          0,
+          Math.min(1, currentScroll / totalHeight),
+        );
+        setProgress(currentProgress);
+        setArrowTop(currentProgress * totalHeight);
+      }
+
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(updateScroll);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    updateScroll();
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+
   return (
     <section
       className={`relative scroll-mt-24 overflow-hidden bg-(--section-alt-bg) border-y border-(--line) py-20 md:py-28 ${sectionTextClass}`}
@@ -78,14 +128,54 @@ export function MyJourney() {
         </ScrollReveal>
 
         <div
+          ref={timelineRef}
           className="relative z-10 mx-auto max-w-4xl"
           style={{ minHeight: 200 }}
           aria-label="Timeline of my learning and work journey"
         >
+          {/* Base timeline line */}
           <span
             className="absolute left-4 top-0 bottom-0 w-px bg-neutral-700 md:left-1/2 md:-translate-x-px"
             aria-hidden="true"
           />
+
+          {/* Active progress line that fills down on scroll */}
+          <div
+            className="absolute left-4 top-0 w-0.5 bg-gradient-to-b from-amber-500 via-amber-400 to-amber-300 md:left-1/2 md:-translate-x-px shadow-[0_0_8px_rgba(245,158,11,0.6)] pointer-events-none transition-opacity duration-300"
+            style={{
+              height: `${arrowTop}px`,
+              opacity: progress > 0 ? 1 : 0,
+            }}
+            aria-hidden="true"
+          />
+
+          {/* Traveling arrow indicator */}
+          <div
+            className={`absolute left-4 md:left-1/2 z-20 flex items-center justify-center w-7 h-7 rounded-full border-2 shadow-lg pointer-events-none -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300 ${
+              isLight
+                ? "bg-white border-amber-500 text-amber-600 shadow-amber-500/30"
+                : "bg-neutral-950 border-amber-400 text-amber-400 shadow-[0_0_14px_rgba(245,158,11,0.7)]"
+            }`}
+            style={{
+              top: `${arrowTop}px`,
+              opacity: progress > 0 ? 1 : 0,
+            }}
+            aria-hidden="true"
+          >
+            <svg
+              className="w-3.5 h-3.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth="2.5"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 4v16m0 0l-6-6m6 6l6-6"
+              />
+            </svg>
+          </div>
 
           {JOURNEY_STEPS.map((step, index) => {
             const sideClass =
