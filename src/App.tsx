@@ -13,6 +13,7 @@ import { SiteHeader } from "./components/SiteHeader";
 import { OWNER_CERTIFICATES } from "./data/certificates";
 import "./App.css";
 import { AboutSection } from "./components/About";
+import { FloatingContactButton } from "./components/FloatingContactButton";
 
 function App() {
   const { theme } = useTheme();
@@ -75,6 +76,7 @@ function App() {
         </main>
 
         <SiteFooter currentYear={currentYear} />
+        <FloatingContactButton />
       </div>
     </div>
   );
