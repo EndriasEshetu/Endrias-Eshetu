@@ -69,7 +69,7 @@ const CountUpStat = memo(function CountUpStat({
       className="h-full"
       style={{ transitionDelay: `${delayMs}ms` }}
     >
-      <div ref={ref} className="bg-white/5 rounded-xl p-6 shadow-md h-full">
+      <div ref={ref} className="bg-white/5 rounded-xl p-6 shadow-md h-full text-center">
         <h3 className="text-4xl font-bold text-accent">
           {count.toString().padStart(2, "0")}
           {suffix}
@@ -85,7 +85,7 @@ export function AboutSection() {
     <section className="section" id="about" aria-labelledby="about-title">
       <div className="mx-auto w-full max-w-6xl min-[1440px]:max-w-360 px-4 sm:px-6 lg:px-8">
         <div className="grid items-center gap-6 lg:grid-cols-12">
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-5 text-center sm:text-left">
             <ScrollReveal variant="fade-up">
               <h2 className="section-title" id="about-title">
                 About me
@@ -101,7 +101,7 @@ export function AboutSection() {
             </ScrollReveal>
 
             <ScrollReveal variant="fade-up" className="mt-4 block">
-              <div className="flex flex-wrap gap-3">
+              <div className="flex justify-center gap-3">
                 <a
                   className="btn-accent inline-flex items-center justify-center rounded-lg p-3 font-medium"
                   href="#contact"
@@ -119,7 +119,7 @@ export function AboutSection() {
             </ScrollReveal>
           </div>
 
-          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8 lg:mt-0">
+          <div className="lg:col-span-7 grid grid-cols-3 gap-4 mt-8 lg:mt-0">
             {ABOUT_STATS.map((stat) => (
               <CountUpStat key={stat.label} {...stat} />
             ))}

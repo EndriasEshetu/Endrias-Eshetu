@@ -140,16 +140,15 @@ export function ContactSection() {
                 Let's connect
               </h2>
               <p className="text-(--metric-label)">
-                Reach out for internships, collaboration, or project work. I
-                respond as quickly as possible.
+                Whether you have a remote engineering role, an on-site position in Ethiopia, or a freelance project, feel free to reach out. I respond as quickly as possible.
               </p>
               <div className="contact-details mt-2">
                 <p className="mb-1">Email</p>
                 <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
                 <p className="mb-1 mt-3">Phone</p>
                 <a href={`tel:${CONTACT_PHONE}`}>{CONTACT_PHONE_DISPLAY}</a>
-                <p className="mb-1 mt-3">Location</p>
-                <p className="text-(--ink)">Addis Ababa, Ethiopia</p>
+                <p className="mb-1 mt-3">Location & Work Mode</p>
+                <p className="text-(--ink)">Addis Ababa, Ethiopia · Remote & On-site</p>
               </div>
             </div>
           </ScrollReveal>
@@ -224,6 +223,8 @@ export function ContactSection() {
                       <option value="" disabled>
                         Choose one
                       </option>
+                      <option value="job">Full-time / Contract Opportunity</option>
+                      <option value="internship">Internship</option>
                       <option value="fullstack">Full-stack project</option>
                       <option value="automation">Automation</option>
                       <option value="networking">Networking</option>

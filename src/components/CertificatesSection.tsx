@@ -105,7 +105,7 @@ export function CertificatesSection({
       <div className="mx-auto w-full max-w-6xl min-[1440px]:max-w-360 px-4 sm:px-6 lg:px-8">
         <div className="space-y-8">
           <ScrollReveal variant="fade-up">
-            <div>
+            <div className="text-center">
               <h2 className="section-title" id="certificates-title">
                 Certificates
               </h2>

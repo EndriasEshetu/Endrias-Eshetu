@@ -5,6 +5,7 @@ import mortgageCalculator from "../assets/mortgage-calculator.png";
 import alpacaImage from "../assets/alpaca-image.png";
 import mernStack from "../assets/mern-stack.png";
 import speedTyping from "../assets/speedtyping.png";
+import letter from "../assets/letter.png";
 import nationalIdIntegration from "../assets/national-id-integration.png";
 import paymentReminderAutomation from "../assets/payment-reminder-automation.png";
 import healthcareManagement from "../assets/healthcare.png";
@@ -15,9 +16,17 @@ export function ProjectsSection() {
   const projects = [
     {
       year: "2026",
+      title: "Letter Management System",
+      description:
+        "An enterprise workflow platform for the Sidama Innovation and Technology Agency (SITA), digitizing official letter registration, approval routing, document archival, and role-based audit tracking",
+      image: letter,
+      liveLink: "https://letter-management-system.vercel.app",
+    },
+    {
+      year: "2026",
       title: "Architectural Design Posting Website",
       description:
-        "Building an e-commerce style website for architectural design publishing and discovery. Includes posting interior and other design types with detailed specifications. Supports ordering design packages, project browsing, and admin-level content management.",
+        "An e-commerce platform for discovering and ordering architectural design packages, featuring specification posts, project browsing, and admin management.",
       image: yosephdesign1,
       liveLink: "https://yosephdesign.vercel.app",
     },
@@ -25,7 +34,7 @@ export function ProjectsSection() {
       year: "2026",
       title: "Smart Healthcare Management Platform",
       description:
-        "Built a modern hospital management system with secure JWT and bcrypt authentication, RBAC for Admin, Doctor, and Patient roles, protected routes, and persistent session handling via Zustand. Admins can manage users and monitor system health, doctors can manage availability, appointments, and patient records, and patients can book appointments, review medical history, and update their profile. Core features include real-time appointment tracking, digital medical records, prescription management, automated reminders with Trigger.dev, and a responsive UI built with Vite and Tailwind CSS.",
+        "A full-stack hospital management system with role-based access for admins, doctors, and patients. Features real-time appointment scheduling, digital medical records, prescription management, and automated reminders.",
       image: healthcareManagement,
       liveLink: "https://hospital-management-system-endrias.vercel.app/",
     },
@@ -33,7 +42,7 @@ export function ProjectsSection() {
       year: "2026",
       title: "MERN Dev Community Platform",
       description:
-        "A full-stack MERN application designed to foster a vibrant community of developers. It features user authentication, profile management, and a dynamic feed for sharing projects and insights. The platform encourages collaboration through interactive features like commenting and liking posts, creating a supportive environment for learning and growth.",
+        "A full-stack developer community platform featuring authentication, user profiles, project feeds, and interactive discussions.",
       image: mernStack,
       liveLink: "https://endrias-mern-stack.onrender.com",
     },
@@ -41,7 +50,7 @@ export function ProjectsSection() {
       year: "2026",
       title: "Speed Typing Game",
       description:
-        "A dynamic speed typing practice game featuring live WPM tracking, dynamic difficulties, a sliding-window typing mode, and custom weighted scoring. Built with Next.js and React. The game offers a responsive design for seamless play across devices, engaging users with real-time feedback and a visually appealing interface.",
+        "A typing practice game featuring real-time WPM tracking, adaptive difficulty modes, sliding-window input, and custom weighted scoring.",
       image: speedTyping,
       liveLink: "https://endrias-speedtyping.netlify.app",
     },
@@ -49,7 +58,7 @@ export function ProjectsSection() {
       year: "2026",
       title: "React Financial App or Mortgage Calculator",
       description:
-        "This mortgage calculator app computes loan amount from purchase price and down payment, estimates monthly payments using the standard amortization formula, and correctly handles 0% interest as a special case. It validates user inputs with inline error messages, presents a clean loan snapshot with formatted USD currency values, and works smoothly across both mobile and desktop layouts.",
+        "A financial mortgage calculator that computes monthly payments with amortization schedules, real-time input validation, and clear loan breakdowns.",
       image: mortgageCalculator,
       liveLink: "https://endrias-mortgage-calculator.netlify.app",
     },
@@ -65,7 +74,7 @@ export function ProjectsSection() {
       year: "2026",
       title: "Alpaca Image Generator",
       description:
-        "This Alpaca Image Generator was built as a deep practice project focused on detailed DOM manipulation, clean and readable JavaScript, manually reusable functions, and component-like UI behavior patterns in vanilla JS. It is developed with HTML5, CSS3, and JavaScript only, without frameworks or UI libraries, and includes full alpaca customization by part and style, a category/style selection panel, a randomize feature to generate a complete random alpaca, and a download option to export the generated image as PNG.",
+        "A vanilla JavaScript image customizer featuring layered asset styling, random avatar generation, and PNG export without external frameworks.",
       image: alpacaImage,
       liveLink: "https://endrias-alpaca-image-generator.vercel.app",
     },
@@ -82,9 +91,9 @@ export function ProjectsSection() {
   return (
     <section className="section" id="project" aria-labelledby="project-title">
       <div className="mx-auto w-full max-w-6xl min-[1440px]:max-w-360 overflow-x-hidden px-4 sm:px-6 lg:px-8">
-        <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
+        <div className="mb-4 flex flex-wrap items-end justify-center gap-3">
           <ScrollReveal variant="slide-left" className="min-w-0">
-            <div>
+            <div className="text-center">
               <h2 className="section-title" id="project-title">
                 Projects &amp; Experience
               </h2>
@@ -93,14 +102,7 @@ export function ProjectsSection() {
               </p>
             </div>
           </ScrollReveal>
-          <ScrollReveal variant="slide-left" className="shrink-0">
-            <a
-              className="inline-flex items-center justify-center rounded-lg border border-(--accent) px-5 py-2.5 font-medium text-(--accent)"
-              href="#contact"
-            >
-              Request CV
-            </a>
-          </ScrollReveal>
+
         </div>
         <div className="projects-scroller mt-6 -mx-4 overflow-x-auto overflow-y-hidden touch-pan-x px-4 pb-2 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
           <div className="mb-4 flex items-stretch gap-4 snap-x snap-mandatory overflow-y-hidden">
@@ -139,11 +141,11 @@ export function ProjectsSection() {
                       expandedProject === project.title
                         ? undefined
                         : {
-                            display: "-webkit-box",
-                            WebkitLineClamp: 2,
-                            WebkitBoxOrient: "vertical",
-                            overflow: "hidden",
-                          }
+                          display: "-webkit-box",
+                          WebkitLineClamp: 2,
+                          WebkitBoxOrient: "vertical",
+                          overflow: "hidden",
+                        }
                     }
                   >
                     {project.description}

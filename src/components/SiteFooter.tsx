@@ -96,7 +96,7 @@ export function SiteFooter({ currentYear }: SiteFooterProps) {
                     <FontAwesomeIcon
                       icon={
                         byPrefixAndName.fab[
-                          social.icon as keyof typeof byPrefixAndName.fab
+                        social.icon as keyof typeof byPrefixAndName.fab
                         ]
                       }
                       className="h-5 w-5"

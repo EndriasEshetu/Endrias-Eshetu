@@ -12,14 +12,14 @@ export function SiteHeader() {
               <div className="hero-intro-block order-2 min-w-0 lg:order-1 lg:col-span-2">
                 <h1
                   id="hero-title"
-                  className="text-2xl font-medium leading-relaxed text-muted-prose sm:text-3xl md:text-4xl"
+                  className="text-2xl text-center sm:text-left font-medium leading-relaxed text-muted-prose sm:text-3xl md:text-4xl"
                 >
                   Based in Addis Ababa, Ethiopia, I build responsive
                   interfaces and dependable back-end systems with clean,
                   maintainable code.
                 </h1>
 
-                <div className="mt-6 flex flex-wrap gap-3">
+                <div className="mt-6 flex justify-center gap-3">
                   <a
                     className="btn-accent inline-flex items-center justify-center rounded-lg px-6 py-3 font-medium"
                     href="/certificates/Endrias%20Eshetu%20CV%20Resume.pdf"
@@ -47,7 +47,7 @@ export function SiteHeader() {
                   <div>
                     <p className="metric-value">Open</p>
                     <p className="text-muted-prose">
-                      Internships and collaborations
+                      Junior works and collaborations
                     </p>
                   </div>
                 </div>
