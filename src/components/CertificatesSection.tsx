@@ -110,7 +110,7 @@ export function CertificatesSection({
                 Certificates
               </h2>
               <p className="text-muted-prose">
-                Curated credentials published by the site owner.
+                Professional certifications and verified credentials validating my technical expertise.
               </p>
             </div>
           </ScrollReveal>

@@ -12,25 +12,25 @@ const JOURNEY_STEPS: JourneyStep[] = [
     phase: "FOUNDATION",
     title: "Academic Studies",
     description:
-      "I built my foundation in Computer Science and Engineering at ASTU, focusing on programming, data structures, algorithms, and core software principles.",
+      "I built my foundation in Computer Science and Engineering at ASTU, mastering programming, data structures, algorithms, object-oriented design and core software engineering principles.",
   },
   {
     phase: "GROWTH",
     title: "Skill Development & Exploration",
     description:
-      "I strengthened my skills through hands-on projects in web development, working with JavaScript, React, Node.js, and databases.",
+      "I strengthened my skills through academic fundamentals into modern web development, working hands-on with JavaScript, TypeScript, React, Node.js, and relational and NoSQL databases.",
   },
   {
     phase: "PROJECTS",
-    title: "Practical Experience",
+    title: "Real-World Systems",
     description:
-      "I developed full-stack applications, including a MERN developer platform, a mortgage calculator, and Yoseph Design. These projects improved my understanding of system design, APIs, and user experience",
+      "I developed production-grade applications—including an enterprise letter workflow system for SITA, a healthcare platform with RBAC, and developer community platforms.",
   },
   {
     phase: "PRESENT",
-    title: "Focused Development",
+    title: "Production-Ready Engineering",
     description:
-      "I’m currently focusing on full-stack (MERN) development, building scalable applications, and writing clean, maintainable code",
+      "Currently architecting full-stack web applications with clean, maintainable architecture, secure authentication, intuitive UX, and reliable cloud deployment.",
   },
   {
     phase: "FUTURE",

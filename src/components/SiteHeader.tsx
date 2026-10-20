@@ -14,9 +14,7 @@ export function SiteHeader() {
                   id="hero-title"
                   className="text-2xl text-center sm:text-left font-medium leading-relaxed text-muted-prose sm:text-3xl md:text-4xl"
                 >
-                  Based in Addis Ababa, Ethiopia, I build responsive
-                  interfaces and dependable back-end systems with clean,
-                  maintainable code.
+                  Full-Stack Developer based in Ethiopia, open to remote and on-site opportunities delivering complete digital products from UI design to scalable back-ends.
                 </h1>
 
                 <div className="mt-6 flex justify-center gap-3">
@@ -47,7 +45,7 @@ export function SiteHeader() {
                   <div>
                     <p className="metric-value">Open</p>
                     <p className="text-muted-prose">
-                      Junior works and collaborations
+                      Remote & on-site opportunities
                     </p>
                   </div>
                 </div>

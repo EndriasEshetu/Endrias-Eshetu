@@ -98,7 +98,7 @@ export function ProjectsSection() {
                 Projects &amp; Experience
               </h2>
               <p className="m-0 text-muted-prose">
-                Academic and automation projects I have delivered.
+                A selection of full-stack web applications, enterprise systems, and tools I have built.
               </p>
             </div>
           </ScrollReveal>
