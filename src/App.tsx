@@ -14,6 +14,7 @@ import { OWNER_CERTIFICATES } from "./data/certificates";
 import "./App.css";
 import { AboutSection } from "./components/About";
 import { FloatingContactButton } from "./components/FloatingContactButton";
+import { ChatbotLauncher } from "./components/chatbot/ChatbotLauncher";
 
 function App() {
   const { theme } = useTheme();
@@ -77,6 +78,7 @@ function App() {
 
         <SiteFooter currentYear={currentYear} />
         <FloatingContactButton />
+        <ChatbotLauncher />
       </div>
     </div>
   );
