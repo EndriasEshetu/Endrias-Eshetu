@@ -97,7 +97,7 @@ export function AboutSection() {
 
             <ScrollReveal variant="fade-up" className="mt-3 block">
               <p className="text-muted-prose">
-                I'm Endrias, a full-stack developerand computer science engineer
+                I'm Endrias, a full-stack developer and computer science engineer
                 helping teams and clients build complete web solutions from
                 planning and responsive UI to secure back-end systems and
                 deployment.

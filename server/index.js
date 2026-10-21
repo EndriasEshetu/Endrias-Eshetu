@@ -6,12 +6,19 @@ import { randomUUID } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import rateLimit from "express-rate-limit";
+import buildSystemPrompt from "./config/chatbotPrompt.js";
+import { GoogleGenAI } from "@google/genai";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const envPath = path.join(__dirname, "..", ".env");
 
 dotenv.config({ path: envPath });
+
+const ai = new GoogleGenAI({
+  apiKey: process.env.GEMINI_API_KEY,
+});
 
 const app = express();
 const port = Number(process.env.PORT) || 4000;
@@ -69,6 +76,43 @@ app.use(
 );
 app.use(cors({ origin: corsOrigin }));
 app.use(express.json({ limit: "100kb" }));
+
+const chatLimiter = rateLimit({
+  windowMs: Number(process.env.CHATBOT_RATE_LIMIT_WINDOW_MS) || 600000,
+  max: Number(process.env.CHATBOT_RATE_LIMIT_MAX) || 20,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    ok: false,
+    message: "Too many chatbot requests. Please try again later.",
+  },
+});
+
+function validateChatPayload(payload) {
+  const message =
+    typeof payload?.message === "string" ? payload.message.trim() : "";
+
+  const history = Array.isArray(payload?.history) ? payload.history : [];
+
+  if (!message || message.length < 1 || message.length > 500) {
+    return {
+      error: "Message must be between 1 and 500 characters.",
+    };
+  }
+
+  if (history.length > 6) {
+    return {
+      error: "Conversation history is too long.",
+    };
+  }
+
+  return {
+    data: {
+      message,
+      history: history.slice(-6),
+    },
+  };
+}
 
 const topics = new Set(["fullstack", "automation", "networking", "other"]);
 
@@ -187,6 +231,88 @@ app.post("/api/contact", async (req, res) => {
     return res.status(201).json({
       ok: true,
       message: "Message saved but email delivery failed.",
+    });
+  }
+});
+
+app.post("/api/chat", chatLimiter, async (req, res) => {
+  const result = validateChatPayload(req.body);
+
+  if (result.error) {
+    return res.status(400).json({
+      ok: false,
+      message: result.error,
+    });
+  }
+
+  const { message, history } = result.data;
+
+  try {
+    
+const contents = [
+  ...history.map((item) => ({
+    role: item.role,
+    parts: [{ text: item.content }],
+  })),
+  {
+    role: "user",
+    parts: [{ text: message }],
+  },
+];
+
+
+    const candidateModels = [
+      process.env.GEMINI_MODEL,
+      "gemini-3-flash-preview",
+      "gemini-3.8-flash",
+      "gemini-flash-latest",
+    ].filter(Boolean);
+
+    let response = null;
+    let lastError = null;
+
+    for (const model of candidateModels) {
+      try {
+        response = await ai.models.generateContent({
+          model,
+          config: {
+            systemInstruction: buildSystemPrompt(),
+          },
+          contents,
+        });
+        if (response?.text) break;
+      } catch (err) {
+        lastError = err;
+        console.warn(
+          `Model ${model} failed (status: ${err?.status ?? "unknown"}), trying fallback:`,
+          err?.message || err,
+        );  
+      }
+    }
+
+    if (!response && lastError) {
+      throw lastError;
+    }
+
+    const reply = response?.text?.trim();
+
+    if (!reply) {
+      return res.status(502).json({
+        ok: false,
+        message: "The chatbot did not return a response.",
+      });
+    }
+
+    return res.json({
+      ok: true,
+      reply,
+    });
+  } catch (err) {
+    console.error("Chatbot request failed:", err);
+
+    return res.status(500).json({
+      ok: false,
+      message: "Sorry, the chatbot is temporarily unavailable.",
     });
   }
 });

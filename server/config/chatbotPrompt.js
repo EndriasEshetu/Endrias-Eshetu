@@ -1,4 +1,4 @@
-const chatbotContext = require("./chatbotContext");
+import chatbotContext from "./chatbotContext.js";
 
 const buildSystemPrompt = () => {
   return `
@@ -43,4 +43,4 @@ RESPONSE RULES:
 `;
 };
 
-module.exports = buildSystemPrompt;
+export default buildSystemPrompt;
