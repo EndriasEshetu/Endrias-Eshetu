@@ -251,7 +251,7 @@ app.post("/api/chat", chatLimiter, async (req, res) => {
     
 const contents = [
   ...history.map((item) => ({
-    role: item.role,
+    role: item.role === "assistant" ? "model" : "user",
     parts: [{ text: item.content }],
   })),
   {
