@@ -66,7 +66,8 @@ export function ProjectsSection() {
         "A financial mortgage calculator that computes monthly payments with amortization schedules, real-time input validation, and clear loan breakdowns.",
       image: mortgageCalculator,
       liveLink: "https://endrias-mortgage-calculator.netlify.app",
-      githubLink: "https://github.com/EndriasEshetu/Mortgage-calculator-web-app",
+      githubLink:
+        "https://github.com/EndriasEshetu/Mortgage-calculator-web-app",
     },
     {
       year: "2025",
@@ -107,11 +108,11 @@ export function ProjectsSection() {
                 Projects &amp; Experience
               </h2>
               <p className="m-0 text-muted-prose">
-                A selection of full-stack web applications, enterprise systems, and tools I have built.
+                A selection of full-stack web applications, enterprise systems,
+                and tools I have built.
               </p>
             </div>
           </ScrollReveal>
-
         </div>
         <div className="projects-scroller mt-6 -mx-4 overflow-x-auto overflow-y-hidden touch-pan-x px-4 pb-2 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
           <div className="mb-4 flex items-stretch gap-4 snap-x snap-mandatory overflow-y-hidden">
@@ -150,11 +151,11 @@ export function ProjectsSection() {
                       expandedProject === project.title
                         ? undefined
                         : {
-                          display: "-webkit-box",
-                          WebkitLineClamp: 2,
-                          WebkitBoxOrient: "vertical",
-                          overflow: "hidden",
-                        }
+                            display: "-webkit-box",
+                            WebkitLineClamp: 2,
+                            WebkitBoxOrient: "vertical",
+                            overflow: "hidden",
+                          }
                     }
                   >
                     {project.description}

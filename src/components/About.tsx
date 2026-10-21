@@ -69,7 +69,10 @@ const CountUpStat = memo(function CountUpStat({
       className="h-full"
       style={{ transitionDelay: `${delayMs}ms` }}
     >
-      <div ref={ref} className="bg-white/5 rounded-xl p-6 shadow-md h-full text-center">
+      <div
+        ref={ref}
+        className="bg-white/5 rounded-xl p-6 shadow-md h-full text-center"
+      >
         <h3 className="text-4xl font-bold text-accent">
           {count.toString().padStart(2, "0")}
           {suffix}
@@ -94,7 +97,10 @@ export function AboutSection() {
 
             <ScrollReveal variant="fade-up" className="mt-3 block">
               <p className="text-muted-prose">
-                I'm Endrias, a full-stack developer helping teams and clients build complete web solutions from planning and responsive UI to secure back-end systems and deployment.
+                I'm Endrias, a full-stack developerand computer science engineer
+                helping teams and clients build complete web solutions from
+                planning and responsive UI to secure back-end systems and
+                deployment.
               </p>
             </ScrollReveal>
 
