@@ -18,7 +18,8 @@ export const ChatbotWindow = forwardRef<HTMLElement, ChatbotWindowProps>(
         role: "assistant",
         content:
           "Hi! I'm Endrias's AI assistant. Ask me about his skills, projects, experience, or technologies.",
-      },
+        timestamp: Date.now(),
+      }
     ]);
 
     const [input, setInput] = useState("");
@@ -54,6 +55,7 @@ export const ChatbotWindow = forwardRef<HTMLElement, ChatbotWindowProps>(
         id: crypto.randomUUID(),
         role: "user",
         content,
+        timestamp: Date.now(),
       };
 
       const nextMessages = [...messages, userMessage];
@@ -78,6 +80,7 @@ export const ChatbotWindow = forwardRef<HTMLElement, ChatbotWindowProps>(
             id: crypto.randomUUID(),
             role: "assistant",
             content: response.reply,
+            timestamp: Date.now(),
           };
 
           setMessages((current) => [...current, assistantMessage]);
@@ -90,6 +93,7 @@ export const ChatbotWindow = forwardRef<HTMLElement, ChatbotWindowProps>(
             error instanceof Error
               ? error.message
               : "Sorry, I couldn't process your message.",
+          timestamp: Date.now(),
         };
 
         setMessages((current) => [...current, errorMessage]);
