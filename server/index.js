@@ -190,6 +190,12 @@ Received: ${entry.createdAt}
   });
 }
 
+function isRetryableGeminiError(err) {
+  const status = err?.status ?? err?.code;
+
+  return status === 500 || status === 502 || status === 503 || status === 504;
+}
+
 app.get("/api/health", (_req, res) => {
   res.json({ ok: true, service: "contact-api" });
 });
@@ -270,29 +276,51 @@ const contents = [
 
     let response = null;
     let lastError = null;
+    let lastErrorWasRetryable = false;
 
     for (const model of candidateModels) {
       try {
         response = await ai.models.generateContent({
-          model,
-          config: {
-            systemInstruction: buildSystemPrompt(),
-          },
-          contents,
-        });
-        if (response?.text) break;
-      } catch (err) {
+  model,
+  config: {
+    systemInstruction: buildSystemPrompt(),
+  },
+  contents,
+});
+
+if (response?.text) {
+  console.log(`[chatbot] Model ${model} responded successfully.`);
+  break;
+}} catch (err) {
         lastError = err;
+lastErrorWasRetryable = isRetryableGeminiError(err);
+
+if (!lastErrorWasRetryable) {
+          console.error(
+            `Model ${model} failed with a non-retryable error:`,
+            err?.message || err,
+          );
+          break;
+        }
+
         console.warn(
-          `Model ${model} failed (status: ${err?.status ?? "unknown"}), trying fallback:`,
-          err?.message || err,
-        );  
+          `Model ${model} failed with a retryable error (status: ${
+            err?.status ?? err?.code ?? "unknown"
+          }), trying fallback.`,
+        );
       }
     }
 
-    if (!response && lastError) {
-      throw lastError;
-    }
+ if (!response && lastError) {
+  if (lastErrorWasRetryable) {
+    return res.status(503).json({
+      ok: false,
+      message: "The AI service is temporarily unavailable. Please try again later.",
+    });
+  }
+
+  throw lastError;
+}
 
     const reply = response?.text?.trim();
 
@@ -309,6 +337,14 @@ const contents = [
     });
   } catch (err) {
     console.error("Chatbot request failed:", err);
+
+    if (err?.status === 429 || err?.code === 429) {
+      return res.status(503).json({
+        ok: false,
+        message:
+          "The chatbot is temporarily unavailable because its AI service quota has been reached. Please try again later.",
+      });
+    }
 
     return res.status(500).json({
       ok: false,
