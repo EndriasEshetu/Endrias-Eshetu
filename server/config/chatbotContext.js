@@ -10,7 +10,7 @@ const chatbotContext = {
     name: "Endrias Eshetu",
     title: "Full-Stack Developer and Computer Science Engineer",
     location: "Addis Ababa, Ethiopia",
-    education: "BSc in Computer Science and Engineering",
+    education: "BSc in Computer Science and Engineering at Adama Science and Technology University ",
     bio: "I'm a passionate full-stack developer and computer science engineer with a strong background in building scalable web applications.",
   },
 

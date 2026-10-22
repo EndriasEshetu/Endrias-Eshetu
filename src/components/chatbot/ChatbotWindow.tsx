@@ -1,7 +1,8 @@
-import { useState, useRef, useEffect, forwardRef } from "react";
-import type { ChatMessage } from "../../types/chatbot";
-import { sendChatMessage } from "../../services/chatbotService";
+import { useRef, useEffect, forwardRef } from "react";
 import { useTheme } from "../../contexts/ThemeContext";
+import { formatChatMessage } from "../../utils/chatFormatter";
+import { DEFAULT_SUGGESTIONS, SuggestionChips, } from "./SuggestionChips";
+import { useChatbot } from "../../hooks/useChatbot";
 
 interface ChatbotWindowProps {
   onClose: () => void;
@@ -12,18 +13,15 @@ export const ChatbotWindow = forwardRef<HTMLElement, ChatbotWindowProps>(
     const { theme } = useTheme();
     const isDark = theme === "dark";
 
-    const [messages, setMessages] = useState<ChatMessage[]>([
-      {
-        id: "welcome",
-        role: "assistant",
-        content:
-          "Hi! I'm Endrias's AI assistant. Ask me about his skills, projects, experience, or technologies.",
-        timestamp: Date.now(),
-      }
-    ]);
 
-    const [input, setInput] = useState("");
-    const [isSending, setIsSending] = useState(false);
+    const {
+      messages,
+      input,
+      setInput,
+      isSending,
+      sendMessage,
+    } = useChatbot();
+
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
     // Auto-scroll to latest message
@@ -44,62 +42,7 @@ export const ChatbotWindow = forwardRef<HTMLElement, ChatbotWindowProps>(
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-
-      const content = input.trim();
-
-      if (!content || isSending) {
-        return;
-      }
-
-      const userMessage: ChatMessage = {
-        id: crypto.randomUUID(),
-        role: "user",
-        content,
-        timestamp: Date.now(),
-      };
-
-      const nextMessages = [...messages, userMessage];
-
-      setMessages(nextMessages);
-      setInput("");
-      setIsSending(true);
-
-      try {
-        const response = await sendChatMessage({
-          message: content,
-          history: messages
-            .filter((message) => message.id !== "welcome")
-            .map(({ role, content }) => ({
-              role,
-              content,
-            })),
-        });
-
-        if (response.reply) {
-          const assistantMessage: ChatMessage = {
-            id: crypto.randomUUID(),
-            role: "assistant",
-            content: response.reply,
-            timestamp: Date.now(),
-          };
-
-          setMessages((current) => [...current, assistantMessage]);
-        }
-      } catch (error) {
-        const errorMessage: ChatMessage = {
-          id: crypto.randomUUID(),
-          role: "assistant",
-          content:
-            error instanceof Error
-              ? error.message
-              : "Sorry, I couldn't process your message.",
-          timestamp: Date.now(),
-        };
-
-        setMessages((current) => [...current, errorMessage]);
-      } finally {
-        setIsSending(false);
-      }
+      await sendMessage();
     };
 
     return (
@@ -209,7 +152,7 @@ export const ChatbotWindow = forwardRef<HTMLElement, ChatbotWindowProps>(
                     : "rounded-bl-sm border border-neutral-200/80 bg-neutral-100 text-neutral-800"
                   }`}
               >
-                {message.content}
+                {formatChatMessage(message.content)}
               </div>
             </div>
           ))}
@@ -234,6 +177,16 @@ export const ChatbotWindow = forwardRef<HTMLElement, ChatbotWindowProps>(
 
           <div ref={messagesEndRef} aria-hidden="true" />
         </div>
+
+        {messages.length === 1 && messages[0].id === "welcome" && (
+          <SuggestionChips
+            suggestions={DEFAULT_SUGGESTIONS}
+            onSelect={(prompt) => {
+              void sendMessage(prompt);
+            }}
+            disabled={isSending}
+          />
+        )}
 
         {/* Input Area */}
         <form

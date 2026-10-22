@@ -61,14 +61,6 @@ export function ProjectsSection() {
     },
     {
       year: "2026",
-      title: "Speed Typing Game",
-      description:
-        "A dynamic speed typing practice game featuring live WPM tracking, dynamic difficulties, a sliding-window typing mode, and custom weighted scoring. Built with Next.js and React. The game offers a responsive design for seamless play across devices, engaging users with real-time feedback and a visually appealing interface.",
-      image: speedTyping,
-      liveLink: "https://endrias-speedtyping.netlify.app",
-    },
-    {
-      year: "2026",
       title: "React Financial App or Mortgage Calculator",
       description:
         "A financial mortgage calculator that computes monthly payments with amortization schedules, real-time input validation, and clear loan breakdowns.",

@@ -24,3 +24,9 @@ export interface ChatResponse {
   reply?: string;
   message?: string;
 }
+
+export interface SuggestionChip {
+  id: string;
+  label: string;
+  prompt: string;
+}
