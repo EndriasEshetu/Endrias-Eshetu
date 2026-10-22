@@ -88,17 +88,35 @@ const chatLimiter = rateLimit({
   },
 });
 
+
 function validateChatPayload(payload) {
+  if (
+    payload === null ||
+    typeof payload !== "object" ||
+    Array.isArray(payload)
+  ) {
+    return { error: "Invalid request payload." };
+  }
+
   const message =
-    typeof payload?.message === "string" ? payload.message.trim() : "";
+    typeof payload.message === "string" ? payload.message.trim() : "";
 
-  const history = Array.isArray(payload?.history) ? payload.history : [];
-
-  if (!message || message.length < 1 || message.length > 500) {
+  if (!message || message.length > 500) {
     return {
       error: "Message must be between 1 and 500 characters.",
     };
   }
+
+  if (
+    payload.history !== undefined &&
+    !Array.isArray(payload.history)
+  ) {
+    return {
+      error: "Conversation history must be an array.",
+    };
+  }
+
+  const history = payload.history ?? [];
 
   if (history.length > 6) {
     return {
@@ -106,13 +124,47 @@ function validateChatPayload(payload) {
     };
   }
 
+  const validRoles = ["user", "assistant"];
+
+  for (const entry of history) {
+    if (
+      entry === null ||
+      typeof entry !== "object" ||
+      Array.isArray(entry) ||
+      ![Object.prototype, null].includes(
+        Object.getPrototypeOf(entry),
+      )
+    ) {
+      return {
+        error: "Conversation history contains an invalid entry.",
+      };
+    }
+
+    if (!validRoles.includes(entry.role)) {
+      return {
+        error: "Conversation history contains an invalid role.",
+      };
+    }
+
+    if (
+      typeof entry.content !== "string" ||
+      !entry.content.trim() ||
+      entry.content.length > 500
+    ) {
+      return {
+        error: "Conversation history contains invalid message content.",
+      };
+    }
+  }
+
   return {
     data: {
       message,
-      history: history.slice(-6),
+      history,
     },
   };
 }
+
 
 const topics = new Set(["fullstack", "automation", "networking", "other"]);
 
