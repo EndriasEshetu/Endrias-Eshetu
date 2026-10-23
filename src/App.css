@@ -166,6 +166,9 @@ a:focus {
   background: var(--navbar-bg);
   color: var(--navbar-text);
   backdrop-filter: blur(8px);
+  padding-top: max(0.75rem, env(safe-area-inset-top));
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
   transition:
     box-shadow 0.25s ease,
     background-color 0.25s ease;
@@ -420,7 +423,7 @@ a:focus {
 }
 
 .site-footer {
-  padding: 3rem 0 2rem;
+  padding: 3rem 0 calc(2rem + env(safe-area-inset-bottom));
   background: var(--footer-bg);
   border-top: 1px solid var(--line);
   color: var(--ink);
