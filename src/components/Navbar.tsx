@@ -79,16 +79,16 @@ export function Navbar() {
     >
       <div className="mx-auto flex w-full max-w-6xl min-[1440px]:max-w-360 items-center justify-between overflow-visible px-4 sm:px-6 lg:px-8">
         <a
-          className="navbar-brand min-w-0 shrink text-lg font-semibold"
+          className="navbar-brand flex items-center min-w-0 shrink text-lg font-semibold"
           href="#top"
           aria-label="Home"
         >
           <img
-            className="brand-mark"
+            className="brand-mark !mr-0 sm:!mr-3"
             src="/logo.png"
             alt="Endrias Eshetu logo"
           />
-          Endrias Eshetu
+          <span className="hidden sm:inline">Endrias Eshetu</span>
         </a>
         <div className="ml-auto flex shrink-0 items-center gap-3 sm:gap-5 pl-2 lg:contents">
           {isInstallable && (
