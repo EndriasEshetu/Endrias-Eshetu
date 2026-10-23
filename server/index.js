@@ -320,11 +320,15 @@ const contents = [
 
 
     const candidateModels = [
-      process.env.GEMINI_MODEL,
-      "gemini-3-flash-preview",
-      "gemini-3.8-flash",
-      "gemini-flash-latest",
-    ].filter(Boolean);
+      ...new Set(
+        [
+          process.env.GEMINI_MODEL,
+          "gemini-3.5-flash-lite",
+          "gemini-3-flash-preview",
+          "gemini-3.5-flash",
+        ].filter(Boolean),
+      ),
+    ];
 
     let response = null;
     let lastError = null;
@@ -332,22 +336,33 @@ const contents = [
 
     for (const model of candidateModels) {
       try {
-        response = await ai.models.generateContent({
-  model,
-  config: {
-    systemInstruction: buildSystemPrompt(),
-  },
-  contents,
-});
+        // Enforce a 6-second timeout per model attempt to prevent long hangs
+        const timeoutPromise = new Promise((_, reject) =>
+          setTimeout(() => reject(new Error("Request timed out")), 6000),
+        );
 
-if (response?.text) {
-  console.log(`[chatbot] Model ${model} responded successfully.`);
-  break;
-}} catch (err) {
+        const generatePromise = ai.models.generateContent({
+          model,
+          config: {
+            systemInstruction: buildSystemPrompt(),
+            maxOutputTokens: 350,
+            temperature: 0.6,
+          },
+          contents,
+        });
+
+        response = await Promise.race([generatePromise, timeoutPromise]);
+
+        if (response?.text) {
+          console.log(`[chatbot] Model ${model} responded successfully.`);
+          break;
+        }
+      } catch (err) {
         lastError = err;
-lastErrorWasRetryable = isRetryableGeminiError(err);
+        const isTimeout = err?.message === "Request timed out";
+        lastErrorWasRetryable = isTimeout || isRetryableGeminiError(err);
 
-if (!lastErrorWasRetryable) {
+        if (!lastErrorWasRetryable) {
           console.error(
             `Model ${model} failed with a non-retryable error:`,
             err?.message || err,
@@ -356,9 +371,9 @@ if (!lastErrorWasRetryable) {
         }
 
         console.warn(
-          `Model ${model} failed with a retryable error (status: ${
-            err?.status ?? err?.code ?? "unknown"
-          }), trying fallback.`,
+          `Model ${model} ${
+            isTimeout ? "timed out (6s)" : `failed (status: ${err?.status ?? err?.code ?? "unknown"})`
+          }, trying fallback.`,
         );
       }
     }
