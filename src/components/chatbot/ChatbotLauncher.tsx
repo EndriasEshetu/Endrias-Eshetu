@@ -59,11 +59,19 @@ export function ChatbotLauncher() {
         title={isOpen ? "Close AI assistant" : "Ask AI assistant"}
         aria-haspopup="dialog"
         aria-expanded={isOpen}
-        className="fixed bottom-5 left-5 z-[1051] flex h-12 w-12 items-center justify-center rounded-full bg-amber-500 text-neutral-950 shadow-xl transition-all duration-300 hover:scale-105 hover:bg-amber-400 active:scale-95 sm:bottom-7 sm:left-7"
+        className="fixed bottom-5 left-5 z-[1051] flex h-12 w-12 items-center justify-center rounded-full bg-amber-500 text-neutral-950 shadow-xl transition-all duration-300 hover:scale-105 hover:bg-amber-400 active:scale-95 sm:bottom-7 sm:left-7 group"
       >
+        {/* Pulsing Emerald Online Status Badge (visible when closed) */}
+        {!isOpen && (
+          <span className="absolute -top-0.5 -right-0.5 flex h-3.5 w-3.5 pointer-events-none">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+            <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 ring-2 ring-white dark:ring-neutral-900" />
+          </span>
+        )}
+
         {isOpen ? (
           <svg
-            className="h-5 w-5"
+            className="h-5 w-5 transition-transform duration-200"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -77,7 +85,7 @@ export function ChatbotLauncher() {
           </svg>
         ) : (
           <svg
-            className="h-5 w-5"
+            className="h-5 w-5 transition-transform duration-200 group-hover:scale-110"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
