@@ -90,14 +90,14 @@ export function Navbar() {
           />
           <span className="hidden sm:inline">Endrias Eshetu</span>
         </a>
-        <div className="ml-auto flex shrink-0 items-center gap-3 sm:gap-5 pl-2 lg:contents">
+        <div className="ml-auto flex shrink-0 items-center gap-3 sm:gap-4 pl-2 lg:order-last lg:ml-6">
           {isInstallable && (
             <button
               type="button"
               onClick={promptInstall}
               title="Install Portfolio App"
               aria-label="Install Portfolio App"
-              className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/40 bg-amber-500/10 px-3 py-1.5 text-xs font-semibold text-amber-400 transition hover:bg-amber-500 hover:text-neutral-950 active:scale-95 lg:order-last"
+              className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/40 bg-amber-500/10 px-3.5 py-1.5 text-xs font-semibold text-amber-400 transition hover:bg-amber-500 hover:text-neutral-950 active:scale-95"
             >
               <svg
                 className="h-3.5 w-3.5"
@@ -116,7 +116,7 @@ export function Navbar() {
             </button>
           )}
           <button
-            className="navbar-theme-toggle inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-(--toggle-bg) text-(--navbar-text) opacity-95 transition hover:opacity-100 lg:order-last"
+            className="navbar-theme-toggle inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-(--toggle-bg) text-(--navbar-text) opacity-95 transition hover:opacity-100"
             type="button"
             aria-label={
               theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
@@ -151,7 +151,7 @@ export function Navbar() {
             )}
           </button>
           <button
-            className="inline-flex h-10 w-10 shrink-0 items-center mr-5 justify-center rounded-md border border-current opacity-90 lg:hidden"
+            className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-current opacity-90 lg:hidden"
             type="button"
             aria-controls="siteNav"
             aria-expanded={isMenuOpen}
