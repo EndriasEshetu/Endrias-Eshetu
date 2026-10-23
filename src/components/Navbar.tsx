@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { useTheme } from "../contexts/ThemeContext";
+import { usePwaInstall } from "../hooks/usePwaInstall";
 
 export function Navbar() {
   const { theme, toggleTheme } = useTheme();
+  const { isInstallable, promptInstall } = usePwaInstall();
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeNav, setActiveNav] = useState("#about");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -88,7 +90,31 @@ export function Navbar() {
           />
           Endrias Eshetu
         </a>
-        <div className="ml-auto flex shrink-0 items-center gap-5 pl-2 lg:contents">
+        <div className="ml-auto flex shrink-0 items-center gap-3 sm:gap-5 pl-2 lg:contents">
+          {isInstallable && (
+            <button
+              type="button"
+              onClick={promptInstall}
+              title="Install Portfolio App"
+              aria-label="Install Portfolio App"
+              className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/40 bg-amber-500/10 px-3 py-1.5 text-xs font-semibold text-amber-400 transition hover:bg-amber-500 hover:text-neutral-950 active:scale-95 lg:order-last"
+            >
+              <svg
+                className="h-3.5 w-3.5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" x2="12" y1="15" y2="3" />
+              </svg>
+              <span>Install App</span>
+            </button>
+          )}
           <button
             className="navbar-theme-toggle inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-(--toggle-bg) text-(--navbar-text) opacity-95 transition hover:opacity-100 lg:order-last"
             type="button"
@@ -201,6 +227,33 @@ export function Navbar() {
                 Certificates
               </a>
             </li>
+            {isInstallable && (
+              <li className="pt-2 border-t border-neutral-800 lg:hidden">
+                <button
+                  type="button"
+                  onClick={() => {
+                    promptInstall();
+                    setIsMenuOpen(false);
+                  }}
+                  className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm font-semibold text-amber-400 transition hover:bg-amber-500/10"
+                >
+                  <svg
+                    className="h-4 w-4"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" x2="12" y1="15" y2="3" />
+                  </svg>
+                  <span>Install App</span>
+                </button>
+              </li>
+            )}
           </ul>
         </div>
       </div>

@@ -15,6 +15,8 @@ import "./App.css";
 import { AboutSection } from "./components/About";
 import { FloatingContactButton } from "./components/FloatingContactButton";
 import { ChatbotLauncher } from "./components/chatbot/ChatbotLauncher";
+import { PwaInstallPrompt } from "./components/pwa/PwaInstallPrompt";
+import { OfflineIndicator } from "./components/pwa/OfflineIndicator";
 
 function App() {
   const { theme } = useTheme();
@@ -79,6 +81,8 @@ function App() {
         <SiteFooter currentYear={currentYear} />
         <FloatingContactButton />
         <ChatbotLauncher />
+        <PwaInstallPrompt />
+        <OfflineIndicator />
       </div>
     </div>
   );
