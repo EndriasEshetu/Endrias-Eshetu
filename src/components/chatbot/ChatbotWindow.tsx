@@ -20,6 +20,7 @@ export const ChatbotWindow = forwardRef<HTMLElement, ChatbotWindowProps>(
       setInput,
       isSending,
       sendMessage,
+      clearChat,
     } = useChatbot();
 
     const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -110,30 +111,64 @@ export const ChatbotWindow = forwardRef<HTMLElement, ChatbotWindowProps>(
             </div>
           </div>
 
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Close AI assistant"
-            title="Close AI assistant"
-            className={`shrink-0 ml-2 flex h-8 w-8 items-center justify-center rounded-lg transition-colors ${isDark
-              ? "text-neutral-400 hover:bg-neutral-800 hover:text-white"
-              : "text-neutral-500 hover:bg-neutral-200 hover:text-neutral-900"
+          <div className="flex items-center gap-1 ml-2 shrink-0">
+            {messages.length > 1 && (
+              <button
+                type="button"
+                onClick={clearChat}
+                disabled={isSending}
+                aria-label="Start new chat"
+                title="Start new chat"
+                className={`flex h-8 w-8 items-center justify-center rounded-lg transition-colors ${
+                  isDark
+                    ? "text-neutral-400 hover:bg-neutral-800 hover:text-white"
+                    : "text-neutral-500 hover:bg-neutral-200 hover:text-neutral-900"
+                } disabled:cursor-not-allowed disabled:opacity-40`}
+              >
+                <svg
+                  className="h-4 w-4"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M3 12a9 9 0 0 1 15-6.7L21 8" />
+                  <path d="M21 3v5h-5" />
+                  <path d="M21 12a9 9 0 0 1-15 6.7L3 16" />
+                  <path d="M3 21v-5h5" />
+                </svg>
+              </button>
+            )}
+
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label="Close AI assistant"
+              title="Close AI assistant"
+              className={`flex h-8 w-8 items-center justify-center rounded-lg transition-colors ${
+                isDark
+                  ? "text-neutral-400 hover:bg-neutral-800 hover:text-white"
+                  : "text-neutral-500 hover:bg-neutral-200 hover:text-neutral-900"
               }`}
-          >
-            <svg
-              className="h-4.5 w-4.5"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
             >
-              <path d="M18 6 6 18" />
-              <path d="m6 6 12 12" />
-            </svg>
-          </button>
+              <svg
+                className="h-4.5 w-4.5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M18 6 6 18" />
+                <path d="m6 6 12 12" />
+              </svg>
+            </button>
+          </div>
         </div>
 
         {/* Messages Scroll Area */}
