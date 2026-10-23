@@ -1,5 +1,6 @@
 import type { SuggestionChip } from "../../types/chatbot";
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const DEFAULT_SUGGESTIONS: SuggestionChip[] = [
   {
     id: "about",

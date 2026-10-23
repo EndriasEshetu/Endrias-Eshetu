@@ -9,31 +9,35 @@ interface BeforeInstallPromptEvent extends Event {
   prompt(): Promise<void>;
 }
 
+function checkIsStandalone(): boolean {
+  if (typeof window === "undefined") return false;
+  return (
+    window.matchMedia("(display-mode: standalone)").matches ||
+    (window.navigator as unknown as { standalone?: boolean }).standalone ===
+      true
+  );
+}
+
+function checkIsIOS(): boolean {
+  if (typeof window === "undefined") return false;
+  const ua = window.navigator.userAgent.toLowerCase();
+  return (
+    /iphone|ipad|ipod/.test(ua) &&
+    !(window.navigator as unknown as { standalone?: boolean }).standalone
+  );
+}
+
 export function usePwaInstall() {
   const [installPrompt, setInstallPrompt] =
     useState<BeforeInstallPromptEvent | null>(null);
-  const [isInstalled, setIsInstalled] = useState<boolean>(false);
-  const [isIOS, setIsIOS] = useState<boolean>(false);
+  const [isInstalled, setIsInstalled] = useState<boolean>(checkIsStandalone);
+  const [isIOS] = useState<boolean>(checkIsIOS);
   const [showIOSPrompt, setShowIOSPrompt] = useState<boolean>(false);
 
   useEffect(() => {
-    // Check if already running in standalone mode (installed)
-    const isStandalone =
-      window.matchMedia("(display-mode: standalone)").matches ||
-      (window.navigator as unknown as { standalone?: boolean }).standalone ===
-        true;
-
-    if (isStandalone) {
-      setIsInstalled(true);
+    if (isInstalled) {
       return;
     }
-
-    // Check if user is on iOS Safari (where beforeinstallprompt is not supported)
-    const ua = window.navigator.userAgent.toLowerCase();
-    const isAppleDevice =
-      /iphone|ipad|ipod/.test(ua) &&
-      !(window.navigator as unknown as { standalone?: boolean }).standalone;
-    setIsIOS(isAppleDevice);
 
     const handleBeforeInstallPrompt = (e: Event) => {
       e.preventDefault();
@@ -58,7 +62,7 @@ export function usePwaInstall() {
       );
       window.removeEventListener("appinstalled", handleAppInstalled);
     };
-  }, []);
+  }, [isInstalled]);
 
   const promptInstall = useCallback(async () => {
     if (isIOS) {

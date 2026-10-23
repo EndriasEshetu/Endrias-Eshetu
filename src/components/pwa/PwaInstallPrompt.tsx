@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { usePwaInstall } from "../../hooks/usePwaInstall";
 
 const DISMISSED_KEY = "pwa_install_prompt_dismissed";
@@ -12,15 +12,10 @@ export function PwaInstallPrompt() {
     closeIOSPrompt,
   } = usePwaInstall();
 
-  const [isDismissed, setIsDismissed] = useState(true);
-
-  useEffect(() => {
-    // Check if dismissed previously during this session
-    const dismissedTime = sessionStorage.getItem(DISMISSED_KEY);
-    if (!dismissedTime) {
-      setIsDismissed(false);
-    }
-  }, []);
+  const [isDismissed, setIsDismissed] = useState<boolean>(() => {
+    if (typeof window === "undefined") return true;
+    return Boolean(sessionStorage.getItem(DISMISSED_KEY));
+  });
 
   const handleDismiss = () => {
     setIsDismissed(true);
