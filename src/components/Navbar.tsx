@@ -79,25 +79,31 @@ export function Navbar() {
     >
       <div className="mx-auto flex w-full max-w-6xl min-[1440px]:max-w-360 items-center justify-between overflow-visible px-4 sm:px-6 lg:px-8">
         <a
-          className="navbar-brand min-w-0 shrink text-lg font-semibold"
+          className="navbar-brand flex items-center min-w-0 shrink whitespace-nowrap text-base sm:text-lg font-semibold"
           href="#top"
           aria-label="Home"
         >
           <img
-            className="brand-mark"
+            className={`brand-mark ${isInstallable ? "!mr-0 sm:!mr-3" : "!mr-2.5 sm:!mr-3"}`}
             src="/logo.png"
             alt="Endrias Eshetu logo"
           />
-          Endrias Eshetu
+          <span
+            className={`whitespace-nowrap ${
+              isInstallable ? "hidden sm:inline" : "inline"
+            }`}
+          >
+            Endrias Eshetu
+          </span>
         </a>
-        <div className="ml-auto flex shrink-0 items-center gap-3 sm:gap-4 pl-2 lg:order-last lg:ml-6">
+        <div className="ml-auto flex shrink-0 items-center gap-2.5 sm:gap-4 pl-2 lg:order-last lg:ml-6">
           {isInstallable && (
             <button
               type="button"
               onClick={promptInstall}
               title="Install Portfolio App"
               aria-label="Install Portfolio App"
-              className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/40 bg-amber-500/10 px-3.5 py-1.5 text-xs font-semibold text-amber-400 transition hover:bg-amber-500 hover:text-neutral-950 active:scale-95"
+              className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/40 bg-amber-500/10 px-3 py-1.5 sm:px-3.5 text-xs font-semibold text-amber-400 transition hover:bg-amber-500 hover:text-neutral-950 active:scale-95"
             >
               <svg
                 className="h-3.5 w-3.5"
@@ -112,7 +118,8 @@ export function Navbar() {
                 <polyline points="7 10 12 15 17 10" />
                 <line x1="12" x2="12" y1="15" y2="3" />
               </svg>
-              <span>Install App</span>
+              <span className="hidden min-[380px]:inline">Install App</span>
+              <span className="min-[380px]:hidden">Install</span>
             </button>
           )}
           <button
