@@ -1,4 +1,4 @@
-import { useEffect, forwardRef } from "react";
+import { useEffect, useRef, forwardRef } from "react";
 import { useTheme } from "../../contexts/ThemeContext";
 import { useChatbot } from "../../hooks/useChatbot";
 import { ChatHeader } from "./ChatHeader";
@@ -14,6 +14,7 @@ export const ChatbotWindow = forwardRef<HTMLElement, ChatbotWindowProps>(
   function ChatbotWindow({ onClose }, ref) {
     const { theme } = useTheme();
     const isDark = theme === "dark";
+    const containerRef = useRef<HTMLElement | null>(null);
 
     const {
       messages,
@@ -24,6 +25,16 @@ export const ChatbotWindow = forwardRef<HTMLElement, ChatbotWindowProps>(
       clearChat,
       retryLastMessage,
     } = useChatbot();
+
+    // Merge forwarded ref with internal containerRef
+    const setRefs = (node: HTMLElement | null) => {
+      containerRef.current = node;
+      if (typeof ref === "function") {
+        ref(node);
+      } else if (ref) {
+        ref.current = node;
+      }
+    };
 
     // Mobile background scroll locking (< 640px) to prevent dual-scrolling
     useEffect(() => {
@@ -44,13 +55,41 @@ export const ChatbotWindow = forwardRef<HTMLElement, ChatbotWindowProps>(
       };
     }, []);
 
-    // Close on Escape key press
+    // Close on Escape key & trap keyboard focus inside the dialog
     useEffect(() => {
       const handleKeyDown = (e: KeyboardEvent) => {
         if (e.key === "Escape") {
           onClose();
+          return;
+        }
+
+        if (e.key === "Tab") {
+          const container = containerRef.current;
+          if (!container) return;
+
+          const focusable = container.querySelectorAll<HTMLElement>(
+            'button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])',
+          );
+
+          if (focusable.length === 0) return;
+
+          const first = focusable[0];
+          const last = focusable[focusable.length - 1];
+
+          if (e.shiftKey) {
+            if (document.activeElement === first) {
+              e.preventDefault();
+              last.focus();
+            }
+          } else {
+            if (document.activeElement === last) {
+              e.preventDefault();
+              first.focus();
+            }
+          }
         }
       };
+
       window.addEventListener("keydown", handleKeyDown);
       return () => window.removeEventListener("keydown", handleKeyDown);
     }, [onClose]);
@@ -62,8 +101,11 @@ export const ChatbotWindow = forwardRef<HTMLElement, ChatbotWindowProps>(
 
     return (
       <section
-        ref={ref}
-        aria-label="AI assistant"
+        ref={setRefs}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="chatbot-heading"
+        aria-describedby="chatbot-subheading"
         className={`fixed z-[1050] flex flex-col overflow-hidden rounded-2xl border shadow-2xl transition-all duration-200
         bottom-20 sm:translate-x-0 sm:left-7 sm:right-auto sm:bottom-24
         w-[85vw] sm:w-[355px] md:w-[395px]

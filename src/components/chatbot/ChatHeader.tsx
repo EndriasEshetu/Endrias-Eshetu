@@ -61,6 +61,7 @@ export function ChatHeader({
 
         <div className="min-w-0 flex-1">
           <h2
+            id="chatbot-heading"
             className={`text-sm font-semibold truncate leading-tight ${
               isDark ? "text-white" : "text-neutral-900"
             }`}
@@ -68,6 +69,7 @@ export function ChatHeader({
             Endrias AI Assistant
           </h2>
           <p
+            id="chatbot-subheading"
             className={`text-xs truncate leading-tight mt-0.5 ${
               isDark ? "text-neutral-400" : "text-neutral-500"
             }`}

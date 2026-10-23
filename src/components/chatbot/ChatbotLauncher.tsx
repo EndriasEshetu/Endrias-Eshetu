@@ -36,6 +36,15 @@ export function ChatbotLauncher() {
     };
   }, [isOpen]);
 
+  const prevIsOpen = useRef(isOpen);
+  useEffect(() => {
+    // When chatbot window closes, return focus to launcher button for keyboard/a11y users
+    if (prevIsOpen.current && !isOpen) {
+      launcherRef.current?.focus();
+    }
+    prevIsOpen.current = isOpen;
+  }, [isOpen]);
+
   return (
     <>
       {isOpen ? (
@@ -48,6 +57,8 @@ export function ChatbotLauncher() {
         onClick={() => setIsOpen((current) => !current)}
         aria-label={isOpen ? "Close AI assistant" : "Open AI assistant"}
         title={isOpen ? "Close AI assistant" : "Ask AI assistant"}
+        aria-haspopup="dialog"
+        aria-expanded={isOpen}
         className="fixed bottom-5 left-5 z-[1051] flex h-12 w-12 items-center justify-center rounded-full bg-amber-500 text-neutral-950 shadow-xl transition-all duration-300 hover:scale-105 hover:bg-amber-400 active:scale-95 sm:bottom-7 sm:left-7"
       >
         {isOpen ? (

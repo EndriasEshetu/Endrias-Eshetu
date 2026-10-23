@@ -1,3 +1,5 @@
+import { useEffect, useRef } from "react";
+
 interface ChatInputProps {
   input: string;
   setInput: (value: string) => void;
@@ -16,8 +18,14 @@ export function ChatInput({
   isSending,
   isDark,
 }: ChatInputProps) {
+  const inputRef = useRef<HTMLInputElement>(null);
   const charCount = input.length;
   const isNearLimit = charCount >= WARN_CHAR_LIMIT;
+
+  useEffect(() => {
+    // Automatically focus input when chatbot opens
+    inputRef.current?.focus();
+  }, []);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -37,6 +45,7 @@ export function ChatInput({
       <div className="flex items-center gap-2">
         <div className="relative flex-1 flex items-center">
           <input
+            ref={inputRef}
             type="text"
             value={input}
             disabled={isSending}
