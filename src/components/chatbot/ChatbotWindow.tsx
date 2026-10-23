@@ -21,6 +21,7 @@ export const ChatbotWindow = forwardRef<HTMLElement, ChatbotWindowProps>(
       input,
       setInput,
       isSending,
+      error,
       sendMessage,
       clearChat,
       retryLastMessage,
@@ -129,6 +130,7 @@ export const ChatbotWindow = forwardRef<HTMLElement, ChatbotWindowProps>(
           messages={messages}
           isSending={isSending}
           isDark={isDark}
+          error={error}
           onRetryLast={retryLastMessage}
         />
 

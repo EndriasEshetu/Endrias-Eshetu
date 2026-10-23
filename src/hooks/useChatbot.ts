@@ -166,12 +166,13 @@ const retryLastMessage = () => {
     return;
   }
 
+  const failedContent = lastFailedMessage.content;
   setMessages((current) =>
     current.filter((message) => message.id !== lastFailedMessage.id),
   );
 
-  setInput(lastFailedMessage.content);
   setError(null);
+  void sendMessage(failedContent);
 };
 
   return {
