@@ -114,8 +114,8 @@ export function ProjectsSection() {
             </div>
           </ScrollReveal>
         </div>
-        <div className="projects-scroller mt-6 -mx-4 overflow-x-auto overscroll-x-contain snap-x snap-proximity px-4 pb-2 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-          <div className="mb-4 flex items-stretch gap-4">
+        <div className="projects-scroller mt-6 -mx-4 overflow-x-auto overflow-y-hidden overscroll-x-contain snap-x snap-proximity px-4 pb-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+          <div className="flex items-stretch gap-4">
             {projects.map((project) => (
               <ScrollReveal
                 key={project.title}

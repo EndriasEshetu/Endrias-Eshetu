@@ -10,6 +10,7 @@ body {
   scrollbar-color: rgba(168, 134, 44, 0.9) transparent;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-x: contain;
+  overflow-y: hidden;
 }
 
 .projects-scroller::-webkit-scrollbar {
