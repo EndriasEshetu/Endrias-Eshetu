@@ -100,7 +100,7 @@ export function ProjectsSection() {
 
   return (
     <section className="section" id="project" aria-labelledby="project-title">
-      <div className="mx-auto w-full max-w-6xl min-[1440px]:max-w-360 overflow-x-hidden px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto w-full max-w-6xl min-[1440px]:max-w-360 px-4 sm:px-6 lg:px-8">
         <div className="mb-4 flex flex-wrap items-end justify-center gap-3">
           <ScrollReveal variant="slide-left" className="min-w-0">
             <div className="text-center">
@@ -114,12 +114,13 @@ export function ProjectsSection() {
             </div>
           </ScrollReveal>
         </div>
-        <div className="projects-scroller mt-6 -mx-4 overflow-x-auto touch-pan-y px-4 pb-2 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-          <div className="mb-4 flex items-stretch gap-4 snap-x snap-proximity">
+        <div className="projects-scroller mt-6 -mx-4 overflow-x-auto overscroll-x-contain snap-x snap-proximity px-4 pb-2 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+          <div className="mb-4 flex items-stretch gap-4">
             {projects.map((project) => (
               <ScrollReveal
                 key={project.title}
                 variant="fade-up"
+                once={true}
                 className="flex min-w-[85%] self-stretch sm:min-w-[60%] lg:min-w-[32%] snap-start"
               >
                 <div className="panel-card h-full rounded-3xl flex flex-col">

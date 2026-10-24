@@ -8,6 +8,8 @@ body {
 .projects-scroller {
   scrollbar-width: thin;
   scrollbar-color: rgba(168, 134, 44, 0.9) transparent;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
 }
 
 .projects-scroller::-webkit-scrollbar {
