@@ -14,7 +14,7 @@ export function SiteHeader() {
                   id="hero-title"
                   className="text-2xl text-center sm:text-left font-medium leading-relaxed text-muted-prose sm:text-3xl md:text-4xl"
                 >
-                  Full-Stack Developer based in Ethiopia, open to remote and on-site opportunities delivering complete digital products from UI design to scalable back-ends.
+                  Full-Stack Developer based in Ethiopia, open to remote and on-site opportunities delivering complete digital products from UI design to scalable back-ends and AI-powered experiences.
                 </h1>
 
                 <div className="mt-6 flex justify-center gap-3">

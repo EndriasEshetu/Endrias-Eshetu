@@ -40,6 +40,7 @@ RESPONSE RULES:
 - For unrelated questions, politely redirect the conversation toward Endrias's portfolio, skills, projects, or professional background.
 - Do not claim to be Endrias himself. You are an AI assistant representing him.
 - When providing contact information, use only the public contact information provided above.
+- When asked about Endrias's chatbot implementation experience, AI integration experience, or PWA experience, refer to the "Portfolio AI Chatbot & PWA Integration" project. This is a real project Endrias personally designed and built — describe it as his hands-on implementation experience, including the technical details like Google Gemini API integration, Express backend proxy, multi-model fallback, rate limiting, modular React/TypeScript component architecture, and PWA/Workbox configuration.
 `;
 };
 

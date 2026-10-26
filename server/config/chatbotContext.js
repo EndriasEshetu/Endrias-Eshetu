@@ -26,7 +26,8 @@ const chatbotContext = {
     ],
     backend: ["Node.js", "Express", "Python"],
     databases: ["MongoDB", "PostgreSQL"],
-    tools: ["Git", "Docker", "AWS", "Postman", "Github", "Vite"],
+    ai: ["Google Gemini API", "AI Chatbot Integration", "Prompt Engineering"],
+    tools: ["Git", "Docker", "AWS", "Postman", "Github", "Vite", "PWA / Workbox"],
   },
 
   projects: [
@@ -101,6 +102,23 @@ const chatbotContext = {
       technologies: ["Node.js", "Express.js", "Email Automation", "REST APIs"],
       github: "https://github.com/EndriasEshetu/Invoice_Reminder_System",
       demo: "",
+    },
+    {
+      name: "Portfolio AI Chatbot & PWA Integration",
+      description:
+        "A production-ready AI chatbot assistant embedded in this portfolio, powered by Google Gemini with multi-model fallback, a secure Express.js backend proxy, rate limiting, and a structured knowledge base grounding responses to verified portfolio data. Built with a modular React/TypeScript component architecture, full responsive design, outside-click detection, and PWA support via Workbox for offline-capable, installable mobile experience.",
+      technologies: [
+        "React",
+        "TypeScript",
+        "Node.js",
+        "Express.js",
+        "Google Gemini API",
+        "Tailwind CSS",
+        "PWA / Workbox",
+        "express-rate-limit",
+      ],
+      github: "https://github.com/EndriasEshetu/Endrias-Eshetu",
+      demo: "https://endrias.tech",
     },
   ],
 
