@@ -63,7 +63,8 @@ function CertificateCard({ certificate }: { certificate: Certificate }) {
               className="certificate-link btn-accent inline-flex items-center justify-center rounded-lg px-3 py-1.5 text-sm font-medium"
               href={certificate.pdfLink}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
+              type="application/pdf"
             >
               See Certificate
             </a>
